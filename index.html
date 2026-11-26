@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>LUNCH LEAGUE 501 LIVE</title>
 
-  <!-- 모바일 홈 화면 추가 시 앱 이름 및 전체화면 웹앱 설정 -->
   <meta name="application-name" content="LUNCH LEAGUE 501" />
   <meta name="apple-mobile-web-app-title" content="LUNCH LEAGUE 501" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -13,8 +12,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#090d16" />
 
-  <!-- 브라우저 탭 & 홈 화면용 다트판(불스아이) 기본 SVG 아이콘 -->
-  <link id="faviconLink" rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230f172a'/%3E%3Ccircle cx='256' cy='256' r='195' fill='%23f43f5e'/%3E%3Ccircle cx='256' cy='256' r='152' fill='%23f8fafc'/%3E%3Ccircle cx='256' cy='256' r='110' fill='%23f43f5e'/%3E%3Ccircle cx='256' cy='256' r='68' fill='%23f8fafc'/%3E%3Ccircle cx='256' cy='256' r='32' fill='%23f59e0b'/%3E%3Cpath d='M390 122 L272 240' stroke='%2338bdf8' stroke-width='20' stroke-linecap='round'/%3E%3Cpolygon points='385,127 440,72 445,105 412,138' fill='%2338bdf8'/%3E%3Cpolygon points='385,127 440,72 407,67 374,100' fill='%230284c7'/%3E%3C/svg%3E" />
+  <link id="faviconLink" rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230f172a'/%3E%3Ccircle cx='256' cy='256' r='195' fill='%23f43f5e'/%3E%3Ccircle cx='256' cy='256' r='152' fill='%23f8fafc'/%3E%3Ccircle cx='256' cy='256' r='110' fill='%23f43f5e'/%3E%3Ccircle cx='256' cy='256' r='68' fill='%23f8fafc'/%3E%3Ccircle cx='256' cy='256' r='32' fill='%23f59e0b'/%3E%3C/svg%3E" />
   <link id="appleTouchIconLink" rel="apple-touch-icon" sizes="512x512" href="" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -51,7 +49,6 @@
       animation: pulseWin 2s infinite;
     }
 
-    /* BULL / TRIPLE 20 초대형 중앙 팝업 애니메이션 */
     @keyframes shoutPopIn {
       0% { transform: scale(0.2) rotate(-8deg); opacity: 0; }
       55% { transform: scale(1.1) rotate(2deg); opacity: 1; }
@@ -73,71 +70,68 @@
       animation: ringExpand 1.4s ease-out infinite;
     }
 
-    /* 전체화면 전광판 집중 모드 */
     body.scoreboard-only #topHeader,
     body.scoreboard-only #bottomFooter {
       display: none !important;
     }
     body.scoreboard-only #mainWorkspace {
       min-height: 100vh !important;
-      padding: 0.65rem !important;
+      padding: 0.55rem !important;
     }
     body.scoreboard-only #floatingFocusControls {
       display: flex !important;
     }
 
-    /* 2경기(3열 x 2행) 기본 가독성 스타일 */
     .score-number {
-      font-size: 2.35rem;
+      font-size: 2.2rem;
       line-height: 1.05;
     }
     @media (min-width: 1280px) {
       .score-number {
-        font-size: 2.85rem;
+        font-size: 2.7rem;
       }
     }
 
-    /* 1경기 단독 크게 보기 / 결승전 모드 초대형 스케일 */
     body.single-match-view .board-main-title {
       font-size: 1.45rem !important;
     }
     body.single-match-view .board-round-pill {
-      font-size: 0.95rem !important;
+      font-size: 0.92rem !important;
       padding: 0.25rem 0.65rem !important;
     }
     body.single-match-view .score-number {
-      font-size: 3.35rem !important;
+      font-size: 3.3rem !important;
     }
     body.single-match-view .score-colon {
-      font-size: 2.4rem !important;
+      font-size: 2.35rem !important;
     }
     body.single-match-view .team-label {
       font-size: 1.25rem !important;
     }
     body.single-match-view .player-pill {
-      padding-top: 0.55rem !important;
-      padding-bottom: 0.55rem !important;
+      padding-top: 0.48rem !important;
+      padding-bottom: 0.48rem !important;
       padding-left: 0.65rem !important;
       padding-right: 0.65rem !important;
-      font-size: 0.98rem !important;
+      font-size: 0.96rem !important;
     }
     body.single-match-view .player-pts {
-      font-size: 0.95rem !important;
+      font-size: 0.92rem !important;
     }
-    body.single-match-view .live-banner {
-      padding-top: 0.65rem !important;
-      padding-bottom: 0.65rem !important;
-      font-size: 0.95rem !important;
+    body.single-match-view .live-log-row {
+      font-size: 0.9rem !important;
+      padding-top: 0.32rem !important;
+      padding-bottom: 0.32rem !important;
     }
     @media (min-width: 1536px) {
       body.single-match-view .board-main-title {
-        font-size: 1.75rem !important;
+        font-size: 1.7rem !important;
       }
       body.single-match-view .score-number {
-        font-size: 4.35rem !important;
+        font-size: 4.1rem !important;
       }
       body.single-match-view .player-pill {
-        font-size: 1.12rem !important;
+        font-size: 1.08rem !important;
       }
     }
 
@@ -150,9 +144,7 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
-  <!-- ========================================================= -->
   <!-- 초대형 BULL / TRIPLE 20 / 180! 전광판 이펙트 오버레이 -->
-  <!-- ========================================================= -->
   <div id="shoutoutOverlay" onclick="hideShoutoutOverlay()" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-md p-4 cursor-pointer select-none">
     <div class="relative flex items-center justify-center">
       <div id="shoutoutWaveRing" class="absolute w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-amber-400/70 animate-ring-wave"></div>
@@ -202,8 +194,10 @@
           <span id="authLockBadge" onclick="toggleHelperAuthStatus()" title="클릭하여 도우미 잠금/해제" class="cursor-pointer px-2 py-0.5 text-[11px] font-bold rounded-full bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-1 hover:bg-slate-700 transition">
             🔒 관전 모드
           </span>
+          <button type="button" id="soundToggleBtn" onclick="toggleSoundEffect()" title="클릭하여 효과음 켜기/끄기 및 테스트" class="px-2 py-0.5 text-[11px] font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 transition">
+            🔊 효과음 ON
+          </button>
         </div>
-        <!-- 경기 수 & 확대 보기 전환 탭 -->
         <div class="flex items-center gap-1 mt-1 flex-wrap">
           <button type="button" onclick="setViewMode('BOTH')" data-vmode="BOTH" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">📊 2경기 동시 (예선 3×2)</button>
           <button type="button" onclick="setViewMode('ONLY_A')" data-vmode="ONLY_A" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">🔍 MATCH A만 크게</button>
@@ -224,7 +218,7 @@
         🔐 도우미 1보드 모드
       </button>
       <button type="button" onclick="requireHelperAuth(() => openRosterManagerModal())" class="px-2.5 py-1.5 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 text-xs font-bold flex items-center gap-1 transition">
-        📋 1~10반 명단 관리
+        📋 팀 · 명단 관리
       </button>
       <button type="button" onclick="requireHelperAuth(() => openMatchSetupModal())" class="px-2.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1 shadow-md shadow-indigo-600/20 transition">
         ⚔️ 대진 선택
@@ -241,25 +235,28 @@
   <!-- 메인 전광판 영역 -->
   <main id="mainWorkspace" class="flex-1 p-2.5 md:p-3.5 max-w-[1920px] w-full mx-auto flex flex-col gap-3.5 justify-center">
     
-    <!-- MATCH A 구역 (다트 1, 2, 3번 보드) -->
-    <section id="sectionMatchA" class="bg-slate-900/80 border border-slate-800/90 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl flex-1">
-      <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-2 mb-2.5">
-        <div class="flex items-center gap-2">
-          <span id="matchA_badgeLabel" class="px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs md:text-sm font-black tracking-wider">MATCH A</span>
-          <span class="text-xs text-slate-300 font-bold hidden sm:inline">다트 1 · 2 · 3번 보드</span>
+    <!-- MATCH A 구역 (쿨 블루/인디고 테마 · 다트 1, 2, 3번 보드) -->
+    <section id="sectionMatchA" class="bg-gradient-to-b from-sky-950/35 to-slate-900/90 border-2 border-sky-500/45 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl shadow-sky-950/20 flex-1">
+      <div class="flex flex-wrap items-center justify-between gap-2 bg-gradient-to-r from-sky-950/90 via-slate-950 to-indigo-950/90 border border-sky-500/45 rounded-xl px-4 py-2.5 mb-2.5 shadow-md">
+        <div class="flex items-center gap-2.5">
+          <span id="matchA_badgeLabel" class="px-3 py-1 rounded-lg bg-sky-500 text-slate-950 text-xs md:text-sm font-black tracking-wider shadow">MATCH A</span>
+          <span class="text-xs md:text-sm text-sky-200 font-bold hidden sm:inline">다트 1 · 2 · 3번 보드</span>
         </div>
+
+        <!-- 초대형 세트 총점 스코어보드 -->
         <div class="flex items-center gap-3 md:gap-6">
-          <span id="matchA_homeName" class="text-lg md:text-2xl font-black text-sky-400">1반</span>
-          <div class="flex items-center gap-2 bg-slate-900 px-3.5 py-0.5 rounded-xl border border-slate-700">
-            <span id="matchA_homeWins" class="font-score text-2xl md:text-3xl font-black text-white">0</span>
-            <span class="text-slate-500 font-bold text-lg">:</span>
-            <span id="matchA_awayWins" class="font-score text-2xl md:text-3xl font-black text-white">0</span>
+          <span id="matchA_homeName" class="text-xl md:text-3xl font-black text-sky-300 tracking-tight drop-shadow">1반</span>
+          <div class="flex items-center gap-3 bg-slate-950 px-5 py-1.5 rounded-2xl border-2 border-sky-400/65 shadow-inner">
+            <span id="matchA_homeWins" class="font-score text-3xl md:text-5xl font-black text-sky-300 leading-none">0</span>
+            <span class="text-slate-400 font-black text-2xl md:text-3xl leading-none">:</span>
+            <span id="matchA_awayWins" class="font-score text-3xl md:text-5xl font-black text-rose-400 leading-none">0</span>
           </div>
-          <span id="matchA_awayName" class="text-lg md:text-2xl font-black text-rose-400">2반</span>
+          <span id="matchA_awayName" class="text-xl md:text-3xl font-black text-rose-400 tracking-tight drop-shadow">2반</span>
         </div>
+
         <div class="flex items-center gap-2">
-          <div id="matchA_statusBadge" class="text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-slate-800 text-slate-300">진행 중</div>
-          <button type="button" id="matchA_zoomBtn" onclick="toggleSingleMatch('ONLY_A')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-indigo-600 text-slate-200 hover:text-white text-xs font-bold border border-slate-700 transition">
+          <div id="matchA_statusBadge" class="text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-sky-950/80 text-sky-200 border border-sky-500/30">진행 중</div>
+          <button type="button" id="matchA_zoomBtn" onclick="toggleSingleMatch('ONLY_A')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-sky-600 text-slate-200 hover:text-white text-xs font-bold border border-slate-700 transition">
             ⤢ 크게 보기
           </button>
         </div>
@@ -268,25 +265,28 @@
       <div id="matchA_boards" class="grid grid-cols-1 lg:grid-cols-3 gap-3 flex-1"></div>
     </section>
 
-    <!-- MATCH B 구역 (다트 4, 5, 6번 보드) -->
-    <section id="sectionMatchB" class="bg-slate-900/80 border border-slate-800/90 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl flex-1">
-      <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-2 mb-2.5">
-        <div class="flex items-center gap-2">
-          <span class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs md:text-sm font-black tracking-wider">MATCH B</span>
-          <span class="text-xs text-slate-300 font-bold hidden sm:inline">다트 4 · 5 · 6번 보드</span>
+    <!-- MATCH B 구역 (앰버/골드 테마 · 다트 4, 5, 6번 보드 [실제 6, 7, 8번판]) -->
+    <section id="sectionMatchB" class="bg-gradient-to-b from-amber-950/30 to-slate-900/90 border-2 border-amber-500/45 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl shadow-amber-950/20 flex-1">
+      <div class="flex flex-wrap items-center justify-between gap-2 bg-gradient-to-r from-amber-950/90 via-slate-950 to-orange-950/90 border border-amber-500/45 rounded-xl px-4 py-2.5 mb-2.5 shadow-md">
+        <div class="flex items-center gap-2.5">
+          <span class="px-3 py-1 rounded-lg bg-amber-400 text-slate-950 text-xs md:text-sm font-black tracking-wider shadow">MATCH B</span>
+          <span class="text-xs md:text-sm text-amber-200 font-bold hidden sm:inline">다트 4 · 5 · 6번 보드 (6·7·8번판)</span>
         </div>
+
+        <!-- 초대형 세트 총점 스코어보드 -->
         <div class="flex items-center gap-3 md:gap-6">
-          <span id="matchB_homeName" class="text-lg md:text-2xl font-black text-sky-400">3반</span>
-          <div class="flex items-center gap-2 bg-slate-900 px-3.5 py-0.5 rounded-xl border border-slate-700">
-            <span id="matchB_homeWins" class="font-score text-2xl md:text-3xl font-black text-white">0</span>
-            <span class="text-slate-500 font-bold text-lg">:</span>
-            <span id="matchB_awayWins" class="font-score text-2xl md:text-3xl font-black text-white">0</span>
+          <span id="matchB_homeName" class="text-xl md:text-3xl font-black text-sky-300 tracking-tight drop-shadow">3반</span>
+          <div class="flex items-center gap-3 bg-slate-950 px-5 py-1.5 rounded-2xl border-2 border-amber-400/65 shadow-inner">
+            <span id="matchB_homeWins" class="font-score text-3xl md:text-5xl font-black text-sky-300 leading-none">0</span>
+            <span class="text-slate-400 font-black text-2xl md:text-3xl leading-none">:</span>
+            <span id="matchB_awayWins" class="font-score text-3xl md:text-5xl font-black text-rose-400 leading-none">0</span>
           </div>
-          <span id="matchB_awayName" class="text-lg md:text-2xl font-black text-rose-400">4반</span>
+          <span id="matchB_awayName" class="text-xl md:text-3xl font-black text-rose-400 tracking-tight drop-shadow">4반</span>
         </div>
+
         <div class="flex items-center gap-2">
-          <div id="matchB_statusBadge" class="text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-slate-800 text-slate-300">진행 중</div>
-          <button type="button" id="matchB_zoomBtn" onclick="toggleSingleMatch('ONLY_B')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-indigo-600 text-slate-200 hover:text-white text-xs font-bold border border-slate-700 transition">
+          <div id="matchB_statusBadge" class="text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-amber-950/80 text-amber-200 border border-amber-500/30">진행 중</div>
+          <button type="button" id="matchB_zoomBtn" onclick="toggleSingleMatch('ONLY_B')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-amber-600 text-slate-200 hover:text-white text-xs font-bold border border-slate-700 transition">
             ⤢ 크게 보기
           </button>
         </div>
@@ -302,7 +302,7 @@
     <div class="flex items-center gap-3">
       <span>🔒 <b>보안:</b> 점수 입력 및 설정은 도우미 비밀번호 인증 후 이용 가능</span>
       <span class="hidden md:inline">|</span>
-      <span class="hidden md:inline">📱 <b>학생 접속:</b> 상단 [🔗 링크 · QR 공유]를 눌러 QR코드를 화면에 띄워주세요</span>
+      <span class="hidden md:inline">🎯 <b>보드 캐릭터 매칭:</b> 1~3번 보드(1·2·3번판) / 4~6번 보드(6·7·8번판)</span>
     </div>
     <div class="flex items-center gap-3">
       <button type="button" onclick="requireHelperAuth(() => resetAllBoardsOnly())" class="text-amber-400 hover:text-amber-300 font-medium underline">현재 보드 점수만 501 초기화</button>
@@ -310,9 +310,7 @@
     </div>
   </footer>
 
-  <!-- ========================================================= -->
   <!-- MODAL AUTH: 도우미/관리자 비밀번호 인증 모달 (PIN: 3895) -->
-  <!-- ========================================================= -->
   <div id="pinAuthModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[80] hidden items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xs shadow-2xl overflow-hidden">
       <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
@@ -324,9 +322,8 @@
       </div>
 
       <div class="p-5 space-y-4">
-        <p class="text-xs text-slate-400 text-center">점수 입력 및 대회 설정을 위해<br>도우미 비밀번호 4자리를 입력하세요.</p>
+        <p class="text-xs text-slate-400 text-center">점수 입력 및 대표 명단 관리를 위해<br>도우미 비밀번호 4자리를 입력하세요.</p>
 
-        <!-- PIN 표시 칸 -->
         <div class="flex justify-center gap-2.5" id="pinDotsDisplay">
           <div class="w-11 h-12 rounded-xl bg-slate-950 border-2 border-slate-700 flex items-center justify-center font-score text-2xl font-black text-amber-400"></div>
           <div class="w-11 h-12 rounded-xl bg-slate-950 border-2 border-slate-700 flex items-center justify-center font-score text-2xl font-black text-amber-400"></div>
@@ -336,7 +333,6 @@
 
         <div id="pinErrorMsg" class="text-center text-xs font-bold text-rose-400 h-4"></div>
 
-        <!-- 숫자 키패드 -->
         <div class="grid grid-cols-3 gap-2">
           <button type="button" onclick="pressPinKey('1')" class="py-3 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 font-score text-lg font-black text-white transition">1</button>
           <button type="button" onclick="pressPinKey('2')" class="py-3 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 font-score text-lg font-black text-white transition">2</button>
@@ -355,9 +351,7 @@
     </div>
   </div>
 
-  <!-- ========================================================= -->
   <!-- MODAL -1: 외부 토너먼트 대진표 사이트 임베드 모달 -->
-  <!-- ========================================================= -->
   <div id="bracketModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-2 md:p-4">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-6xl h-[92vh] shadow-2xl overflow-hidden flex flex-col">
       <div class="px-4 py-2.5 bg-slate-950 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
@@ -389,9 +383,7 @@
     </div>
   </div>
 
-  <!-- ========================================================= -->
   <!-- MODAL 0: Firebase 연결 상태 & QR코드 · 링크 공유 모달 -->
-  <!-- ========================================================= -->
   <div id="firebaseModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-3">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col max-h-[94vh]">
       <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
@@ -403,17 +395,15 @@
       </div>
 
       <div class="p-5 overflow-y-auto space-y-4 text-xs text-slate-300">
-        <!-- QR 모드 전환 버튼 -->
         <div class="grid grid-cols-2 gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800">
           <button type="button" onclick="setQrTargetType('BOARD')" id="qrTabBoard" class="py-2 px-3 rounded-lg text-xs font-black bg-emerald-600 text-white shadow transition">
             📊 전체 현황판 접속 QR
           </button>
           <button type="button" onclick="setQrTargetType('HELPER')" id="qrTabHelper" class="py-2 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
-            🔐 도우미 입력용 QR
+            🔐 도우미·반대표용 QR
           </button>
         </div>
 
-        <!-- QR코드 표시 카드 -->
         <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-5 flex flex-col items-center text-center space-y-3">
           <div id="qrTargetDescription" class="text-sm font-black text-emerald-300">
             📷 스마트폰 카메라로 아래 QR코드를 스캔하세요!
@@ -432,7 +422,6 @@
           </button>
         </div>
 
-        <!-- 주소 복사 영역 -->
         <div class="bg-emerald-950/30 border border-emerald-500/30 rounded-xl p-3.5 space-y-2">
           <div class="font-bold text-emerald-300 text-xs flex items-center justify-between">
             <span>🔗 직접 접속 링크 (카카오톡·클래스룸 공유용)</span>
@@ -447,35 +436,29 @@
     </div>
   </div>
 
-  <!-- ========================================================= -->
   <!-- MODAL 1: 도우미 학생용 점수 입력 & 이펙트 모달 -->
-  <!-- ========================================================= -->
   <div id="scoreModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-2 md:p-4">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[96vh]">
       
-      <!-- 도우미 1보드 모드 전용 상단 보드 전환 바 -->
-      <div id="helperBoardSwitcher" class="hidden bg-slate-950 border-b border-slate-800 px-3 py-2 flex items-center justify-between gap-1 overflow-x-auto">
-        <span class="text-[11px] font-black text-cyan-400 whitespace-nowrap mr-1">📱 내 담당 보드:</span>
-        <div class="flex items-center gap-1" id="helperBoardTabList">
-          <button type="button" onclick="switchHelperBoard(0)" data-hboard="0" class="hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300">1번(A-남)</button>
-          <button type="button" onclick="switchHelperBoard(1)" data-hboard="1" class="hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300">2번(A-여)</button>
-          <button type="button" onclick="switchHelperBoard(2)" data-hboard="2" class="hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300">3번(A-혼)</button>
-          <button type="button" onclick="switchHelperBoard(3)" data-hboard="3" class="hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300">4번(B-남)</button>
-          <button type="button" onclick="switchHelperBoard(4)" data-hboard="4" class="hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300">5번(B-여)</button>
-          <button type="button" onclick="switchHelperBoard(5)" data-hboard="5" class="hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300">6번(B-혼)</button>
-        </div>
+      <div id="helperBoardSwitcher" class="hidden bg-slate-950 border-b border-slate-800 px-3 py-2 flex items-center justify-between gap-1.5 overflow-x-auto">
+        <div class="flex items-center gap-1" id="helperBoardTabList"></div>
+        <button type="button" onclick="closeScoreModal(); openRosterManagerModal();" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-black whitespace-nowrap">
+          📋 우리반 명단 입력
+        </button>
       </div>
 
       <div class="px-4 py-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
-        <div>
-          <span id="modalBoardBadge" class="text-xs font-black px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 mr-1.5">MATCH A · 1번 보드</span>
-          <span id="modalRoundTitle" class="text-sm md:text-base font-black text-white">1라운드 (남자 4 vs 4)</span>
+        <div class="flex items-center gap-2">
+          <span id="modalBoardCharIcon" class="w-8 h-8 rounded-lg bg-white p-0.5 flex items-center justify-center shrink-0 overflow-hidden shadow"></span>
+          <div>
+            <span id="modalBoardBadge" class="text-xs font-black px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 mr-1.5">MATCH A · 1번 보드</span>
+            <span id="modalRoundTitle" class="text-sm md:text-base font-black text-white">1라운드 (남자 4 vs 4)</span>
+          </div>
         </div>
         <button type="button" onclick="closeScoreModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold">✕</button>
       </div>
 
       <div class="p-3.5 md:p-4 overflow-y-auto space-y-3">
-        <!-- 현재 점수 현황 -->
         <div class="grid grid-cols-11 items-center gap-2 bg-slate-950/90 p-3 rounded-xl border border-slate-800">
           <div id="modalHomeBox" class="col-span-5 text-center p-2 rounded-lg border border-sky-500/30 bg-sky-500/5">
             <div id="modalHomeTeam" class="text-xs md:text-sm font-black text-sky-400">1반</div>
@@ -490,27 +473,24 @@
           </div>
         </div>
 
-        <!-- ① 던진 학생 선택 -->
         <div>
           <div class="flex items-center justify-between mb-1.5">
-            <label class="text-xs font-bold text-slate-300">① 방금 다트를 던진 학생 선택 <span class="text-amber-400">(팀 차감 + 개인 득점 합산)</span></label>
+            <label class="text-xs font-bold text-slate-300">① 방금 다트를 던진 학생 <span class="text-emerald-400">(적용 시 상대 반 다음 순번으로 자동 이동)</span></label>
             <span id="selectedPlayerNotice" class="text-xs font-bold text-emerald-400">선택됨: 없음</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             <div class="bg-slate-950/70 p-2 rounded-xl border border-sky-500/20">
-              <div id="homeRosterLabel" class="text-[11px] font-bold text-sky-400 mb-1.5 px-1">1반 출전 선수 (4명)</div>
+              <div id="homeRosterLabel" class="text-[11px] font-bold text-sky-400 mb-1.5 px-1">1반 출전 선수</div>
               <div id="modalHomePlayers" class="grid grid-cols-2 gap-1.5"></div>
             </div>
             <div class="bg-slate-950/70 p-2 rounded-xl border border-rose-500/20">
-              <div id="awayRosterLabel" class="text-[11px] font-bold text-rose-400 mb-1.5 px-1">2반 출전 선수 (4명)</div>
+              <div id="awayRosterLabel" class="text-[11px] font-bold text-rose-400 mb-1.5 px-1">2반 출전 선수</div>
               <div id="modalAwayPlayers" class="grid grid-cols-2 gap-1.5"></div>
             </div>
           </div>
         </div>
 
-        <!-- ② 전자다트 태블릿 맞춤형 점수 입력 영역 -->
         <div class="bg-slate-950/95 p-3 rounded-xl border border-indigo-500/40 space-y-2.5">
-          <!-- 입력 모드 전환 탭 -->
           <div class="flex flex-wrap items-center justify-between gap-2">
             <span class="text-xs font-bold text-slate-300">② 점수 입력 방식:</span>
             <div class="grid grid-cols-2 gap-1 bg-slate-900 p-1 rounded-lg border border-slate-700 text-[11px] font-black">
@@ -523,7 +503,6 @@
             </div>
           </div>
 
-          <!-- 입력 가이드 & 숫자 입력창 -->
           <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-900/90 p-2.5 rounded-xl border border-slate-800">
             <div id="scoreInputGuideText" class="text-xs text-cyan-300 font-bold">
               전자다트 태블릿의 <span class="underline text-amber-300">줄어든 현재 점수</span>를 그대로 적으세요!
@@ -536,7 +515,6 @@
             </div>
           </div>
 
-          <!-- 빠른 점수 버튼 (획득 점수 모드일 때 유용) -->
           <div id="quickScoreButtonsRow" class="hidden grid-cols-4 sm:grid-cols-8 gap-1.5">
             <button type="button" onclick="quickAddScore(20)" class="py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700">20</button>
             <button type="button" onclick="quickAddScore(40)" class="py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700">40</button>
@@ -549,10 +527,9 @@
           </div>
         </div>
 
-        <!-- ③ 전광판 스페셜 이펙트 버튼 (점수와 무관하게 즉시 화면 중앙 애니메이션 송출) -->
         <div class="bg-gradient-to-r from-rose-950/50 via-amber-950/40 to-rose-950/50 p-3 rounded-xl border border-amber-500/40 space-y-2">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-black text-amber-300">🎉 전광판 스페셜 이펙트 송출 <span class="font-normal text-slate-400">(점수 변동 없이 화면 중앙에 크게 표시)</span></span>
+            <span class="text-xs font-black text-amber-300">🎉 전광판 스페셜 이펙트 & 팡파레 송출 <span class="font-normal text-slate-400">(효과음 + 초대형 화면 이펙트)</span></span>
           </div>
           <div class="grid grid-cols-3 gap-2">
             <button type="button" onclick="triggerSpecialShoutout('BULL')" class="py-2.5 px-2 rounded-xl bg-gradient-to-b from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-black text-xs md:text-sm shadow-lg shadow-rose-600/25 active:scale-95 transition flex flex-col items-center justify-center gap-0.5">
@@ -570,7 +547,6 @@
           </div>
         </div>
 
-        <!-- 최근 기록 및 취소/리셋 -->
         <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-950/60 px-3 py-2 rounded-xl border border-slate-800/80">
           <div class="text-xs text-slate-400 truncate max-w-[65%]">
             최근 기록: <span id="modalLastLog" class="text-slate-200 font-medium">아직 입력된 기록이 없습니다.</span>
@@ -581,7 +557,6 @@
           </div>
         </div>
 
-        <!-- 승리 확정 처리 -->
         <div class="pt-1 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
           <span class="text-[11px] text-slate-400">※ 머신에서 승패가 이미 결정된 경우 바로 승리 처리:</span>
           <div class="flex items-center gap-2">
@@ -593,84 +568,121 @@
     </div>
   </div>
 
-  <!-- ========================================================= -->
-  <!-- MODAL 2: 1~10반 마스터 대표선수 명단 관리 모달 -->
-  <!-- ========================================================= -->
+  <!-- MODAL 2: 팀 · 대표선수 명단 관리 모달 (런치리그 1~10반 + 범용 팀·인원 커스텀 모드) -->
   <div id="rosterManagerModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-3">
-    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-5xl shadow-2xl overflow-hidden flex flex-col max-h-[93vh]">
       <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
         <div>
-          <h2 class="text-base font-black text-white">📋 1반 ~ 10반 대표선수 명단 관리 (남4 · 여4 · 혼성 남2여2)</h2>
-          <p class="text-xs text-slate-400">각 반의 명단을 저장해 두면 대진표에서 반을 고를 때 자동으로 불러와지며 실시간 동기화됩니다.</p>
+          <h2 class="text-base font-black text-white">📋 팀 · 대표선수 명단 관리 <span class="text-amber-300">(학급별 개별 잠금 & 범용 커스텀 지원)</span></h2>
+          <p class="text-xs text-slate-400">자기 반 명단을 입력하고 <b>[🔒 이 반 잠그기]</b>를 눌러두면 다른 반에서 실수로 건드려도 수정되지 않습니다.</p>
         </div>
-        <div class="flex items-center gap-1.5">
-          <button type="button" onclick="exportRosterJSON()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 text-xs font-bold">💾 명단 백업(JSON)</button>
+        <div class="flex items-center gap-1.5 flex-wrap">
+          <button type="button" id="customModeToggleBtn" onclick="toggleCustomRosterMode()" class="px-2.5 py-1.5 rounded-lg bg-indigo-600/25 hover:bg-indigo-600/40 text-indigo-200 border border-indigo-400/50 text-xs font-black transition">
+            ⚙️ 범용 팀·인원 커스텀: OFF
+          </button>
+          <button type="button" onclick="clearAllClassesRoster()" class="px-2.5 py-1.5 rounded-lg bg-rose-950/70 hover:bg-rose-900 text-rose-300 border border-rose-700/60 text-xs font-black transition">
+            🗑️ 전체 예시 비우기
+          </button>
+          <button type="button" onclick="exportRosterJSON()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 text-xs font-bold">💾 백업</button>
           <label class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-slate-700 text-xs font-bold cursor-pointer">
-            📂 명단 불러오기
+            📂 불러오기
             <input type="file" accept=".json" onchange="importRosterJSON(event)" class="hidden" />
           </label>
           <button type="button" onclick="closeModal('rosterManagerModal')" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold ml-1">✕</button>
         </div>
       </div>
 
+      <!-- 팀 탭 바 (1~10반 + 커스텀 팀 추가 버튼) -->
       <div class="bg-slate-950/90 px-4 py-2.5 border-b border-slate-800 flex items-center gap-1.5 flex-wrap" id="classTabsContainer"></div>
 
       <div class="p-4 md:p-5 overflow-y-auto space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-950/70 p-3 rounded-xl border border-slate-800">
-          <div class="flex items-center gap-2">
-            <span id="editingClassBadge" class="px-3 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 text-sm font-black">1반</span>
-            <input id="editingClassDisplayName" type="text" placeholder="반 표시 이름 (예: 1반 또는 2-1)" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1 text-sm font-bold text-white w-44" />
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="editingClassBadge" class="px-3 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 text-sm font-black">1반 설정</span>
+            <input id="editingClassDisplayName" type="text" placeholder="팀/반 표시 이름" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1 text-sm font-bold text-white w-36" />
+            <button type="button" id="toggleClassLockBtn" onclick="toggleCurrentClassLock()" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/40 text-xs font-black transition">
+              🔓 수정 가능 상태 (클릭 시 잠금)
+            </button>
+            <button type="button" id="deleteCustomClassBtn" onclick="deleteCurrentCustomClass()" class="hidden px-2.5 py-1 rounded-lg bg-rose-600/25 hover:bg-rose-600/40 text-rose-300 border border-rose-500/40 text-xs font-bold transition">
+              🗑️ 이 커스텀 팀 삭제
+            </button>
+            <button type="button" onclick="clearCurrentClassInputs()" class="px-2.5 py-1 rounded-lg bg-rose-600/20 hover:bg-rose-600/35 text-rose-300 border border-rose-500/40 text-xs font-bold transition">
+              🧹 이 팀 명단 비우기
+            </button>
           </div>
-          <div class="text-xs text-slate-400">
-            3R 혼성 출전 선택 현황: <span id="mixedSelectionCounter" class="font-black text-emerald-400">남 2명 · 여 2명</span>
+          <div id="rosterSummaryCountText" class="text-xs font-bold text-emerald-300">
+            총원: 1R 남자 4명 + 2R 여자 4명 + 3R 혼성 4명 = 12명
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-slate-950/80 border border-sky-500/30 rounded-xl p-3.5 space-y-2.5">
+        <div id="classLockedBanner" class="hidden bg-rose-950/50 border border-rose-500/40 rounded-xl px-4 py-2.5 text-xs text-rose-200 flex items-center justify-between">
+          <span>🔒 <b>이 반의 명단은 현재 잠금 보호 중입니다.</b> 다른 반 학생의 실수 수정을 막기 위해 입력칸이 잠겨 있습니다.</span>
+          <button type="button" onclick="toggleCurrentClassLock()" class="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-black text-xs">잠금 해제</button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3.5">
+          <!-- 1R 남자 -->
+          <div class="bg-slate-950/80 border border-sky-500/35 rounded-xl p-3.5 space-y-2.5">
             <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-              <span class="text-xs font-black text-sky-400">👦 남자 대표 4명 (1R 남자 4v4 출전)</span>
-              <span class="text-[11px] text-amber-300 font-bold">혼성 2명 체크</span>
+              <span class="text-xs font-black text-sky-400">👦 1R 남자 대표 (<span id="maleCountLabel">4</span>명)</span>
+              <div id="maleAdjustControls" class="hidden items-center gap-1">
+                <button type="button" onclick="adjustRosterCount('males', -1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-rose-600 text-white font-black text-xs">-</button>
+                <button type="button" onclick="adjustRosterCount('males', 1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-sky-600 text-white font-black text-xs">+</button>
+              </div>
             </div>
             <div id="maleRosterInputs" class="space-y-2"></div>
           </div>
 
-          <div class="bg-slate-950/80 border border-rose-500/30 rounded-xl p-3.5 space-y-2.5">
+          <!-- 2R 여자 -->
+          <div class="bg-slate-950/80 border border-rose-500/35 rounded-xl p-3.5 space-y-2.5">
             <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-              <span class="text-xs font-black text-rose-400">👧 여자 대표 4명 (2R 여자 4v4 출전)</span>
-              <span class="text-[11px] text-amber-300 font-bold">혼성 2명 체크</span>
+              <span class="text-xs font-black text-rose-400">👧 2R 여자 대표 (<span id="femaleCountLabel">4</span>명)</span>
+              <div id="femaleAdjustControls" class="hidden items-center gap-1">
+                <button type="button" onclick="adjustRosterCount('females', -1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-rose-600 text-white font-black text-xs">-</button>
+                <button type="button" onclick="adjustRosterCount('females', 1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-rose-600 text-white font-black text-xs">+</button>
+              </div>
             </div>
             <div id="femaleRosterInputs" class="space-y-2"></div>
+          </div>
+
+          <!-- 3R 혼성 -->
+          <div class="bg-slate-950/80 border border-purple-500/35 rounded-xl p-3.5 space-y-2.5">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+              <span class="text-xs font-black text-purple-300">🤝 3R 혼성 대표 (<span id="mixedCountLabel">4</span>명)</span>
+              <div id="mixedAdjustControls" class="hidden items-center gap-1">
+                <button type="button" onclick="adjustRosterCount('mixed', -1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-rose-600 text-white font-black text-xs">-</button>
+                <button type="button" onclick="adjustRosterCount('mixed', 1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-purple-600 text-white font-black text-xs">+</button>
+              </div>
+            </div>
+            <div id="mixedRosterInputs" class="space-y-2"></div>
           </div>
         </div>
       </div>
 
-      <div class="px-5 py-3 bg-slate-950 border-t border-slate-800 flex items-center justify-between">
-        <span class="text-xs text-slate-400">※ 저장 시 현재 경기 중인 보드에 해당 반이 배정되어 있다면 명단이 즉시 반영됩니다.</span>
+      <div class="px-5 py-3 bg-slate-950 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
+        <span class="text-xs text-slate-400">※ 각 반 대표가 따로 저장해도 해당 반 데이터만 안전하게 병합 저장됩니다.</span>
         <button type="button" onclick="saveCurrentClassRoster()" class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-sm font-black shadow-lg transition">
-          ✓ 이 반 명단 저장하기
+          ✓ 이 반(팀) 명단 저장하기
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ========================================================= -->
   <!-- MODAL 3: 오늘의 대진 선택 모달 -->
-  <!-- ========================================================= -->
   <div id="matchSetupModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-3">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
       <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
         <div>
-          <h2 class="text-base font-black text-white">⚔️ 대진 선택 (1~10반 선택 시 대표 명단 자동 불러오기)</h2>
+          <h2 class="text-base font-black text-white">⚔️ 대진 선택 (반/팀 선택 시 대표 명단 자동 불러오기)</h2>
           <p class="text-xs text-slate-400">결승전 모드일 경우 <b>MATCH A (결승전 1~3번 보드)</b> 1경기만 설정하면 됩니다.</p>
         </div>
         <button type="button" onclick="closeModal('matchSetupModal')" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold">✕</button>
       </div>
 
       <div id="matchSetupGrid" class="p-4 md:p-5 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="bg-slate-950/90 border border-rose-500/30 rounded-xl p-4 space-y-3">
+        <div class="bg-slate-950/90 border border-sky-500/40 rounded-xl p-4 space-y-3">
           <div class="flex items-center justify-between">
-            <span id="setupMatchALabel" class="px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-400 text-xs font-black">MATCH A (1~3번 보드)</span>
+            <span id="setupMatchALabel" class="px-2.5 py-0.5 rounded bg-sky-500 text-slate-950 text-xs font-black">MATCH A (1~3번 보드)</span>
           </div>
           <div class="grid grid-cols-11 items-center gap-2">
             <select id="selectMatchA_home" onchange="updateMatchPreview()" class="col-span-5 bg-slate-900 border border-sky-500/40 rounded-lg px-3 py-2 text-sm font-black text-sky-400 outline-none"></select>
@@ -680,9 +692,9 @@
           <div id="previewMatchA" class="bg-slate-900/90 border border-slate-800 rounded-lg p-3 text-xs space-y-2"></div>
         </div>
 
-        <div id="setupMatchBCard" class="bg-slate-950/90 border border-amber-500/30 rounded-xl p-4 space-y-3">
+        <div id="setupMatchBCard" class="bg-slate-950/90 border border-amber-500/40 rounded-xl p-4 space-y-3">
           <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 text-xs font-black">MATCH B (4~6번 보드)</span>
+            <span class="px-2.5 py-0.5 rounded bg-amber-400 text-slate-950 text-xs font-black">MATCH B (4~6번 보드)</span>
           </div>
           <div class="grid grid-cols-11 items-center gap-2">
             <select id="selectMatchB_home" onchange="updateMatchPreview()" class="col-span-5 bg-slate-900 border border-sky-500/40 rounded-lg px-3 py-2 text-sm font-black text-sky-400 outline-none"></select>
@@ -706,15 +718,13 @@
     </div>
   </div>
 
-  <!-- ========================================================= -->
-  <!-- MODAL 4: 전체 1~10반 명렬표 & 개인 누적 득점 순위표 -->
-  <!-- ========================================================= -->
+  <!-- MODAL 4: 전체 명렬표 & 개인 누적 득점 순위표 -->
   <div id="leaderboardModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-3">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
       <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
         <div>
-          <h2 class="text-base font-black text-white">🏆 1~10반 통합 명렬표 & 개인 누적 득점 순위</h2>
-          <p class="text-xs text-slate-400">리그 전 경기 동안 각 학생이 기록한 총 누적 득점과 턴당 평균 득점이 실시간으로 집계됩니다.</p>
+          <h2 class="text-base font-black text-white">🏆 전체 통합 명렬표 & 개인 누적 득점 순위</h2>
+          <p class="text-xs text-slate-400">각 학급/팀 출전 선수의 누적 득점과 턴당 평균 득점이 실시간으로 집계됩니다.</p>
         </div>
         <div class="flex items-center gap-2">
           <button type="button" onclick="exportCSV()" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold">📥 엑셀(CSV) 저장</button>
@@ -732,9 +742,9 @@
           <thead>
             <tr class="border-b border-slate-700 text-[11px] uppercase text-slate-400 bg-slate-950/60">
               <th class="py-2.5 px-3">순위</th>
-              <th class="py-2.5 px-3">학급</th>
+              <th class="py-2.5 px-3">학급/팀</th>
               <th class="py-2.5 px-3">학번 / 이름</th>
-              <th class="py-2.5 px-3">성별</th>
+              <th class="py-2.5 px-3">출전 구분</th>
               <th class="py-2.5 px-3 text-right">투구 턴</th>
               <th class="py-2.5 px-3 text-right">턴당 평균</th>
               <th class="py-2.5 px-3 text-right text-amber-400">총 누적 득점</th>
@@ -751,77 +761,178 @@
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    // 홈 화면 추가(iOS/Android) 시 고해상도 다트판 PNG 아이콘 자동 생성
+    // ==========================================
+    // 0. 첨부 이미지 원본 캐릭터 6종 추출기 (1,2,3 -> 1,2,3번판 / 4,5,6 -> 6,7,8번판)
+    // ==========================================
+    const BOARD_CHARACTER_META = [
+      { boardNum: 1, physicalBoard: 1, label: '1번판', cropIndex: 0 },
+      { boardNum: 2, physicalBoard: 2, label: '2번판', cropIndex: 1 },
+      { boardNum: 3, physicalBoard: 3, label: '3번판', cropIndex: 2 },
+      { boardNum: 4, physicalBoard: 6, label: '6번판', cropIndex: 3 },
+      { boardNum: 5, physicalBoard: 7, label: '7번판', cropIndex: 4 },
+      { boardNum: 6, physicalBoard: 8, label: '8번판', cropIndex: 5 }
+    ];
+
+    // 업로드된 원본 사진 파일(KakaoTalk_20261126_195245795.jpg)에서 각 캐릭터 영역만 정밀 크롭하여 DataURL로 저장
+    const CROPPED_CHAR_DATA_URLS = [null, null, null, null, null, null];
+
+    function initOriginalCharacterSprites() {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        try {
+          const w = img.naturalWidth;
+          const h = img.naturalHeight;
+          // 사진 세로 6등분 기준 각 행의 캐릭터 영역 (좌측 민트 번호박스 우측에 위치한 캐릭터 영역)
+          const rowHeight = h / 6;
+          const sx = Math.round(w * 0.28);
+          const sw = Math.round(w * 0.24);
+
+          for (let i = 0; i < 6; i++) {
+            const sy = Math.round(i * rowHeight + rowHeight * 0.14);
+            const sh = Math.round(rowHeight * 0.72);
+            const canvas = document.createElement('canvas');
+            canvas.width = 120;
+            canvas.height = 120;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, 120, 120);
+            ctx.drawImage(img, sx, sy, sw, sh, 4, 4, 112, 112);
+            CROPPED_CHAR_DATA_URLS[i] = canvas.toDataURL('image/png');
+          }
+          renderAll();
+          if (activeBoardIndex !== null && !document.getElementById('scoreModal').classList.contains('hidden')) {
+            renderScoreModalContent();
+          }
+        } catch (err) {
+          console.warn('원본 캐릭터 크롭 중 오류:', err);
+        }
+      };
+      img.src = 'KakaoTalk_20261126_195245795.jpg';
+    }
+    initOriginalCharacterSprites();
+
+    function getBoardCharImageHTML(boardIdx, sizeClass = 'w-8 h-8') {
+      const meta = BOARD_CHARACTER_META[boardIdx] || BOARD_CHARACTER_META[0];
+      const src = CROPPED_CHAR_DATA_URLS[meta.cropIndex];
+      if (src) {
+        return `<img src="${src}" alt="${meta.label} 캐릭터" class="${sizeClass} object-contain rounded-lg bg-white p-0.5 shadow border border-white/30 shrink-0" />`;
+      }
+      // 이미지 로딩 직전 대체 배지
+      return `<span class="${sizeClass} rounded-lg bg-teal-500 text-slate-950 font-score font-black text-xs flex items-center justify-center shrink-0">${meta.physicalBoard}</span>`;
+    }
+
+    // ==========================================
+    // 1. Web Audio API 스페셜 사운드 효과음 엔진
+    // ==========================================
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) audioCtx = new AudioContextClass();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+      }
+      return audioCtx;
+    }
+
+    window.toggleSoundEffect = function() {
+      soundEnabled = !soundEnabled;
+      const btn = document.getElementById('soundToggleBtn');
+      if (soundEnabled) {
+        btn.className = 'px-2 py-0.5 text-[11px] font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 transition';
+        btn.textContent = '🔊 효과음 ON';
+        playShoutoutSound('BULL');
+      } else {
+        btn.className = 'px-2 py-0.5 text-[11px] font-bold rounded-full bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700 transition';
+        btn.textContent = '🔇 효과음 OFF';
+      }
+    };
+
+    function playShoutoutSound(type) {
+      if (!soundEnabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+
+      const playTone = (freq, startOffset, duration, waveType = 'triangle', gainVal = 0.25) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = waveType;
+        osc.frequency.setValueAtTime(freq, now + startOffset);
+        gain.gain.setValueAtTime(0.001, now + startOffset);
+        gain.gain.exponentialRampToValueAtTime(gainVal, now + startOffset + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + startOffset + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + startOffset);
+        osc.stop(now + startOffset + duration + 0.03);
+      };
+
+      if (type === 'BULL') {
+        // 🎯 BULL: 경쾌한 전자 다트 아케이드 상승 팡파레 (C5 - E5 - G5 - C6)
+        playTone(523.25, 0.00, 0.14, 'triangle', 0.28);
+        playTone(659.25, 0.10, 0.14, 'triangle', 0.28);
+        playTone(783.99, 0.20, 0.16, 'triangle', 0.30);
+        playTone(1046.50, 0.31, 0.45, 'sawtooth', 0.22);
+        playTone(1046.50, 0.31, 0.45, 'sine', 0.30);
+      } else if (type === 'TRIPLE20') {
+        // 🔥 TRIPLE 20: 강렬한 3연타 파워 히트 사운드
+        playTone(440.00, 0.00, 0.13, 'sawtooth', 0.24);
+        playTone(554.37, 0.11, 0.13, 'sawtooth', 0.26);
+        playTone(659.25, 0.22, 0.15, 'sawtooth', 0.28);
+        playTone(880.00, 0.34, 0.48, 'square', 0.20);
+        playTone(1108.73, 0.34, 0.48, 'triangle', 0.26);
+      } else {
+        // 👑 180 TON: 웅장한 챔피언 브라스 화음 팡파레
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((f, idx) => {
+          playTone(f, idx * 0.09, 0.22, 'sawtooth', 0.22);
+        });
+        [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach(f => {
+          playTone(f, 0.38, 0.65, 'triangle', 0.22);
+        });
+      }
+    }
+
+    // ==========================================
+    // 2. 앱 아이콘 PNG 생성
+    // ==========================================
     function generateDartAppIconPNG() {
       try {
         const canvas = document.createElement('canvas');
         canvas.width = 512;
         canvas.height = 512;
         const ctx = canvas.getContext('2d');
-
         ctx.fillStyle = '#0f172a';
         ctx.fillRect(0, 0, 512, 512);
-
         const cx = 256, cy = 256;
-        const rings = [
-          { r: 205, color: '#1e293b' },
+        [
           { r: 190, color: '#f43f5e' },
           { r: 148, color: '#f8fafc' },
           { r: 106, color: '#f43f5e' },
           { r: 64,  color: '#f8fafc' },
           { r: 28,  color: '#f59e0b' }
-        ];
-        rings.forEach(ring => {
+        ].forEach(ring => {
           ctx.beginPath();
           ctx.arc(cx, cy, ring.r, 0, Math.PI * 2);
           ctx.fillStyle = ring.color;
           ctx.fill();
         });
-
-        ctx.strokeStyle = '#38bdf8';
-        ctx.lineWidth = 22;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(410, 102);
-        ctx.lineTo(272, 240);
-        ctx.stroke();
-
-        ctx.fillStyle = '#e2e8f0';
-        ctx.beginPath();
-        ctx.moveTo(258, 254);
-        ctx.lineTo(286, 212);
-        ctx.lineTo(300, 226);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.fillStyle = '#0284c7';
-        ctx.beginPath();
-        ctx.moveTo(375, 137);
-        ctx.lineTo(445, 67);
-        ctx.lineTo(455, 112);
-        ctx.lineTo(415, 152);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.fillStyle = '#38bdf8';
-        ctx.beginPath();
-        ctx.moveTo(375, 137);
-        ctx.lineTo(445, 67);
-        ctx.lineTo(400, 57);
-        ctx.lineTo(360, 97);
-        ctx.closePath();
-        ctx.fill();
-
-        const pngUrl = canvas.toDataURL('image/png');
         const appleIcon = document.getElementById('appleTouchIconLink');
-        if (appleIcon) appleIcon.href = pngUrl;
-      } catch (e) {
-        console.warn('아이콘 생성 중 오류:', e);
-      }
+        if (appleIcon) appleIcon.href = canvas.toDataURL('image/png');
+      } catch (e) {}
     }
     generateDartAppIconPNG();
 
-    const LOCAL_STORAGE_KEY = 'dart_lunch_league_10classes_v3';
+    // ==========================================
+    // 3. 기본 상태 및 데이터 구조
+    // ==========================================
+    const LOCAL_STORAGE_KEY = 'dart_lunch_league_10classes_12players_v5';
     const ROOM_ID = 'main_league_room';
     const BRACKET_SITE_URL = 'https://today119.github.io/baseball-record/dart1.html';
     const HELPER_PIN_CODE = '3895';
@@ -838,44 +949,23 @@
     };
 
     const ROUND_META = [
-      {
-        key: 'R1',
-        num: 1,
-        title: '1라운드 · 남자 4 vs 4',
-        badge: '남자 4v4',
-        badgeStyle: 'bg-sky-500/25 text-sky-300 border-sky-400/50',
-        type: 'male'
-      },
-      {
-        key: 'R2',
-        num: 2,
-        title: '2라운드 · 여자 4 vs 4',
-        badge: '여자 4v4',
-        badgeStyle: 'bg-rose-500/25 text-rose-300 border-rose-400/50',
-        type: 'female'
-      },
-      {
-        key: 'R3',
-        num: 3,
-        title: '3라운드 · 혼성 (남2·여2)',
-        badge: '혼성 4v4',
-        badgeStyle: 'bg-purple-500/25 text-purple-200 border-purple-400/50',
-        type: 'mixed'
-      }
+      { key: 'R1', num: 1, title: '1라운드 · 남자 대표전', badge: '남자 대표', badgeStyle: 'bg-sky-500/25 text-sky-300 border-sky-400/50', type: 'male' },
+      { key: 'R2', num: 2, title: '2라운드 · 여자 대표전', badge: '여자 대표', badgeStyle: 'bg-rose-500/25 text-rose-300 border-rose-400/50', type: 'female' },
+      { key: 'R3', num: 3, title: '3라운드 · 혼성 대표전', badge: '혼성 대표', badgeStyle: 'bg-purple-500/25 text-purple-200 border-purple-400/50', type: 'mixed' }
     ];
 
-    function buildDefaultClasses() {
+    function buildDefaultClasses(blankNames = false) {
       const sampleNames = {
-        1: { m: ['김민준', '이서준', '박도윤', '최예준'], f: ['김서연', '이하윤', '박지우', '최서현'] },
-        2: { m: ['정시우', '강주원', '조하준', '윤지호'], f: ['정하은', '강민서', '조지유', '윤채원'] },
-        3: { m: ['장준우', '임현우', '한도현', '오건우'], f: ['장수아', '임지아', '한다은', '오예은'] },
-        4: { m: ['서우진', '신선우', '권연우', '황유준'], f: ['서윤서', '신채은', '권지민', '황소율'] },
-        5: { m: ['안정우', '송승현', '전승우', '홍시윤'], f: ['안예린', '송수빈', '전지윤', '홍지원'] },
-        6: { m: ['유준혁', '고은우', '문지훈', '양태윤'], f: ['유하린', '고다인', '문서윤', '양아린'] },
-        7: { m: ['손민재', '배현준', '백준서', '허지환'], f: ['손유나', '배나은', '백소은', '허예원'] },
-        8: { m: ['남승민', '심재원', '노민성', '하준영'], f: ['남지안', '심시아', '노채아', '하가은'] },
-        9: { m: ['곽태현', '성민규', '차유찬', '주현성'], f: ['곽세아', '성다현', '차유진', '주보민'] },
-        10: { m: ['우지성', '구현서', '나도훈', '변시온'], f: ['우서아', '구연서', '나주아', '변하율'] }
+        1: { m: ['김민준', '이서준', '박도윤', '최예준'], f: ['김서연', '이하윤', '박지우', '최서현'], x: ['강태오', '윤도현', '정유나', '한소미'] },
+        2: { m: ['정시우', '강주원', '조하준', '윤지호'], f: ['정하은', '강민서', '조지유', '윤채원'], x: ['송재민', '임서진', '오수빈', '배지안'] },
+        3: { m: ['장준우', '임현우', '한도현', '오건우'], f: ['장수아', '임지아', '한다은', '오예은'], x: ['신우빈', '권민재', '황나연', '서채린'] },
+        4: { m: ['서우진', '신선우', '권연우', '황유준'], f: ['서윤서', '신채은', '권지민', '황소율'], x: ['안준서', '전시후', '홍다인', '유아린'] },
+        5: { m: ['안정우', '송승현', '전승우', '홍시윤'], f: ['안예린', '송수빈', '전지윤', '홍지원'], x: ['고은찬', '문태윤', '양서아', '손하린'] },
+        6: { m: ['유준혁', '고은우', '문지훈', '양태윤'], f: ['유하린', '고다인', '문서윤', '양아린'], x: ['백승민', '허지환', '남예원', '심지유'] },
+        7: { m: ['손민재', '배현준', '백준서', '허지환'], f: ['손유나', '배나은', '백소은', '허예원'], x: ['노현준', '하준영', '곽세아', '성다현'] },
+        8: { m: ['남승민', '심재원', '노민성', '하준영'], f: ['남지안', '심시아', '노채아', '하가은'], x: ['차유찬', '주현성', '우서아', '구연서'] },
+        9: { m: ['곽태현', '성민규', '차유찬', '주현성'], f: ['곽세아', '성다현', '차유진', '주보민'], x: ['나도훈', '변시온', '김나윤', '이채원'] },
+        10: { m: ['우지성', '구현서', '나도훈', '변시온'], f: ['우서아', '구연서', '나주아', '변하율'], x: ['박시우', '최지호', '정서연', '강하은'] }
       };
       const classes = {};
       for (let c = 1; c <= 10; c++) {
@@ -884,23 +974,98 @@
         classes[classId] = {
           id: classId,
           name: `${c}반`,
-          males: [
-            { id: `${classId}_m1`, num: `${numPrefix}01`, name: sampleNames[c].m[0], gender: 'M' },
-            { id: `${classId}_m2`, num: `${numPrefix}02`, name: sampleNames[c].m[1], gender: 'M' },
-            { id: `${classId}_m3`, num: `${numPrefix}03`, name: sampleNames[c].m[2], gender: 'M' },
-            { id: `${classId}_m4`, num: `${numPrefix}04`, name: sampleNames[c].m[3], gender: 'M' }
-          ],
-          females: [
-            { id: `${classId}_f1`, num: `${numPrefix}11`, name: sampleNames[c].f[0], gender: 'F' },
-            { id: `${classId}_f2`, num: `${numPrefix}12`, name: sampleNames[c].f[1], gender: 'F' },
-            { id: `${classId}_f3`, num: `${numPrefix}13`, name: sampleNames[c].f[2], gender: 'F' },
-            { id: `${classId}_f4`, num: `${numPrefix}14`, name: sampleNames[c].f[3], gender: 'F' }
-          ],
-          mixedMaleIds: [`${classId}_m1`, `${classId}_m2`],
-          mixedFemaleIds: [`${classId}_f1`, `${classId}_f2`]
+          locked: false,
+          isCustom: false,
+          males: [0, 1, 2, 3].map(i => ({
+            id: `${classId}_m${i + 1}`,
+            num: blankNames ? '' : `${numPrefix}0${i + 1}`,
+            name: blankNames ? '' : sampleNames[c].m[i],
+            gender: 'M',
+            roundTag: '1R 남자'
+          })),
+          females: [0, 1, 2, 3].map(i => ({
+            id: `${classId}_f${i + 1}`,
+            num: blankNames ? '' : `${numPrefix}1${i + 1}`,
+            name: blankNames ? '' : sampleNames[c].f[i],
+            gender: 'F',
+            roundTag: '2R 여자'
+          })),
+          mixed: [0, 1, 2, 3].map(i => ({
+            id: `${classId}_x${i + 1}`,
+            num: blankNames ? '' : `${numPrefix}2${i + 1}`,
+            name: blankNames ? '' : sampleNames[c].x[i],
+            gender: i < 2 ? 'M' : 'F',
+            roundTag: i < 2 ? '3R 혼성(남)' : '3R 혼성(여)'
+          }))
         };
       }
       return classes;
+    }
+
+    function normalizeClassesData(rawClasses) {
+      const defaults = buildDefaultClasses(true);
+      const result = {};
+      const keys = new Set([...Object.keys(defaults), ...Object.keys(rawClasses || {})]);
+
+      keys.forEach(cid => {
+        const src = (rawClasses && rawClasses[cid]) ? rawClasses[cid] : defaults[cid];
+        if (!src) return;
+        const baseFallback = defaults[cid] || {
+          id: cid,
+          name: src.name || '새 팀',
+          locked: false,
+          isCustom: true,
+          males: [],
+          females: [],
+          mixed: []
+        };
+
+        const malesArr = Array.isArray(src.males) ? src.males : baseFallback.males;
+        const femalesArr = Array.isArray(src.females) ? src.females : baseFallback.females;
+        const mixedArr = Array.isArray(src.mixed) ? src.mixed : baseFallback.mixed;
+
+        result[cid] = {
+          id: cid,
+          name: src.name || baseFallback.name,
+          locked: Boolean(src.locked),
+          isCustom: Boolean(src.isCustom || !defaults[cid]),
+          males: malesArr.map((p, i) => ({
+            ...p,
+            id: p.id || `${cid}_m${i + 1}`,
+            gender: 'M',
+            roundTag: '1R 남자'
+          })),
+          females: femalesArr.map((p, i) => ({
+            ...p,
+            id: p.id || `${cid}_f${i + 1}`,
+            gender: 'F',
+            roundTag: '2R 여자'
+          })),
+          mixed: mixedArr.map((p, i) => ({
+            ...p,
+            id: p.id || `${cid}_x${i + 1}`,
+            gender: p.gender || (i % 2 === 0 ? 'M' : 'F'),
+            roundTag: (p.gender || (i % 2 === 0 ? 'M' : 'F')) === 'M' ? '3R 혼성(남)' : '3R 혼성(여)'
+          }))
+        };
+      });
+      return result;
+    }
+
+    function getOrderedClassIds() {
+      const allKeys = Object.keys(state.classes);
+      const baseKeys = [];
+      for (let c = 1; c <= 10; c++) {
+        if (state.classes[`c${c}`]) baseKeys.push(`c${c}`);
+      }
+      const customKeys = allKeys.filter(k => !baseKeys.includes(k)).sort();
+      return [...baseKeys, ...customKeys];
+    }
+
+    function getDisplayPlayerName(player, fallbackIdx = 0) {
+      if (player && player.name && player.name.trim()) return player.name.trim();
+      const prefix = player && player.gender === 'F' ? '여' : '남';
+      return `${prefix}${fallbackIdx + 1}`;
     }
 
     function buildDefaultBoards() {
@@ -920,14 +1085,15 @@
     }
 
     let state = {
-      classes: buildDefaultClasses(),
+      classes: buildDefaultClasses(false),
       matches: {
         A: { homeClassId: 'c1', awayClassId: 'c2' },
         B: { homeClassId: 'c3', awayClassId: 'c4' }
       },
       boards: buildDefaultBoards(),
       playerStats: {},
-      viewMode: 'BOTH'
+      viewMode: 'BOTH',
+      customRosterMode: false
     };
 
     let db = null;
@@ -941,17 +1107,18 @@
     window.selectedRosterClass = 'c1';
     let currentLeaderboardFilter = 'ALL';
     let currentQrType = 'BOARD';
-    let scoreInputMode = 'REMAINING'; // 'REMAINING' (남은 점수 그대로) | 'SCORED' (획득 점수)
+    let scoreInputMode = 'REMAINING';
 
-    // 비밀번호 인증 상태 관리
     let isHelperAuthenticated = sessionStorage.getItem(HELPER_SESSION_KEY) === 'true';
     let currentPinBuffer = '';
     let pendingAuthCallback = null;
 
-    // 스페셜 이펙트 타이머 및 마지막 수신 ID
     let lastHandledShoutoutId = null;
     let shoutoutAutoCloseTimer = null;
 
+    // ==========================================
+    // 4. 도우미 PIN 인증 및 로컬 스토리지
+    // ==========================================
     function updateAuthBadgeUI() {
       const badge = document.getElementById('authLockBadge');
       if (!badge) return;
@@ -1042,17 +1209,12 @@
       renderPinDots();
     };
 
-    // 키보드 숫자 입력 지원 (비밀번호 창 열려 있을 때)
     document.addEventListener('keydown', (e) => {
       const pinModal = document.getElementById('pinAuthModal');
       if (pinModal && !pinModal.classList.contains('hidden')) {
-        if (e.key >= '0' && e.key <= '9') {
-          pressPinKey(e.key);
-        } else if (e.key === 'Backspace') {
-          backspacePinInput();
-        } else if (e.key === 'Escape') {
-          closeModal('pinAuthModal');
-        }
+        if (e.key >= '0' && e.key <= '9') pressPinKey(e.key);
+        else if (e.key === 'Backspace') backspacePinInput();
+        else if (e.key === 'Escape') closeModal('pinAuthModal');
       }
     });
 
@@ -1062,7 +1224,12 @@
         if (saved) {
           const parsed = JSON.parse(saved);
           if (parsed && parsed.classes && parsed.boards && parsed.boards.length === 6) {
-            state = { viewMode: 'BOTH', ...parsed };
+            state = {
+              viewMode: 'BOTH',
+              customRosterMode: false,
+              ...parsed,
+              classes: normalizeClassesData(parsed.classes)
+            };
           }
         }
       } catch (e) { console.warn(e); }
@@ -1095,6 +1262,9 @@
       }
     }
 
+    // ==========================================
+    // 5. QR코드 및 스페셜 이펙트
+    // ==========================================
     window.openShareModal = function() {
       openModal('firebaseModal');
       renderQrCode();
@@ -1116,9 +1286,9 @@
       } else {
         tabHelper.className = 'py-2 px-3 rounded-lg text-xs font-black bg-cyan-600 text-white shadow transition';
         tabBoard.className = 'py-2 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
-        desc.textContent = '🔐 도우미 학생용 점수 입력 화면 바로가기 QR';
+        desc.textContent = '🔐 도우미·반대표 학생용 입력 화면 QR';
         desc.className = 'text-sm font-black text-cyan-300';
-        hint.textContent = '도우미 학생이 스캔하면 비밀번호 인증 후 즉시 [도우미 1보드 모드] 점수 입력창이 열립니다.';
+        hint.textContent = '스캔 후 비밀번호(3895)를 입력하면 점수 입력 및 자기 반 명단 입력이 가능합니다.';
       }
       renderQrCode();
     };
@@ -1171,23 +1341,21 @@
       }
     };
 
-    // =========================================================
-    // BULL / TRIPLE 20 / 180! 초대형 전광판 이펙트 송출 및 수신
-    // =========================================================
     window.triggerSpecialShoutout = async function(type) {
       if (activeBoardIndex === null) return;
       const board = state.boards[activeBoardIndex];
       const matchCfg = state.matches[board.matchId];
       const homeCls = state.classes[matchCfg.homeClassId];
       const awayCls = state.classes[matchCfg.awayClassId];
+      const charMeta = BOARD_CHARACTER_META[activeBoardIndex];
 
       const playerLabel = selectedPlayerInfo
         ? `${selectedPlayerInfo.teamName} ${selectedPlayerInfo.playerName} 선수!`
         : `${homeCls.name} vs ${awayCls.name}`;
 
       const boardTag = state.viewMode === 'FINAL'
-        ? `🏆 FINAL 결승전 · 다트 ${activeBoardIndex + 1}번 보드`
-        : `MATCH ${board.matchId} · 다트 ${activeBoardIndex + 1}번 보드`;
+        ? `🏆 FINAL 결승전 · 다트 ${activeBoardIndex + 1}번 (${charMeta.label})`
+        : `MATCH ${board.matchId} · 다트 ${activeBoardIndex + 1}번 (${charMeta.label})`;
 
       const payload = {
         id: `${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
@@ -1197,10 +1365,8 @@
         createdAt: Date.now()
       };
 
-      // 내 화면 즉시 표시
       showShoutoutOverlay(payload);
 
-      // 클라우드로 전송하여 전광판 & 다른 기기 화면에도 동시에 띄우기
       if (isCloudConnected && db) {
         try {
           await setDoc(doc(db, 'dart_leagues', ROOM_ID, 'state_docs', 'shoutout_event'), payload);
@@ -1215,8 +1381,9 @@
       if (lastHandledShoutoutId === payload.id) return;
       lastHandledShoutoutId = payload.id;
 
-      // 8초 이상 지난 오래된 이벤트는 무시
       if (payload.createdAt && (Date.now() - payload.createdAt > 8000)) return;
+
+      playShoutoutSound(payload.type);
 
       const overlay = document.getElementById('shoutoutOverlay');
       const card = document.getElementById('shoutoutCard');
@@ -1249,7 +1416,6 @@
         titleEl.className = 'font-score text-4xl md:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-white to-amber-300';
       }
 
-      // 애니메이션 재시작을 위한 리플로우
       card.style.animation = 'none';
       void card.offsetWidth;
       card.style.animation = '';
@@ -1269,6 +1435,9 @@
       overlay.classList.remove('flex');
     };
 
+    // ==========================================
+    // 6. Firebase 실시간 동기화
+    // ==========================================
     async function initFirebaseAuto() {
       try {
         unsubscribers.forEach(fn => fn());
@@ -1290,12 +1459,20 @@
           const unsubMeta = onSnapshot(doc(baseCol, 'meta'), (snap) => {
             if (snap.exists()) {
               const data = snap.data();
-              if (data.classes) state.classes = data.classes;
+              if (data.classes) {
+                state.classes = normalizeClassesData(data.classes);
+              }
               if (data.matches) state.matches = data.matches;
               if (data.viewMode) state.viewMode = data.viewMode;
+              if (typeof data.customRosterMode === 'boolean') state.customRosterMode = data.customRosterMode;
               saveLocalState();
               applyViewModeUI();
               renderAll();
+
+              if (!document.getElementById('rosterManagerModal').classList.contains('hidden')) {
+                renderClassTabs();
+                renderClassRosterForm(window.selectedRosterClass);
+              }
             } else {
               syncMetaToCloud();
             }
@@ -1332,7 +1509,6 @@
           });
           unsubscribers.push(unsubStats);
 
-          // 실시간 BULL / TRIPLE 20 스페셜 이펙트 수신 리스너
           const unsubShoutout = onSnapshot(doc(baseCol, 'shoutout_event'), (snap) => {
             if (snap.exists()) {
               showShoutoutOverlay(snap.data());
@@ -1343,8 +1519,21 @@
       } catch (err) {
         console.error('Firebase 연결 오류:', err);
         isCloudConnected = false;
-        updateSyncBadge(false, 'Firebase 연결 오류 (콘솔 설정 확인)');
+        updateSyncBadge(false, 'Firebase 연결 오류');
       }
+    }
+
+    async function syncSingleClassToCloud(classId) {
+      saveLocalState();
+      if (!isCloudConnected || !db) return;
+      try {
+        await setDoc(doc(db, 'dart_leagues', ROOM_ID, 'state_docs', 'meta'), {
+          classes: {
+            [classId]: state.classes[classId]
+          },
+          updatedAt: Date.now()
+        }, { merge: true });
+      } catch (e) { console.error(e); }
     }
 
     async function syncMetaToCloud() {
@@ -1355,6 +1544,7 @@
           classes: state.classes,
           matches: state.matches,
           viewMode: state.viewMode,
+          customRosterMode: state.customRosterMode,
           updatedAt: Date.now()
         });
       } catch (e) { console.error(e); }
@@ -1382,6 +1572,9 @@
       } catch (e) { console.error(e); }
     }
 
+    // ==========================================
+    // 7. 화면 보기 모드 & 전광판 렌더링
+    // ==========================================
     window.openBracketModal = function() {
       const iframe = document.getElementById('bracketIframe');
       if (!iframe.src || iframe.src === window.location.href) {
@@ -1403,11 +1596,8 @@
     };
 
     window.toggleSingleMatch = function(targetMode) {
-      if (state.viewMode === targetMode) {
-        setViewMode('BOTH');
-      } else {
-        setViewMode(targetMode);
-      }
+      if (state.viewMode === targetMode) setViewMode('BOTH');
+      else setViewMode(targetMode);
     };
 
     function applyViewModeUI() {
@@ -1423,7 +1613,7 @@
         secA.classList.remove('hidden');
         secB.classList.remove('hidden');
         badgeA.textContent = 'MATCH A';
-        badgeA.className = 'px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs md:text-sm font-black tracking-wider';
+        badgeA.className = 'px-3 py-1 rounded-lg bg-sky-500 text-slate-950 text-xs md:text-sm font-black tracking-wider shadow';
         zoomA.textContent = '⤢ 크게 보기';
         zoomB.textContent = '⤢ 크게 보기';
       } else if (mode === 'ONLY_A') {
@@ -1431,7 +1621,7 @@
         secA.classList.remove('hidden');
         secB.classList.add('hidden');
         badgeA.textContent = 'MATCH A (단독 확대)';
-        badgeA.className = 'px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs md:text-sm font-black tracking-wider';
+        badgeA.className = 'px-3 py-1 rounded-lg bg-sky-500 text-slate-950 text-xs md:text-sm font-black tracking-wider shadow';
         zoomA.textContent = '⤡ 2경기 전체로 복귀';
       } else if (mode === 'ONLY_B') {
         document.body.classList.add('single-match-view');
@@ -1443,7 +1633,7 @@
         secA.classList.remove('hidden');
         secB.classList.add('hidden');
         badgeA.textContent = '🏆 FINAL 결승전';
-        badgeA.className = 'px-3 py-0.5 rounded bg-amber-500/25 text-amber-300 border border-amber-400/50 text-xs md:text-sm font-black tracking-wider';
+        badgeA.className = 'px-3 py-1 rounded-lg bg-amber-400 text-slate-950 text-xs md:text-sm font-black tracking-wider shadow';
         zoomA.textContent = '⤡ 2경기(예선) 모드로 복귀';
       }
 
@@ -1472,13 +1662,11 @@
     }
 
     function getRoundLineup(classId, roundIndex) {
-      const cls = state.classes[classId];
+      const cls = state.classes[classId] || state.classes['c1'];
       if (!cls) return [];
-      if (roundIndex === 0) return cls.males;
-      if (roundIndex === 1) return cls.females;
-      const mList = cls.males.filter(p => cls.mixedMaleIds.includes(p.id));
-      const fList = cls.females.filter(p => cls.mixedFemaleIds.includes(p.id));
-      return [...mList, ...fList];
+      if (roundIndex === 0) return cls.males || [];
+      if (roundIndex === 1) return cls.females || [];
+      return cls.mixed || [];
     }
 
     window.enterScoreboardOnlyMode = function() {
@@ -1508,8 +1696,8 @@
 
     function renderMatchSection(matchKey, boardIndices, containerId) {
       const matchCfg = state.matches[matchKey];
-      const homeCls = state.classes[matchCfg.homeClassId];
-      const awayCls = state.classes[matchCfg.awayClassId];
+      const homeCls = state.classes[matchCfg.homeClassId] || state.classes['c1'];
+      const awayCls = state.classes[matchCfg.awayClassId] || state.classes['c2'];
 
       document.getElementById(`match${matchKey}_homeName`).textContent = homeCls.name;
       document.getElementById(`match${matchKey}_awayName`).textContent = awayCls.name;
@@ -1533,7 +1721,9 @@
         statusBadge.className = 'text-xs md:text-sm font-black px-3 py-1 rounded-lg bg-rose-500/25 text-rose-300 border border-rose-400/40';
       } else {
         statusBadge.textContent = '진행 중';
-        statusBadge.className = 'text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-slate-800 text-slate-300';
+        statusBadge.className = matchKey === 'A'
+          ? 'text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-sky-950/80 text-sky-200 border border-sky-500/30'
+          : 'text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-amber-950/80 text-amber-200 border border-amber-500/30';
       }
 
       const container = document.getElementById(containerId);
@@ -1543,9 +1733,10 @@
     function createBoardCardHTML(boardIdx) {
       const board = state.boards[boardIdx];
       const matchCfg = state.matches[board.matchId];
-      const homeCls = state.classes[matchCfg.homeClassId];
-      const awayCls = state.classes[matchCfg.awayClassId];
+      const homeCls = state.classes[matchCfg.homeClassId] || state.classes['c1'];
+      const awayCls = state.classes[matchCfg.awayClassId] || state.classes['c2'];
       const rMeta = ROUND_META[board.roundIndex];
+      const charMeta = BOARD_CHARACTER_META[boardIdx];
 
       const homeLineup = getRoundLineup(homeCls.id, board.roundIndex);
       const awayLineup = getRoundLineup(awayCls.id, board.roundIndex);
@@ -1561,38 +1752,48 @@
       const homePct = Math.max(0, Math.min(100, (board.homeScore / 501) * 100));
       const awayPct = Math.max(0, Math.min(100, (board.awayScore / 501) * 100));
 
-      const lastTurn = board.history && board.history.length > 0
-        ? board.history[board.history.length - 1]
-        : null;
+      const historyArr = board.history || [];
+      const lastTurn = historyArr.length > 0 ? historyArr[historyArr.length - 1] : null;
+
+      // 2경기 동시 보기일 때는 2줄, 단독/결승 크게 보기일 때는 3줄 표시
+      const maxLogLines = state.viewMode === 'BOTH' ? 2 : 3;
+      const recentLogs = historyArr.slice(-maxLogLines).reverse();
 
       let liveThrowBanner = '';
-      if (lastTurn) {
-        const sideColor = lastTurn.side === 'home'
-          ? 'text-sky-300 border-sky-500/35 bg-sky-950/40'
-          : 'text-rose-300 border-rose-500/35 bg-rose-950/40';
-        const scoreBadge = lastTurn.isBust
-          ? `<span class="text-rose-400 font-black">BUST (0점)</span>`
-          : `<span class="font-score text-amber-300 font-black text-base">-${lastTurn.appliedPoints}</span>`;
-        liveThrowBanner = `
-          <div class="live-banner px-3 py-1.5 rounded-xl border ${sideColor} flex items-center justify-between gap-2 shadow-inner">
-            <div class="flex items-center gap-1.5 truncate">
-              <span>🎯</span>
-              <span class="font-black truncate">${lastTurn.teamName} ${lastTurn.playerName}</span>
+      if (recentLogs.length > 0) {
+        const rowsHtml = recentLogs.map((turn, rIdx) => {
+          const isLatest = rIdx === 0;
+          const sideColor = turn.side === 'home'
+            ? (isLatest ? 'text-sky-200 bg-sky-950/60 border-sky-500/45' : 'text-sky-300/80 bg-slate-900/70 border-slate-800/80')
+            : (isLatest ? 'text-rose-200 bg-rose-950/60 border-rose-500/45' : 'text-rose-300/80 bg-slate-900/70 border-slate-800/80');
+          const scoreBadge = turn.isBust
+            ? `<span class="text-rose-400 font-black text-xs">BUST (0)</span>`
+            : `<span class="font-score text-amber-300 font-black ${isLatest ? 'text-sm md:text-base' : 'text-xs'}">-${turn.appliedPoints}</span>`;
+          return `
+            <div class="live-log-row px-2.5 py-1 rounded-lg border ${sideColor} flex items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5 truncate text-xs">
+                <span>${isLatest ? '🎯' : '•'}</span>
+                <span class="${isLatest ? 'font-black' : 'font-semibold'} truncate">${turn.teamName} ${turn.playerName}</span>
+              </div>
+              ${scoreBadge}
             </div>
-            ${scoreBadge}
-          </div>
-        `;
+          `;
+        }).join('');
+
+        liveThrowBanner = `<div class="space-y-1">${rowsHtml}</div>`;
       } else {
         liveThrowBanner = `
-          <div class="live-banner px-3 py-1.5 rounded-xl border border-slate-800/80 bg-slate-900/50 flex items-center justify-center text-xs text-slate-500 font-medium">
+          <div class="live-log-row px-3 py-1.5 rounded-xl border border-slate-800/80 bg-slate-900/50 flex items-center justify-center text-xs text-slate-500 font-medium">
             ${isHelperAuthenticated ? '투구 대기 중 · 터치하여 입력' : 'LIVE 실시간 관전 중'}
           </div>
         `;
       }
 
       const renderPlayerMiniList = (players) => {
-        return players.map(p => {
+        return players.map((p, idx) => {
           const stat = getPlayerStat(p.id);
+          const dispName = getDisplayPlayerName(p, idx);
+          const isBlank = !p.name || !p.name.trim();
           const isLastThrower = lastTurn && lastTurn.playerId === p.id;
           const highlightCls = isLastThrower
             ? 'border-amber-400/75 bg-amber-500/15'
@@ -1602,7 +1803,7 @@
             <div class="player-pill flex items-center justify-between ${highlightCls} px-2.5 py-1.5 rounded-lg border text-xs md:text-sm transition">
               <div class="flex items-center gap-1.5 truncate">
                 ${genderDot}
-                <span class="text-slate-100 font-bold truncate">${p.name}</span>
+                <span class="${isBlank ? 'text-slate-500 italic' : 'text-slate-100'} font-bold truncate">${dispName}</span>
               </div>
               <span class="player-pts font-score text-xs font-bold text-amber-400 ml-1">+${stat.points}</span>
             </div>
@@ -1618,15 +1819,21 @@
         ? `<span class="text-xs font-extrabold text-indigo-300 bg-indigo-500/15 border border-indigo-500/30 px-2 py-0.5 rounded-md">입력 ▸</span>`
         : `<span class="text-xs font-bold text-slate-400 bg-slate-800/80 border border-slate-700 px-2 py-0.5 rounded-md">🔒 도우미</span>`;
 
+      const charSpriteHTML = getBoardCharImageHTML(boardIdx, state.viewMode === 'BOTH' ? 'w-8 h-8' : 'w-10 h-10');
+      const physicalTag = charMeta.physicalBoard !== (boardIdx + 1)
+        ? `<span class="text-[11px] font-black text-amber-300 bg-amber-500/15 border border-amber-500/35 px-1.5 py-0.5 rounded">${charMeta.label}</span>`
+        : '';
+
       return `
         <div onclick="requireHelperAuth(() => openScoreModal(${boardIdx}))" class="board-card cursor-pointer rounded-xl border ${cardBorder} p-3 flex flex-col justify-between gap-2">
-          <div class="flex items-center justify-between gap-2 bg-slate-900/95 border border-slate-700/80 rounded-xl px-3 py-2 shadow-sm">
+          <div class="flex items-center justify-between gap-2 bg-slate-900/95 border border-slate-700/80 rounded-xl px-2.5 py-2 shadow-sm">
             <div class="flex items-center gap-2 flex-wrap">
-              <span class="board-main-title text-lg md:text-xl font-black tracking-tight text-white flex items-center gap-1.5">
-                <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-400 shadow shadow-amber-400/60"></span>
+              ${charSpriteHTML}
+              <span class="board-main-title text-lg md:text-xl font-black tracking-tight text-white">
                 다트 ${boardIdx + 1}번
               </span>
-              <span class="board-round-pill text-xs md:text-sm font-black px-2.5 py-0.5 rounded-lg border ${rMeta.badgeStyle}">
+              ${physicalTag}
+              <span class="board-round-pill text-xs md:text-sm font-black px-2 py-0.5 rounded-lg border ${rMeta.badgeStyle}">
                 ${rMeta.badge}
               </span>
             </div>
@@ -1675,7 +1882,9 @@
       `;
     }
 
-    // 점수 입력 방식 전환 (남은 점수 그대로 vs 획득 점수 입력)
+    // ==========================================
+    // 8. 도우미 점수 입력 및 교대 투구 순서 전환
+    // ==========================================
     window.setScoreInputMode = function(mode) {
       scoreInputMode = mode;
       const btnRem = document.getElementById('modeRemainingBtn');
@@ -1705,6 +1914,35 @@
       input.focus();
     };
 
+    function getNextAlternatingPlayer(boardIdx, currentSide, currentIdx) {
+      const board = state.boards[boardIdx];
+      if (!board || board.winner) return null;
+
+      const matchCfg = state.matches[board.matchId];
+      const homeCls = state.classes[matchCfg.homeClassId] || state.classes['c1'];
+      const awayCls = state.classes[matchCfg.awayClassId] || state.classes['c2'];
+
+      const nextSide = currentSide === 'home' ? 'away' : 'home';
+      const targetCls = nextSide === 'home' ? homeCls : awayCls;
+      const lineup = getRoundLineup(targetCls.id, board.roundIndex);
+      if (!lineup || lineup.length === 0) return null;
+
+      const nextIdx = currentSide === 'home'
+        ? (currentIdx % lineup.length)
+        : ((currentIdx + 1) % lineup.length);
+
+      const nextPlayer = lineup[nextIdx];
+      if (!nextPlayer) return null;
+
+      return {
+        side: nextSide,
+        teamName: targetCls.name,
+        playerId: nextPlayer.id,
+        playerName: getDisplayPlayerName(nextPlayer, nextIdx),
+        playerIndex: nextIdx
+      };
+    }
+
     window.openHelperSingleMode = function(boardIdx = 0) {
       isHelperSingleMode = true;
       document.getElementById('helperBoardSwitcher').classList.remove('hidden');
@@ -1722,6 +1960,32 @@
       }
       activeBoardIndex = boardIdx;
       selectedPlayerInfo = null;
+
+      const board = state.boards[boardIdx];
+      const matchCfg = state.matches[board.matchId];
+      const homeCls = state.classes[matchCfg.homeClassId] || state.classes['c1'];
+      const awayCls = state.classes[matchCfg.awayClassId] || state.classes['c2'];
+      const homeLineup = getRoundLineup(homeCls.id, board.roundIndex);
+      const awayLineup = getRoundLineup(awayCls.id, board.roundIndex);
+
+      if (!board.winner) {
+        if (board.history && board.history.length > 0) {
+          const last = board.history[board.history.length - 1];
+          const lastLineup = last.side === 'home' ? homeLineup : awayLineup;
+          const foundIdx = lastLineup.findIndex(p => p.id === last.playerId);
+          const safeIdx = foundIdx >= 0 ? foundIdx : 0;
+          selectedPlayerInfo = getNextAlternatingPlayer(boardIdx, last.side, safeIdx);
+        } else if (homeLineup[0]) {
+          selectedPlayerInfo = {
+            side: 'home',
+            teamName: homeCls.name,
+            playerId: homeLineup[0].id,
+            playerName: getDisplayPlayerName(homeLineup[0], 0),
+            playerIndex: 0
+          };
+        }
+      }
+
       document.getElementById('turnScoreInput').value = '';
       setScoreInputMode(scoreInputMode);
       renderScoreModalContent();
@@ -1738,28 +2002,35 @@
       if (activeBoardIndex === null) return;
       const board = state.boards[activeBoardIndex];
       const matchCfg = state.matches[board.matchId];
-      const homeCls = state.classes[matchCfg.homeClassId];
-      const awayCls = state.classes[matchCfg.awayClassId];
+      const homeCls = state.classes[matchCfg.homeClassId] || state.classes['c1'];
+      const awayCls = state.classes[matchCfg.awayClassId] || state.classes['c2'];
       const rMeta = ROUND_META[board.roundIndex];
+      const charMeta = BOARD_CHARACTER_META[activeBoardIndex];
 
       if (isHelperSingleMode) {
-        document.querySelectorAll('.hboard-tab').forEach(btn => {
-          const bIdx = Number(btn.getAttribute('data-hboard'));
-          if (state.viewMode === 'FINAL' && bIdx >= 3) {
-            btn.classList.add('hidden');
-          } else {
-            btn.classList.remove('hidden');
-          }
-          if (bIdx === activeBoardIndex) {
-            btn.className = `hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-cyan-500 text-slate-950 shadow ${state.viewMode === 'FINAL' && bIdx >= 3 ? 'hidden' : ''}`;
-          } else {
-            btn.className = `hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300 hover:bg-slate-700 ${state.viewMode === 'FINAL' && bIdx >= 3 ? 'hidden' : ''}`;
-          }
-        });
+        const tabContainer = document.getElementById('helperBoardTabList');
+        let tabsHtml = `<span class="text-[11px] font-black text-cyan-400 whitespace-nowrap mr-1">📱 보드:</span>`;
+        for (let bIdx = 0; bIdx < 6; bIdx++) {
+          if (state.viewMode === 'FINAL' && bIdx >= 3) continue;
+          const cMeta = BOARD_CHARACTER_META[bIdx];
+          const isAct = bIdx === activeBoardIndex;
+          const miniImg = getBoardCharImageHTML(bIdx, 'w-5 h-5');
+          const clsStyle = isAct
+            ? 'bg-cyan-500 text-slate-950 shadow'
+            : 'bg-slate-800 text-slate-300 hover:bg-slate-700';
+          tabsHtml += `
+            <button type="button" onclick="switchHelperBoard(${bIdx})" class="px-2 py-1 rounded-lg text-xs font-black flex items-center gap-1 whitespace-nowrap ${clsStyle}">
+              ${miniImg}
+              <span>${bIdx + 1}번${cMeta.physicalBoard !== (bIdx + 1) ? `(${cMeta.physicalBoard}판)` : ''}</span>
+            </button>
+          `;
+        }
+        tabContainer.innerHTML = tabsHtml;
       }
 
+      document.getElementById('modalBoardCharIcon').innerHTML = getBoardCharImageHTML(activeBoardIndex, 'w-7 h-7');
       const prefixLabel = state.viewMode === 'FINAL' ? '🏆 결승전' : `MATCH ${board.matchId}`;
-      document.getElementById('modalBoardBadge').textContent = `${prefixLabel} · 다트 ${activeBoardIndex + 1}번`;
+      document.getElementById('modalBoardBadge').textContent = `${prefixLabel} · 다트 ${activeBoardIndex + 1}번 (${charMeta.label})`;
       document.getElementById('modalRoundTitle').textContent = rMeta.title;
 
       document.getElementById('modalHomeTeam').textContent = homeCls.name;
@@ -1770,17 +2041,17 @@
       document.getElementById('modalAwayScore').textContent = board.awayScore;
       document.getElementById('modalAwayStatus').textContent = board.winner === 'away' ? '🏆 승리 확정!' : `차감: ${501 - board.awayScore}점`;
 
-      document.getElementById('homeRosterLabel').textContent = `${homeCls.name} 출전 선수 (4명)`;
-      document.getElementById('awayRosterLabel').textContent = `${awayCls.name} 출전 선수 (4명)`;
+      const homeLineup = getRoundLineup(homeCls.id, board.roundIndex);
+      const awayLineup = getRoundLineup(awayCls.id, board.roundIndex);
+
+      document.getElementById('homeRosterLabel').textContent = `${homeCls.name} 출전 선수 (${homeLineup.length}명)`;
+      document.getElementById('awayRosterLabel').textContent = `${awayCls.name} 출전 선수 (${awayLineup.length}명)`;
 
       document.getElementById('forceHomeWinBtn').textContent = `🏆 ${homeCls.name} 승리 확정`;
       document.getElementById('forceAwayWinBtn').textContent = `🏆 ${awayCls.name} 승리 확정`;
 
-      const homeLineup = getRoundLineup(homeCls.id, board.roundIndex);
-      const awayLineup = getRoundLineup(awayCls.id, board.roundIndex);
-
-      document.getElementById('modalHomePlayers').innerHTML = homeLineup.map(p => renderSelectablePlayerBtn('home', homeCls.name, p)).join('');
-      document.getElementById('modalAwayPlayers').innerHTML = awayLineup.map(p => renderSelectablePlayerBtn('away', awayCls.name, p)).join('');
+      document.getElementById('modalHomePlayers').innerHTML = homeLineup.map((p, idx) => renderSelectablePlayerBtn('home', homeCls.name, p, idx)).join('');
+      document.getElementById('modalAwayPlayers').innerHTML = awayLineup.map((p, idx) => renderSelectablePlayerBtn('away', awayCls.name, p, idx)).join('');
 
       updateSelectedPlayerNotice();
 
@@ -1793,8 +2064,10 @@
       }
     }
 
-    function renderSelectablePlayerBtn(side, teamName, player) {
+    function renderSelectablePlayerBtn(side, teamName, player, idx = 0) {
       const stat = getPlayerStat(player.id);
+      const dispName = getDisplayPlayerName(player, idx);
+      const safeName = dispName.replace(/'/g, "\\'");
       const isSelected = selectedPlayerInfo && selectedPlayerInfo.playerId === player.id;
       const baseStyle = side === 'home'
         ? (isSelected ? 'bg-sky-500 text-slate-950 border-sky-300 ring-2 ring-sky-300 font-black' : 'bg-slate-900 hover:bg-slate-800 text-slate-200 border-slate-700')
@@ -1803,18 +2076,18 @@
       const genderTag = `<span class="text-[10px] px-1 rounded font-black ${isSelected ? 'bg-black/25 text-white' : (player.gender === 'M' ? 'bg-sky-500/20 text-sky-300' : 'bg-rose-500/20 text-rose-300')}">${player.gender === 'M' ? '남' : '여'}</span>`;
 
       return `
-        <button type="button" onclick="selectThrower('${side}', '${teamName}', '${player.id}', '${player.name}')" class="px-2.5 py-2 rounded-lg border text-left transition flex items-center justify-between ${baseStyle}">
+        <button type="button" onclick="selectThrower('${side}', '${teamName}', '${player.id}', '${safeName}', ${idx})" class="px-2.5 py-2 rounded-lg border text-left transition flex items-center justify-between ${baseStyle}">
           <div class="flex items-center gap-1.5 truncate">
             ${genderTag}
-            <span class="text-xs font-bold truncate">${player.name}</span>
+            <span class="text-xs font-bold truncate">${dispName}</span>
           </div>
           <span class="font-score text-[11px] ${isSelected ? 'opacity-90' : 'text-amber-400'}">+${stat.points}</span>
         </button>
       `;
     }
 
-    window.selectThrower = function(side, teamName, playerId, playerName) {
-      selectedPlayerInfo = { side, teamName, playerId, playerName };
+    window.selectThrower = function(side, teamName, playerId, playerName, playerIndex = 0) {
+      selectedPlayerInfo = { side, teamName, playerId, playerName, playerIndex };
       renderScoreModalContent();
       document.getElementById('turnScoreInput').focus();
     };
@@ -1822,7 +2095,7 @@
     function updateSelectedPlayerNotice() {
       const el = document.getElementById('selectedPlayerNotice');
       if (selectedPlayerInfo) {
-        el.textContent = `선택됨: [${selectedPlayerInfo.teamName}] ${selectedPlayerInfo.playerName}`;
+        el.textContent = `다음 입력 대상: [${selectedPlayerInfo.teamName}] ${selectedPlayerInfo.playerName}`;
         el.className = 'text-xs font-black text-emerald-400';
       } else {
         el.textContent = '선택됨: 없음 (학생을 먼저 눌러주세요)';
@@ -1858,6 +2131,15 @@
       }
 
       const { side, teamName, playerId, playerName } = selectedPlayerInfo;
+
+      const matchCfg = state.matches[board.matchId];
+      const currentClsId = side === 'home' ? matchCfg.homeClassId : matchCfg.awayClassId;
+      const currentLineup = getRoundLineup(currentClsId, board.roundIndex);
+      const foundIdx = currentLineup.findIndex(p => p.id === playerId);
+      const currentIdx = typeof selectedPlayerInfo.playerIndex === 'number'
+        ? selectedPlayerInfo.playerIndex
+        : (foundIdx >= 0 ? foundIdx : 0);
+
       const currentRemaining = side === 'home' ? board.homeScore : board.awayScore;
 
       let scoredThisTurn = 0;
@@ -1866,7 +2148,6 @@
       let appliedPoints = 0;
 
       if (scoreInputMode === 'REMAINING') {
-        // 전자다트 태블릿의 남은 점수를 그대로 입력한 경우
         if (rawVal > currentRemaining) {
           alert(`현재 남은 점수(${currentRemaining}점)보다 큰 숫자는 입력할 수 없습니다.\n태블릿에 표시된 줄어든 남은 점수를 입력해 주세요.`);
           return;
@@ -1891,7 +2172,6 @@
           board.winner = side;
         }
       } else {
-        // 획득 점수를 직접 입력한 경우 (0~180)
         if (rawVal > 180) {
           alert('0부터 180 사이의 유효한 획득 점수를 입력해 주세요.');
           return;
@@ -1922,14 +2202,21 @@
         teamName,
         playerId,
         playerName,
+        playerIndex: currentIdx,
         score: scoredThisTurn,
         appliedPoints,
         isBust
       });
 
-      document.getElementById('turnScoreInput').value = '';
+      if (!board.winner) {
+        selectedPlayerInfo = getNextAlternatingPlayer(activeBoardIndex, side, currentIdx);
+      }
+
+      const inputEl = document.getElementById('turnScoreInput');
+      inputEl.value = '';
       renderAll();
       renderScoreModalContent();
+      inputEl.focus();
 
       await Promise.all([
         syncBoardToCloud(activeBoardIndex),
@@ -1955,6 +2242,18 @@
       }
       board.winner = null;
 
+      const matchCfg = state.matches[board.matchId];
+      const targetClsId = last.side === 'home' ? matchCfg.homeClassId : matchCfg.awayClassId;
+      const lineup = getRoundLineup(targetClsId, board.roundIndex);
+      const foundIdx = lineup.findIndex(p => p.id === last.playerId);
+      selectedPlayerInfo = {
+        side: last.side,
+        teamName: last.teamName,
+        playerId: last.playerId,
+        playerName: last.playerName,
+        playerIndex: typeof last.playerIndex === 'number' ? last.playerIndex : (foundIdx >= 0 ? foundIdx : 0)
+      };
+
       renderAll();
       renderScoreModalContent();
       await Promise.all([
@@ -1971,6 +2270,17 @@
       board.awayScore = 501;
       board.winner = null;
       board.history = [];
+
+      const matchCfg = state.matches[board.matchId];
+      const homeCls = state.classes[matchCfg.homeClassId] || state.classes['c1'];
+      const homeLineup = getRoundLineup(homeCls.id, board.roundIndex);
+      selectedPlayerInfo = homeLineup[0] ? {
+        side: 'home',
+        teamName: homeCls.name,
+        playerId: homeLineup[0].id,
+        playerName: getDisplayPlayerName(homeLineup[0], 0),
+        playerIndex: 0
+      } : null;
 
       renderAll();
       renderScoreModalContent();
@@ -1989,32 +2299,108 @@
       await syncBoardToCloud(activeBoardIndex);
     };
 
+    // ==========================================
+    // 9. 명단 관리 (학급 잠금 보호 + 범용 커스텀 모드)
+    // ==========================================
     window.openRosterManagerModal = function(classId) {
       const targetClassId = classId || window.selectedRosterClass || 'c1';
-      window.selectedRosterClass = targetClassId;
+      window.selectedRosterClass = state.classes[targetClassId] ? targetClassId : 'c1';
       renderClassTabs();
-      renderClassRosterForm(targetClassId);
+      renderClassRosterForm(window.selectedRosterClass);
       openModal('rosterManagerModal');
+    };
+
+    window.toggleCustomRosterMode = async function() {
+      state.customRosterMode = !state.customRosterMode;
+      renderClassTabs();
+      renderClassRosterForm(window.selectedRosterClass);
+      await syncMetaToCloud();
     };
 
     function renderClassTabs() {
       const container = document.getElementById('classTabsContainer');
+      const customBtn = document.getElementById('customModeToggleBtn');
+      if (customBtn) {
+        if (state.customRosterMode) {
+          customBtn.className = 'px-2.5 py-1.5 rounded-lg bg-indigo-600 text-white border border-indigo-400 text-xs font-black shadow transition';
+          customBtn.textContent = '⚙️ 범용 팀·인원 커스텀: ON';
+        } else {
+          customBtn.className = 'px-2.5 py-1.5 rounded-lg bg-indigo-600/25 hover:bg-indigo-600/40 text-indigo-200 border border-indigo-400/50 text-xs font-black transition';
+          customBtn.textContent = '⚙️ 범용 팀·인원 커스텀: OFF';
+        }
+      }
+
       if (!container) return;
+      const orderedIds = getOrderedClassIds();
       let html = '';
-      for (let c = 1; c <= 10; c++) {
-        const cid = `c${c}`;
+      orderedIds.forEach(cid => {
         const cls = state.classes[cid];
+        if (!cls) return;
         const isActive = cid === window.selectedRosterClass;
+        const allPlayers = [...(cls.males || []), ...(cls.females || []), ...(cls.mixed || [])];
+        const filledCount = allPlayers.filter(p => p.name && p.name.trim()).length;
+        const lockIcon = cls.locked ? `<span class="mr-1 text-[10px]">🔒</span>` : '';
+        const statusDot = filledCount === allPlayers.length && allPlayers.length > 0
+          ? `<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 ml-1"></span>`
+          : filledCount > 0
+          ? `<span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-300 ml-1"></span>`
+          : '';
         html += `
-          <button type="button" onclick="switchRosterClassTab('${cid}')" class="px-3 py-1.5 rounded-lg text-xs font-black whitespace-nowrap transition cursor-pointer ${
+          <button type="button" onclick="switchRosterClassTab('${cid}')" class="px-3 py-1.5 rounded-lg text-xs font-black whitespace-nowrap transition cursor-pointer flex items-center ${
             isActive ? 'bg-amber-500 text-slate-950 shadow' : 'bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800'
           }">
-            ${cls.name}
+            ${lockIcon}<span>${cls.name}</span>${statusDot}
+          </button>
+        `;
+      });
+
+      if (state.customRosterMode) {
+        html += `
+          <button type="button" onclick="addCustomTeamTab()" class="px-3 py-1.5 rounded-lg text-xs font-black whitespace-nowrap bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/50 transition flex items-center gap-1">
+            <span>+ 새 팀 추가</span>
           </button>
         `;
       }
       container.innerHTML = html;
     }
+
+    window.addCustomTeamTab = async function() {
+      const teamName = prompt('추가할 새 팀(또는 반) 이름을 입력하세요:', '교직원팀');
+      if (!teamName || !teamName.trim()) return;
+      const newId = `custom_${Date.now()}`;
+      state.classes[newId] = {
+        id: newId,
+        name: teamName.trim(),
+        locked: false,
+        isCustom: true,
+        males: [0, 1, 2, 3].map(i => ({ id: `${newId}_m${i + 1}`, num: '', name: '', gender: 'M', roundTag: '1R 남자' })),
+        females: [0, 1, 2, 3].map(i => ({ id: `${newId}_f${i + 1}`, num: '', name: '', gender: 'F', roundTag: '2R 여자' })),
+        mixed: [0, 1, 2, 3].map(i => ({ id: `${newId}_x${i + 1}`, num: '', name: '', gender: i % 2 === 0 ? 'M' : 'F', roundTag: i % 2 === 0 ? '3R 혼성(남)' : '3R 혼성(여)' }))
+      };
+      window.selectedRosterClass = newId;
+      renderClassTabs();
+      renderClassRosterForm(newId);
+      await syncSingleClassToCloud(newId);
+    };
+
+    window.deleteCurrentCustomClass = async function() {
+      const cid = window.selectedRosterClass;
+      const cls = state.classes[cid];
+      if (!cls || !cls.isCustom) return;
+      if (!confirm(`[${cls.name}] 커스텀 팀을 삭제하시겠습니까?`)) return;
+
+      delete state.classes[cid];
+      if (state.matches.A.homeClassId === cid) state.matches.A.homeClassId = 'c1';
+      if (state.matches.A.awayClassId === cid) state.matches.A.awayClassId = 'c2';
+      if (state.matches.B.homeClassId === cid) state.matches.B.homeClassId = 'c3';
+      if (state.matches.B.awayClassId === cid) state.matches.B.awayClassId = 'c4';
+
+      window.selectedRosterClass = 'c1';
+      renderClassTabs();
+      renderClassRosterForm('c1');
+      renderAll();
+      await syncMetaToCloud();
+    };
 
     window.switchRosterClassTab = function(classId) {
       window.selectedRosterClass = classId;
@@ -2022,94 +2408,245 @@
       renderClassRosterForm(classId);
     };
 
-    function renderClassRosterForm(classId) {
-      const cls = state.classes[classId];
+    window.toggleCurrentClassLock = async function() {
+      const cid = window.selectedRosterClass;
+      const cls = state.classes[cid];
       if (!cls) return;
-      document.getElementById('editingClassBadge').textContent = `${classId.replace('c', '')}반 설정`;
-      document.getElementById('editingClassDisplayName').value = cls.name;
 
-      document.getElementById('maleRosterInputs').innerHTML = cls.males.map((p, idx) => {
-        const checked = cls.mixedMaleIds.includes(p.id) ? 'checked' : '';
-        return `
-          <div class="flex items-center gap-2 bg-slate-900 p-2 rounded-lg border border-slate-800">
-            <span class="text-[11px] font-black text-sky-400 w-7">남${idx + 1}</span>
-            <input id="m_num_${idx}" type="text" value="${p.num}" placeholder="학번" class="w-16 bg-slate-950 border border-slate-700 rounded px-2 py-1 text-xs text-slate-300 text-center" />
-            <input id="m_name_${idx}" type="text" value="${p.name}" placeholder="이름" class="flex-1 bg-slate-950 border border-slate-700 rounded px-2.5 py-1 text-xs font-bold text-white" />
-            <label class="flex items-center gap-1 text-[11px] text-amber-300 font-bold cursor-pointer select-none px-1">
-              <input type="checkbox" class="mixed-male-chk w-4 h-4 accent-amber-500" value="${p.id}" ${checked} onchange="enforceMixedLimit('male', this)" />
-              혼성
-            </label>
-          </div>
-        `;
-      }).join('');
-
-      document.getElementById('femaleRosterInputs').innerHTML = cls.females.map((p, idx) => {
-        const checked = cls.mixedFemaleIds.includes(p.id) ? 'checked' : '';
-        return `
-          <div class="flex items-center gap-2 bg-slate-900 p-2 rounded-lg border border-slate-800">
-            <span class="text-[11px] font-black text-rose-400 w-7">여${idx + 1}</span>
-            <input id="f_num_${idx}" type="text" value="${p.num}" placeholder="학번" class="w-16 bg-slate-950 border border-slate-700 rounded px-2 py-1 text-xs text-slate-300 text-center" />
-            <input id="f_name_${idx}" type="text" value="${p.name}" placeholder="이름" class="flex-1 bg-slate-950 border border-slate-700 rounded px-2.5 py-1 text-xs font-bold text-white" />
-            <label class="flex items-center gap-1 text-[11px] text-amber-300 font-bold cursor-pointer select-none px-1">
-              <input type="checkbox" class="mixed-female-chk w-4 h-4 accent-amber-500" value="${p.id}" ${checked} onchange="enforceMixedLimit('female', this)" />
-              혼성
-            </label>
-          </div>
-        `;
-      }).join('');
-
-      updateMixedCounterDisplay();
-    }
-
-    window.enforceMixedLimit = function(gender, checkbox) {
-      const selector = gender === 'male' ? '.mixed-male-chk:checked' : '.mixed-female-chk:checked';
-      const checkedBoxes = document.querySelectorAll(selector);
-      if (checkedBoxes.length > 2) {
-        checkbox.checked = false;
-        alert(`3라운드 혼성 경기는 ${gender === 'male' ? '남학생' : '여학생'}을 최대 2명까지만 선택할 수 있습니다.`);
+      if (!cls.locked) {
+        // 잠그기 전에 현재 입력칸 내용을 먼저 저장
+        saveInputsToClassState(cid);
+        cls.locked = true;
+      } else {
+        cls.locked = false;
       }
-      updateMixedCounterDisplay();
+
+      renderClassTabs();
+      renderClassRosterForm(cid);
+      renderAll();
+      await syncSingleClassToCloud(cid);
     };
 
-    function updateMixedCounterDisplay() {
-      const mCount = document.querySelectorAll('.mixed-male-chk:checked').length;
-      const fCount = document.querySelectorAll('.mixed-female-chk:checked').length;
-      const el = document.getElementById('mixedSelectionCounter');
-      el.textContent = `남 ${mCount}명 · 여 ${fCount}명`;
-      el.className = (mCount === 2 && fCount === 2) ? 'font-black text-emerald-400' : 'font-black text-rose-400';
-    }
-
-    window.saveCurrentClassRoster = async function() {
-      const mChecked = Array.from(document.querySelectorAll('.mixed-male-chk:checked')).map(el => el.value);
-      const fChecked = Array.from(document.querySelectorAll('.mixed-female-chk:checked')).map(el => el.value);
-      if (mChecked.length !== 2 || fChecked.length !== 2) {
-        alert('3라운드 혼성 경기 출전을 위해 남자 2명, 여자 2명을 정확히 체크해 주세요!');
+    window.adjustRosterCount = function(groupKey, delta) {
+      const cid = window.selectedRosterClass;
+      const cls = state.classes[cid];
+      if (!cls) return;
+      if (cls.locked) {
+        alert('이 팀은 잠금 상태입니다. 먼저 잠금을 해제해 주세요.');
         return;
       }
 
-      const cls = state.classes[window.selectedRosterClass];
-      const newDisplayName = document.getElementById('editingClassDisplayName').value.trim();
-      if (newDisplayName) cls.name = newDisplayName;
+      // 현재 입력된 값 보존
+      saveInputsToClassState(cid);
 
-      for (let i = 0; i < 4; i++) {
-        const mNum = document.getElementById(`m_num_${i}`).value.trim();
-        const mName = document.getElementById(`m_name_${i}`).value.trim();
-        if (mNum) cls.males[i].num = mNum;
-        if (mName) cls.males[i].name = mName;
-
-        const fNum = document.getElementById(`f_num_${i}`).value.trim();
-        const fName = document.getElementById(`f_name_${i}`).value.trim();
-        if (fNum) cls.females[i].num = fNum;
-        if (fName) cls.females[i].name = fName;
+      const arr = cls[groupKey];
+      const newLen = arr.length + delta;
+      if (newLen < 1 || newLen > 8) {
+        alert('라운드별 출전 인원은 최소 1명 ~ 최대 8명까지 설정할 수 있습니다.');
+        return;
       }
 
-      cls.mixedMaleIds = mChecked;
-      cls.mixedFemaleIds = fChecked;
+      if (delta > 0) {
+        const idx = arr.length;
+        const prefix = groupKey === 'males' ? 'm' : groupKey === 'females' ? 'f' : 'x';
+        const gender = groupKey === 'males' ? 'M' : groupKey === 'females' ? 'F' : (idx % 2 === 0 ? 'M' : 'F');
+        const roundTag = groupKey === 'males' ? '1R 남자' : groupKey === 'females' ? '2R 여자' : (gender === 'M' ? '3R 혼성(남)' : '3R 혼성(여)');
+        arr.push({
+          id: `${cid}_${prefix}${idx + 1}_${Date.now().toString(36).slice(-3)}`,
+          num: '',
+          name: '',
+          gender,
+          roundTag
+        });
+      } else {
+        arr.pop();
+      }
+
+      renderClassRosterForm(cid);
+    };
+
+    window.clearCurrentClassInputs = function() {
+      const cls = state.classes[window.selectedRosterClass];
+      if (!cls) return;
+      if (cls.locked) {
+        alert('이 반은 현재 잠금 보호 중입니다. 상단의 [잠금 해제]를 누른 뒤 비워주세요.');
+        return;
+      }
+      if (!confirm(`${cls.name}의 명단과 학번 칸을 모두 비우시겠습니까?`)) return;
+
+      cls.males.forEach((_, i) => {
+        document.getElementById(`m_num_${i}`).value = '';
+        document.getElementById(`m_name_${i}`).value = '';
+      });
+      cls.females.forEach((_, i) => {
+        document.getElementById(`f_num_${i}`).value = '';
+        document.getElementById(`f_name_${i}`).value = '';
+      });
+      cls.mixed.forEach((_, i) => {
+        document.getElementById(`x_num_${i}`).value = '';
+        document.getElementById(`x_name_${i}`).value = '';
+      });
+      if (document.getElementById('m_name_0')) document.getElementById('m_name_0').focus();
+    };
+
+    window.clearAllClassesRoster = async function() {
+      if (!confirm('잠기지 않은 모든 반의 예시 명단과 학번을 한 번에 비우시겠습니까?\n(🔒 잠금 처리된 반은 보호되어 지워지지 않습니다)')) return;
+
+      const defaults = buildDefaultClasses(true);
+      Object.keys(state.classes).forEach(cid => {
+        const cls = state.classes[cid];
+        if (cls.locked) return; // 잠긴 반 보호
+        const keepName = cls.name;
+        const keepCustom = cls.isCustom;
+        if (defaults[cid]) {
+          state.classes[cid] = { ...defaults[cid], name: keepName, locked: false, isCustom: keepCustom };
+        } else {
+          cls.males.forEach(p => { p.num = ''; p.name = ''; });
+          cls.females.forEach(p => { p.num = ''; p.name = ''; });
+          cls.mixed.forEach(p => { p.num = ''; p.name = ''; });
+        }
+      });
+
+      renderClassTabs();
+      renderClassRosterForm(window.selectedRosterClass);
+      renderAll();
+      await syncMetaToCloud();
+      alert('잠기지 않은 모든 반의 예시 명단이 비워졌습니다!');
+    };
+
+    function renderClassRosterForm(classId) {
+      const cls = state.classes[classId];
+      if (!cls) return;
+      const isLocked = Boolean(cls.locked);
+      const disabledAttr = isLocked ? 'disabled' : '';
+
+      document.getElementById('editingClassBadge').textContent = cls.isCustom ? '커스텀 팀' : `${classId.replace('c', '')}반 설정`;
+      const nameInput = document.getElementById('editingClassDisplayName');
+      nameInput.value = cls.name;
+      nameInput.disabled = isLocked;
+
+      const lockBtn = document.getElementById('toggleClassLockBtn');
+      const lockBanner = document.getElementById('classLockedBanner');
+      if (isLocked) {
+        lockBtn.className = 'px-3 py-1 rounded-lg bg-rose-600 text-white border border-rose-400 text-xs font-black shadow transition';
+        lockBtn.textContent = '🔒 잠금 보호 중 (클릭 시 해제)';
+        lockBanner.classList.remove('hidden');
+      } else {
+        lockBtn.className = 'px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/40 text-xs font-black transition';
+        lockBtn.textContent = '🔓 수정 가능 (클릭 시 반 잠금)';
+        lockBanner.classList.add('hidden');
+      }
+
+      const delBtn = document.getElementById('deleteCustomClassBtn');
+      if (cls.isCustom && state.customRosterMode) delBtn.classList.remove('hidden');
+      else delBtn.classList.add('hidden');
+
+      // 커스텀 모드일 때 +/- 버튼 표시
+      ['maleAdjustControls', 'femaleAdjustControls', 'mixedAdjustControls'].forEach(id => {
+        const el = document.getElementById(id);
+        if (state.customRosterMode && !isLocked) {
+          el.classList.remove('hidden');
+          el.classList.add('flex');
+        } else {
+          el.classList.add('hidden');
+          el.classList.remove('flex');
+        }
+      });
+
+      document.getElementById('maleCountLabel').textContent = cls.males.length;
+      document.getElementById('femaleCountLabel').textContent = cls.females.length;
+      document.getElementById('mixedCountLabel').textContent = cls.mixed.length;
+      const totalCount = cls.males.length + cls.females.length + cls.mixed.length;
+      document.getElementById('rosterSummaryCountText').textContent =
+        `총원: 1R 남자 ${cls.males.length}명 + 2R 여자 ${cls.females.length}명 + 3R 혼성 ${cls.mixed.length}명 = ${totalCount}명`;
+
+      document.getElementById('maleRosterInputs').innerHTML = cls.males.map((p, idx) => `
+        <div class="flex items-center gap-1.5 bg-slate-900 p-2 rounded-lg border border-slate-800 ${isLocked ? 'opacity-70' : ''}">
+          <span class="text-[11px] font-black text-sky-400 w-7">남${idx + 1}</span>
+          <input id="m_num_${idx}" type="text" ${disabledAttr} value="${p.num || ''}" placeholder="학번" class="w-16 bg-slate-950 border border-slate-700 rounded px-1.5 py-1 text-xs text-slate-300 text-center" />
+          <input id="m_name_${idx}" type="text" ${disabledAttr} value="${p.name || ''}" placeholder="남학생 ${idx + 1} 이름" class="flex-1 min-w-0 bg-slate-950 border border-slate-700 focus:border-sky-400 rounded px-2.5 py-1 text-xs font-bold text-white outline-none" />
+        </div>
+      `).join('');
+
+      document.getElementById('femaleRosterInputs').innerHTML = cls.females.map((p, idx) => `
+        <div class="flex items-center gap-1.5 bg-slate-900 p-2 rounded-lg border border-slate-800 ${isLocked ? 'opacity-70' : ''}">
+          <span class="text-[11px] font-black text-rose-400 w-7">여${idx + 1}</span>
+          <input id="f_num_${idx}" type="text" ${disabledAttr} value="${p.num || ''}" placeholder="학번" class="w-16 bg-slate-950 border border-slate-700 rounded px-1.5 py-1 text-xs text-slate-300 text-center" />
+          <input id="f_name_${idx}" type="text" ${disabledAttr} value="${p.name || ''}" placeholder="여학생 ${idx + 1} 이름" class="flex-1 min-w-0 bg-slate-950 border border-slate-700 focus:border-rose-400 rounded px-2.5 py-1 text-xs font-bold text-white outline-none" />
+        </div>
+      `).join('');
+
+      document.getElementById('mixedRosterInputs').innerHTML = cls.mixed.map((p, idx) => {
+        const isMale = p.gender === 'M';
+        const label = isMale ? `혼남` : `혼여`;
+        const labelColor = isMale ? 'text-sky-300' : 'text-rose-300';
+        const placeholderText = isMale ? `혼성 남학생 이름` : `혼성 여학생 이름`;
+        const toggleGenderBtn = (state.customRosterMode && !isLocked)
+          ? `<button type="button" onclick="toggleMixedPlayerGender(${idx})" class="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 ${labelColor} font-black">${label}⇄</button>`
+          : `<span class="text-[11px] font-black ${labelColor} w-8">${label}</span>`;
+        return `
+          <div class="flex items-center gap-1.5 bg-slate-900 p-2 rounded-lg border border-slate-800 ${isLocked ? 'opacity-70' : ''}">
+            ${toggleGenderBtn}
+            <input id="x_num_${idx}" type="text" ${disabledAttr} value="${p.num || ''}" placeholder="학번" class="w-16 bg-slate-950 border border-slate-700 rounded px-1.5 py-1 text-xs text-slate-300 text-center" />
+            <input id="x_name_${idx}" type="text" ${disabledAttr} value="${p.name || ''}" placeholder="${placeholderText}" class="flex-1 min-w-0 bg-slate-950 border border-slate-700 focus:border-purple-400 rounded px-2.5 py-1 text-xs font-bold text-white outline-none" />
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.toggleMixedPlayerGender = function(idx) {
+      const cid = window.selectedRosterClass;
+      const cls = state.classes[cid];
+      if (!cls || cls.locked) return;
+      saveInputsToClassState(cid);
+      const p = cls.mixed[idx];
+      if (!p) return;
+      p.gender = p.gender === 'M' ? 'F' : 'M';
+      p.roundTag = p.gender === 'M' ? '3R 혼성(남)' : '3R 혼성(여)';
+      renderClassRosterForm(cid);
+    };
+
+    function saveInputsToClassState(targetClassId) {
+      const cls = state.classes[targetClassId];
+      if (!cls) return;
+      const nameEl = document.getElementById('editingClassDisplayName');
+      if (nameEl && nameEl.value.trim()) cls.name = nameEl.value.trim();
+
+      cls.males.forEach((p, i) => {
+        const numEl = document.getElementById(`m_num_${i}`);
+        const nmEl = document.getElementById(`m_name_${i}`);
+        if (numEl) p.num = numEl.value.trim();
+        if (nmEl) p.name = nmEl.value.trim();
+      });
+      cls.females.forEach((p, i) => {
+        const numEl = document.getElementById(`f_num_${i}`);
+        const nmEl = document.getElementById(`f_name_${i}`);
+        if (numEl) p.num = numEl.value.trim();
+        if (nmEl) p.name = nmEl.value.trim();
+      });
+      cls.mixed.forEach((p, i) => {
+        const numEl = document.getElementById(`x_num_${i}`);
+        const nmEl = document.getElementById(`x_name_${i}`);
+        if (numEl) p.num = numEl.value.trim();
+        if (nmEl) p.name = nmEl.value.trim();
+      });
+    }
+
+    window.saveCurrentClassRoster = async function() {
+      const targetClassId = window.selectedRosterClass;
+      const cls = state.classes[targetClassId];
+      if (!cls) return;
+      if (cls.locked) {
+        alert('이 반은 잠금 보호 중입니다. 수정하려면 먼저 잠금을 해제해 주세요.');
+        return;
+      }
+
+      saveInputsToClassState(targetClassId);
 
       renderClassTabs();
       renderAll();
-      await syncMetaToCloud();
-      alert(`${cls.name} 대표선수 명단이 저장되었습니다!`);
+      await syncSingleClassToCloud(targetClassId);
+      alert(`${cls.name} 대표선수 명단이 안전하게 저장되었습니다!\n(다른 반 실수 수정을 막으려면 [🔓 수정 가능] 버튼을 눌러 잠금 처리해 두세요)`);
     };
 
     window.exportRosterJSON = function() {
@@ -2118,7 +2655,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `LUNCH_LEAGUE_501_1~10반_대표명단.json`;
+      a.download = `LUNCH_LEAGUE_501_대표명단백업.json`;
       a.click();
     };
 
@@ -2129,13 +2666,13 @@
       reader.onload = async (e) => {
         try {
           const imported = JSON.parse(e.target.result);
-          if (imported && imported.c1 && imported.c10) {
-            state.classes = imported;
+          if (imported && typeof imported === 'object') {
+            state.classes = normalizeClassesData(imported);
             renderClassTabs();
             renderClassRosterForm(window.selectedRosterClass);
             renderAll();
             await syncMetaToCloud();
-            alert('1~10반 대표선수 명단 파일을 성공적으로 불러왔습니다!');
+            alert('대표선수 명단 파일을 성공적으로 불러왔습니다!');
           } else {
             alert('올바른 명단 백업 파일이 아닙니다.');
           }
@@ -2146,6 +2683,9 @@
       reader.readAsText(file);
     };
 
+    // ==========================================
+    // 10. 대진 선택 & 개인 득점 순위표
+    // ==========================================
     window.openMatchSetupModal = function() {
       const selects = ['selectMatchA_home', 'selectMatchA_away', 'selectMatchB_home', 'selectMatchB_away'];
       const currentVals = [
@@ -2155,15 +2695,15 @@
         state.matches.B.awayClassId
       ];
 
+      const orderedIds = getOrderedClassIds();
       selects.forEach((selId, idx) => {
         const el = document.getElementById(selId);
         let optionsHtml = '';
-        for (let c = 1; c <= 10; c++) {
-          const cid = `c${c}`;
+        orderedIds.forEach(cid => {
           optionsHtml += `<option value="${cid}">${state.classes[cid].name}</option>`;
-        }
+        });
         el.innerHTML = optionsHtml;
-        el.value = currentVals[idx];
+        el.value = state.classes[currentVals[idx]] ? currentVals[idx] : orderedIds[0];
       });
 
       const isFinal = state.viewMode === 'FINAL';
@@ -2193,10 +2733,10 @@
     function renderSingleMatchPreview(homeSelId, awaySelId, previewBoxId) {
       const homeId = document.getElementById(homeSelId).value;
       const awayId = document.getElementById(awaySelId).value;
-      const homeCls = state.classes[homeId];
-      const awayCls = state.classes[awayId];
+      const homeCls = state.classes[homeId] || state.classes['c1'];
+      const awayCls = state.classes[awayId] || state.classes['c2'];
 
-      const getNames = (arr) => arr.map(p => p.name).join(', ');
+      const getNames = (arr) => arr.map((p, idx) => getDisplayPlayerName(p, idx)).join(', ');
 
       document.getElementById(previewBoxId).innerHTML = `
         <div class="flex justify-between text-[11px] text-slate-400 border-b border-slate-800 pb-1">
@@ -2205,16 +2745,16 @@
         </div>
         <div class="space-y-1.5 text-[11px]">
           <div class="grid grid-cols-2 gap-2">
-            <div><span class="text-slate-500 font-bold">1R(남):</span> <span class="text-slate-200">${getNames(getRoundLineup(homeId, 0))}</span></div>
-            <div><span class="text-slate-500 font-bold">1R(남):</span> <span class="text-slate-200">${getNames(getRoundLineup(awayId, 0))}</span></div>
+            <div><span class="text-sky-400/90 font-bold">1R(남):</span> <span class="text-slate-200">${getNames(getRoundLineup(homeId, 0))}</span></div>
+            <div><span class="text-sky-400/90 font-bold">1R(남):</span> <span class="text-slate-200">${getNames(getRoundLineup(awayId, 0))}</span></div>
           </div>
           <div class="grid grid-cols-2 gap-2">
-            <div><span class="text-slate-500 font-bold">2R(여):</span> <span class="text-slate-200">${getNames(getRoundLineup(homeId, 1))}</span></div>
-            <div><span class="text-slate-500 font-bold">2R(여):</span> <span class="text-slate-200">${getNames(getRoundLineup(awayId, 1))}</span></div>
+            <div><span class="text-rose-400/90 font-bold">2R(여):</span> <span class="text-slate-200">${getNames(getRoundLineup(homeId, 1))}</span></div>
+            <div><span class="text-rose-400/90 font-bold">2R(여):</span> <span class="text-slate-200">${getNames(getRoundLineup(awayId, 1))}</span></div>
           </div>
           <div class="grid grid-cols-2 gap-2">
-            <div><span class="text-amber-400/90 font-bold">3R(혼):</span> <span class="text-slate-200">${getNames(getRoundLineup(homeId, 2))}</span></div>
-            <div><span class="text-amber-400/90 font-bold">3R(혼):</span> <span class="text-slate-200">${getNames(getRoundLineup(awayId, 2))}</span></div>
+            <div><span class="text-purple-300 font-bold">3R(혼):</span> <span class="text-slate-200">${getNames(getRoundLineup(homeId, 2))}</span></div>
+            <div><span class="text-purple-300 font-bold">3R(혼):</span> <span class="text-slate-200">${getNames(getRoundLineup(awayId, 2))}</span></div>
           </div>
         </div>
       `;
@@ -2227,7 +2767,7 @@
       const bAway = document.getElementById('selectMatchB_away').value;
 
       if (aHome === aAway || (state.viewMode !== 'FINAL' && bHome === bAway)) {
-        alert('같은 반끼리는 대진을 설정할 수 없습니다. 서로 다른 반을 선택해 주세요.');
+        alert('같은 반(팀)끼리는 대진을 설정할 수 없습니다. 서로 다른 반(팀)을 선택해 주세요.');
         return;
       }
 
@@ -2263,12 +2803,12 @@
 
     function renderLeaderboardFilterTabs() {
       const container = document.getElementById('leaderboardFilterTabs');
-      let html = `<button type="button" onclick="filterLeaderboard('ALL')" class="px-2.5 py-1 rounded-lg text-xs font-bold ${currentLeaderboardFilter === 'ALL' ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-300'}">전체 (80명)</button>`;
-      for (let c = 1; c <= 10; c++) {
-        const cid = `c${c}`;
+      const allCount = getAllPlayersList().length;
+      let html = `<button type="button" onclick="filterLeaderboard('ALL')" class="px-2.5 py-1 rounded-lg text-xs font-bold ${currentLeaderboardFilter === 'ALL' ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-300'}">전체 (${allCount}명)</button>`;
+      getOrderedClassIds().forEach(cid => {
         const cls = state.classes[cid];
         html += `<button type="button" onclick="filterLeaderboard('${cid}')" class="px-2.5 py-1 rounded-lg text-xs font-bold whitespace-nowrap ${currentLeaderboardFilter === cid ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-300'}">${cls.name}</button>`;
-      }
+      });
       container.innerHTML = html;
     }
 
@@ -2280,20 +2820,22 @@
 
     function getAllPlayersList() {
       const list = [];
-      for (let c = 1; c <= 10; c++) {
-        const cid = `c${c}`;
+      getOrderedClassIds().forEach(cid => {
         const cls = state.classes[cid];
-        [...cls.males, ...cls.females].forEach(p => {
+        if (!cls) return;
+        (cls.males || []).forEach((p, idx) => {
           const stat = getPlayerStat(p.id);
-          list.push({
-            ...p,
-            classId: cid,
-            className: cls.name,
-            points: stat.points,
-            turns: stat.turns
-          });
+          list.push({ ...p, roundTag: p.roundTag || '1R 남자', displayName: getDisplayPlayerName(p, idx), classId: cid, className: cls.name, points: stat.points, turns: stat.turns });
         });
-      }
+        (cls.females || []).forEach((p, idx) => {
+          const stat = getPlayerStat(p.id);
+          list.push({ ...p, roundTag: p.roundTag || '2R 여자', displayName: getDisplayPlayerName(p, idx), classId: cid, className: cls.name, points: stat.points, turns: stat.turns });
+        });
+        (cls.mixed || []).forEach((p, idx) => {
+          const stat = getPlayerStat(p.id);
+          list.push({ ...p, roundTag: p.roundTag || (p.gender === 'M' ? '3R 혼성(남)' : '3R 혼성(여)'), displayName: getDisplayPlayerName(p, idx), classId: cid, className: cls.name, points: stat.points, turns: stat.turns });
+        });
+      });
       return list;
     }
 
@@ -2302,7 +2844,7 @@
       if (currentLeaderboardFilter !== 'ALL') {
         allPlayers = allPlayers.filter(p => p.classId === currentLeaderboardFilter);
       }
-      allPlayers.sort((a, b) => b.points - a.points || a.num.localeCompare(b.num));
+      allPlayers.sort((a, b) => b.points - a.points || (a.num || '').localeCompare(b.num || ''));
 
       const tbody = document.getElementById('leaderboardBody');
       tbody.innerHTML = allPlayers.map((p, idx) => {
@@ -2311,12 +2853,17 @@
           : idx === 1 && p.points > 0 ? '🥈 2'
           : idx === 2 && p.points > 0 ? '🥉 3'
           : `${idx + 1}`;
+        const tagColor = p.roundTag.includes('혼성')
+          ? 'text-purple-300'
+          : p.gender === 'M'
+          ? 'text-sky-400'
+          : 'text-rose-400';
         return `
           <tr class="hover:bg-slate-800/40">
             <td class="py-2 px-3 font-black text-slate-300">${rankBadge}</td>
             <td class="py-2 px-3 font-bold text-indigo-300">${p.className}</td>
-            <td class="py-2 px-3 font-bold text-white"><span class="text-slate-400 font-normal mr-1.5">${p.num}</span>${p.name}</td>
-            <td class="py-2 px-3 text-xs font-bold ${p.gender === 'M' ? 'text-sky-400' : 'text-rose-400'}">${p.gender === 'M' ? '남' : '여'}</td>
+            <td class="py-2 px-3 font-bold text-white"><span class="text-slate-400 font-normal mr-1.5">${p.num || ''}</span>${p.displayName}</td>
+            <td class="py-2 px-3 text-xs font-bold ${tagColor}">${p.roundTag}</td>
             <td class="py-2 px-3 text-right text-slate-300">${p.turns}턴</td>
             <td class="py-2 px-3 text-right text-slate-300">${avg}</td>
             <td class="py-2 px-3 text-right font-score font-black text-amber-400 text-base">${p.points}</td>
@@ -2327,10 +2874,10 @@
 
     window.exportCSV = function() {
       const allPlayers = getAllPlayersList().sort((a, b) => b.points - a.points);
-      let csv = '\uFEFF순위,학급,학번,이름,성별,투구턴수,턴당평균,총누적득점\n';
+      let csv = '\uFEFF순위,학급/팀,학번,이름,출전구분,투구턴수,턴당평균,총누적득점\n';
       allPlayers.forEach((p, idx) => {
         const avg = p.turns > 0 ? (p.points / p.turns).toFixed(1) : '0.0';
-        csv += `${idx + 1},${p.className},${p.num},${p.name},${p.gender === 'M' ? '남' : '여'},${p.turns},${avg},${p.points}\n`;
+        csv += `${idx + 1},${p.className},${p.num || ''},${p.displayName},${p.roundTag},${p.turns},${avg},${p.points}\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
@@ -2341,7 +2888,7 @@
     };
 
     window.resetPlayerStatsOnly = async function() {
-      if (!confirm('1~10반 모든 학생의 개인 누적 득점을 0점으로 초기화하시겠습니까?')) return;
+      if (!confirm('모든 학생의 개인 누적 득점을 0점으로 초기화하시겠습니까?')) return;
       state.playerStats = {};
       renderAll();
       renderLeaderboard();
@@ -2363,17 +2910,18 @@
     };
 
     window.factoryReset = async function() {
-      if (!confirm('모든 점수와 1~10반 명단을 기본값으로 완전히 초기화하시겠습니까?')) return;
+      if (!confirm('모든 점수와 반/팀 명단을 기본값으로 완전히 초기화하시겠습니까?')) return;
       localStorage.removeItem(LOCAL_STORAGE_KEY);
       state = {
-        classes: buildDefaultClasses(),
+        classes: buildDefaultClasses(false),
         matches: {
           A: { homeClassId: 'c1', awayClassId: 'c2' },
           B: { homeClassId: 'c3', awayClassId: 'c4' }
         },
         boards: buildDefaultBoards(),
         playerStats: {},
-        viewMode: 'BOTH'
+        viewMode: 'BOTH',
+        customRosterMode: false
       };
       applyViewModeUI();
       renderAll();
