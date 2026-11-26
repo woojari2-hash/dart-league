@@ -62,6 +62,7 @@
           <div id="shoutoutBoardTag" class="inline-block px-3.5 py-1 rounded-full bg-white/10 text-amber-300 text-xs md:text-sm font-black tracking-widest uppercase">MATCH A · 다트 1번 보드</div>
           <div id="shoutoutEmoji" class="text-6xl md:text-8xl leading-none py-1">🎯</div>
           <div id="shoutoutMainTitle" class="font-score text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-white to-rose-300">BULLSEYE!</div>
+          <div id="shoutoutSubBadge" class="hidden inline-block px-4 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-sm md:text-lg font-black tracking-wide">BULL 3연속 명중! 150점!</div>
           <div id="shoutoutPlayerText" class="text-2xl md:text-4xl font-black text-white pt-1">1반 김민준 선수!</div>
           <div class="text-xs text-slate-400 pt-2">화면을 터치하면 닫힙니다 (자동 닫힘)</div>
         </div>
@@ -338,12 +339,17 @@
             <button type="button" onclick="quickAddScore(180)" class="py-1.5 rounded-lg bg-rose-900/60 hover:bg-rose-800/70 text-xs font-black text-rose-300 border border-rose-700/60">180!</button>
           </div>
         </div>
+        <!-- 전광판 스페셜 이펙트 & 팡파레 송출 -->
         <div class="bg-gradient-to-r from-rose-950/50 via-amber-950/40 to-rose-950/50 p-3 rounded-xl border border-amber-500/40 space-y-2">
           <div class="text-xs font-black text-amber-300">🎉 전광판 스페셜 이펙트 & 팡파레 송출</div>
           <div class="grid grid-cols-3 gap-2">
-            <button type="button" onclick="triggerSpecialShoutout('BULL')" class="py-2.5 px-2 rounded-xl bg-gradient-to-b from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-black text-xs md:text-sm shadow-lg active:scale-95 flex flex-col items-center justify-center gap-0.5"><span class="text-base">🎯</span><span>BULL 명중!</span></button>
-            <button type="button" onclick="triggerSpecialShoutout('TRIPLE20')" class="py-2.5 px-2 rounded-xl bg-gradient-to-b from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-black text-xs md:text-sm shadow-lg active:scale-95 flex flex-col items-center justify-center gap-0.5"><span class="text-base">🔥</span><span>TRIPLE 20!</span></button>
-            <button type="button" onclick="triggerSpecialShoutout('TON180')" class="py-2.5 px-2 rounded-xl bg-gradient-to-b from-purple-600 to-indigo-700 hover:from-purple-500 hover:to-indigo-600 text-white font-black text-xs md:text-sm shadow-lg active:scale-95 flex flex-col items-center justify-center gap-0.5"><span class="text-base">👑</span><span>180 TON!</span></button>
+            <button type="button" onclick="triggerSpecialShoutout('BULL')" class="py-2 px-2 rounded-xl bg-gradient-to-b from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-black text-xs md:text-sm shadow-lg active:scale-95 flex flex-col items-center justify-center gap-0.5"><span class="text-base">🎯</span><span>BULL 명중!</span></button>
+            <button type="button" onclick="triggerSpecialShoutout('TRIPLE20')" class="py-2 px-2 rounded-xl bg-gradient-to-b from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-black text-xs md:text-sm shadow-lg active:scale-95 flex flex-col items-center justify-center gap-0.5"><span class="text-base">🔥</span><span>TRIPLE 20!</span></button>
+            <button type="button" onclick="triggerSpecialShoutout('TON180')" class="py-2 px-2 rounded-xl bg-gradient-to-b from-purple-600 to-indigo-700 hover:from-purple-500 hover:to-indigo-600 text-white font-black text-xs md:text-sm shadow-lg active:scale-95 flex flex-col items-center justify-center gap-0.5"><span class="text-base">👑</span><span>180 TON!</span></button>
+            <button type="button" onclick="triggerSpecialShoutout('HATTRICK')" class="col-span-3 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-400 to-amber-400 hover:from-emerald-400 hover:via-teal-300 hover:to-amber-300 text-slate-950 font-black text-base md:text-lg shadow-xl shadow-emerald-500/20 border-2 border-white/40 active:scale-[0.98] flex items-center justify-center gap-2 transition">
+              <span class="text-xl md:text-2xl">🎩</span>
+              <span class="tracking-tight">HAT TRICK! (해트트릭 · 불 3연속 명중!)</span>
+            </button>
           </div>
         </div>
         <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-950/60 px-3 py-2 rounded-xl border border-slate-800/80">
@@ -570,6 +576,12 @@
       } else if (type === 'TRIPLE20') {
         playTone(440, 0, 0.13, 'sawtooth', 0.24); playTone(554.37, 0.11, 0.13, 'sawtooth', 0.26);
         playTone(659.25, 0.22, 0.15, 'sawtooth', 0.28); playTone(880, 0.34, 0.48, 'square', 0.2); playTone(1108.73, 0.34, 0.48, 'triangle', 0.26);
+      } else if (type === 'HATTRICK') {
+        // 불(BULL) 3연발 착탄 + 화려한 팡파레
+        playTone(783.99, 0.00, 0.12, 'square', 0.24);
+        playTone(987.77, 0.13, 0.12, 'square', 0.26);
+        playTone(1174.66, 0.26, 0.14, 'square', 0.28);
+        [523.25, 659.25, 783.99, 1046.5, 1567.98].forEach(f => playTone(f, 0.41, 0.65, 'triangle', 0.24));
       } else {
         [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => playTone(f, i * 0.09, 0.22, 'sawtooth', 0.22));
         [523.25, 659.25, 783.99, 1046.5, 1318.51].forEach(f => playTone(f, 0.38, 0.65, 'triangle', 0.22));
@@ -838,29 +850,45 @@
 
       const overlay = document.getElementById('shoutoutOverlay'), card = document.getElementById('shoutoutCard');
       const waveRing = document.getElementById('shoutoutWaveRing'), boardTagEl = document.getElementById('shoutoutBoardTag');
-      const emojiEl = document.getElementById('shoutoutEmoji'), titleEl = document.getElementById('shoutoutMainTitle'), playerEl = document.getElementById('shoutoutPlayerText');
+      const emojiEl = document.getElementById('shoutoutEmoji'), titleEl = document.getElementById('shoutoutMainTitle');
+      const subBadgeEl = document.getElementById('shoutoutSubBadge'), playerEl = document.getElementById('shoutoutPlayerText');
 
       boardTagEl.textContent = payload.boardTag || 'LUNCH LEAGUE 501';
       playerEl.textContent = payload.playerLabel || '';
+      subBadgeEl.classList.add('hidden');
 
       if (payload.type === 'BULL') {
         card.className = 'animate-shout-box relative bg-gradient-to-br from-rose-600 via-amber-500 to-rose-600 p-1.5 rounded-3xl shadow-2xl max-w-2xl w-full';
         waveRing.className = 'absolute w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-rose-400/80 animate-ring-wave';
-        emojiEl.textContent = '🎯'; titleEl.textContent = 'BULLSEYE!';
+        emojiEl.textContent = '🎯';
+        titleEl.className = 'font-score text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-white to-rose-300';
+        titleEl.textContent = 'BULLSEYE!';
       } else if (payload.type === 'TRIPLE20') {
         card.className = 'animate-shout-box relative bg-gradient-to-br from-amber-400 via-orange-500 to-red-600 p-1.5 rounded-3xl shadow-2xl max-w-2xl w-full';
         waveRing.className = 'absolute w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-amber-400/80 animate-ring-wave';
-        emojiEl.textContent = '🔥'; titleEl.textContent = 'TRIPLE 20!';
+        emojiEl.textContent = '🔥';
+        titleEl.className = 'font-score text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-orange-300';
+        titleEl.textContent = 'TRIPLE 20!';
+      } else if (payload.type === 'HATTRICK') {
+        card.className = 'animate-shout-box relative bg-gradient-to-br from-emerald-400 via-teal-400 to-amber-400 p-2 rounded-3xl shadow-2xl max-w-2xl w-full';
+        waveRing.className = 'absolute w-80 h-80 md:w-[440px] md:h-[440px] rounded-full border-8 border-emerald-400/80 animate-ring-wave';
+        emojiEl.textContent = '🎩';
+        titleEl.className = 'font-score text-5xl md:text-8xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-white to-amber-300';
+        titleEl.textContent = 'HAT TRICK!';
+        subBadgeEl.textContent = '🎯 BULL 3연속 명중! 150점!';
+        subBadgeEl.classList.remove('hidden');
       } else {
         card.className = 'animate-shout-box relative bg-gradient-to-br from-purple-500 via-pink-500 to-amber-400 p-1.5 rounded-3xl shadow-2xl max-w-2xl w-full';
         waveRing.className = 'absolute w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-purple-400/80 animate-ring-wave';
-        emojiEl.textContent = '👑'; titleEl.textContent = '180! MAXIMUM!';
+        emojiEl.textContent = '👑';
+        titleEl.className = 'font-score text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-white to-amber-300';
+        titleEl.textContent = '180! MAXIMUM!';
       }
 
       card.style.animation = 'none'; void card.offsetWidth; card.style.animation = '';
       overlay.classList.remove('hidden'); overlay.classList.add('flex');
       if (shoutoutAutoCloseTimer) clearTimeout(shoutoutAutoCloseTimer);
-      shoutoutAutoCloseTimer = setTimeout(() => hideShoutoutOverlay(), 3600);
+      shoutoutAutoCloseTimer = setTimeout(() => hideShoutoutOverlay(), 3800);
     }
     window.hideShoutoutOverlay = function() { const o = document.getElementById('shoutoutOverlay'); o.classList.add('hidden'); o.classList.remove('flex'); };
 
