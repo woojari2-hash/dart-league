@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>다트 런치리그 6보드 실시간 클라우드 현황판 (1~10반)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #090d16;
+      color: #f8fafc;
+      overflow-x: hidden;
+      user-select: none;
+    }
+    .font-score {
+      font-family: 'Orbitron', 'Noto Sans KR', sans-serif;
+      font-variant-numeric: tabular-nums;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+
+    .board-card {
+      transition: all 0.18s ease;
+    }
+    .board-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7);
+    }
+
+    @keyframes pulseWin {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.45); }
+      50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+    }
+    .win-glow {
+      animation: pulseWin 2s infinite;
+    }
+
+    /* 전체화면 전광판 집중 모드 */
+    body.scoreboard-only #topHeader,
+    body.scoreboard-only #bottomFooter {
+      display: none !important;
+    }
+    body.scoreboard-only #mainWorkspace {
+      height: 100vh !important;
+      padding: 0.65rem !important;
+    }
+    body.scoreboard-only #exitFocusBtn {
+      display: flex !important;
+    }
+    body.scoreboard-only .score-number {
+      font-size: 3.1rem !important;
+    }
+    body.scoreboard-only .score-colon {
+      font-size: 2.1rem !important;
+    }
+    body.scoreboard-only .team-label {
+      font-size: 1.05rem !important;
+    }
+    body.scoreboard-only .player-pill {
+      padding-top: 0.35rem !important;
+      padding-bottom: 0.35rem !important;
+      font-size: 0.85rem !important;
+    }
+    @media (min-width: 1536px) {
+      body.scoreboard-only .score-number {
+        font-size: 3.85rem !important;
+      }
+      body.scoreboard-only .player-pill {
+        font-size: 0.95rem !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col
