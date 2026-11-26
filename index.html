@@ -63,6 +63,13 @@
     }
 
     /* 1경기 단독 크게 보기 / 결승전 모드 초대형 스케일 */
+    body.single-match-view .board-main-title {
+      font-size: 1.45rem !important;
+    }
+    body.single-match-view .board-round-pill {
+      font-size: 0.95rem !important;
+      padding: 0.25rem 0.65rem !important;
+    }
     body.single-match-view .score-number {
       font-size: 3.35rem !important;
     }
@@ -88,6 +95,9 @@
       font-size: 0.95rem !important;
     }
     @media (min-width: 1536px) {
+      body.single-match-view .board-main-title {
+        font-size: 1.75rem !important;
+      }
       body.single-match-view .score-number {
         font-size: 4.35rem !important;
       }
@@ -161,7 +171,7 @@
       <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-2 mb-2.5">
         <div class="flex items-center gap-2">
           <span id="matchA_badgeLabel" class="px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs md:text-sm font-black tracking-wider">MATCH A</span>
-          <span class="text-xs text-slate-400 hidden sm:inline">다트 1 · 2 · 3번 보드</span>
+          <span class="text-xs text-slate-300 font-bold hidden sm:inline">다트 1 · 2 · 3번 보드</span>
         </div>
         <div class="flex items-center gap-3 md:gap-6">
           <span id="matchA_homeName" class="text-lg md:text-2xl font-black text-sky-400">1반</span>
@@ -188,7 +198,7 @@
       <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-2 mb-2.5">
         <div class="flex items-center gap-2">
           <span class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs md:text-sm font-black tracking-wider">MATCH B</span>
-          <span class="text-xs text-slate-400 hidden sm:inline">다트 4 · 5 · 6번 보드</span>
+          <span class="text-xs text-slate-300 font-bold hidden sm:inline">다트 4 · 5 · 6번 보드</span>
         </div>
         <div class="flex items-center gap-3 md:gap-6">
           <span id="matchB_homeName" class="text-lg md:text-2xl font-black text-sky-400">3반</span>
@@ -528,9 +538,30 @@
     };
 
     const ROUND_META = [
-      { key: 'R1', num: 1, title: '1라운드 · 남자 4 vs 4', badge: '남자 4v4', type: 'male' },
-      { key: 'R2', num: 2, title: '2라운드 · 여자 4 vs 4', badge: '여자 4v4', type: 'female' },
-      { key: 'R3', num: 3, title: '3라운드 · 혼성 (남2·여2)', badge: '혼성 4v4', type: 'mixed' }
+      {
+        key: 'R1',
+        num: 1,
+        title: '1라운드 · 남자 4 vs 4',
+        badge: '남자 4v4',
+        badgeStyle: 'bg-sky-500/25 text-sky-300 border-sky-400/50',
+        type: 'male'
+      },
+      {
+        key: 'R2',
+        num: 2,
+        title: '2라운드 · 여자 4 vs 4',
+        badge: '여자 4v4',
+        badgeStyle: 'bg-rose-500/25 text-rose-300 border-rose-400/50',
+        type: 'female'
+      },
+      {
+        key: 'R3',
+        num: 3,
+        title: '3라운드 · 혼성 (남2·여2)',
+        badge: '혼성 4v4',
+        badgeStyle: 'bg-purple-500/25 text-purple-200 border-purple-400/50',
+        type: 'mixed'
+      }
     ];
 
     function buildDefaultClasses() {
@@ -596,7 +627,7 @@
       },
       boards: buildDefaultBoards(),
       playerStats: {},
-      viewMode: 'BOTH' // 'BOTH' (2경기 예선) | 'ONLY_A' | 'ONLY_B' | 'FINAL' (결승전 1경기)
+      viewMode: 'BOTH'
     };
 
     let db = null;
@@ -748,9 +779,6 @@
       } catch (e) { console.error(e); }
     }
 
-    // =========================================================
-    // 화면 보기 모드 전환 (2경기 예선 / A 단독 / B 단독 / 결승 1경기)
-    // =========================================================
     window.setViewMode = async function(mode) {
       state.viewMode = mode;
       applyViewModeUI();
@@ -946,6 +974,7 @@
         `;
       }
 
+      // 남자 4v4, 여자 4v4, 혼성 4v4 모두 이름 앞에 성별(남/여) 배지 표시
       const renderPlayerMiniList = (players) => {
         return players.map(p => {
           const stat = getPlayerStat(p.id);
@@ -953,9 +982,7 @@
           const highlightCls = isLastThrower
             ? 'border-amber-400/75 bg-amber-500/15'
             : 'border-slate-800/90 bg-slate-900/95';
-          const genderDot = rMeta.type === 'mixed'
-            ? `<span class="text-[10px] px-1 rounded font-black ${p.gender === 'M' ? 'bg-sky-500/20 text-sky-300' : 'bg-rose-500/20 text-rose-300'}">${p.gender === 'M' ? '남' : '여'}</span>`
-            : '';
+          const genderDot = `<span class="text-[10px] px-1.5 py-0.2 rounded font-black ${p.gender === 'M' ? 'bg-sky-500/20 text-sky-300' : 'bg-rose-500/20 text-rose-300'}">${p.gender === 'M' ? '남' : '여'}</span>`;
           return `
             <div class="player-pill flex items-center justify-between ${highlightCls} px-2.5 py-1.5 rounded-lg border text-xs md:text-sm transition">
               <div class="flex items-center gap-1.5 truncate">
@@ -970,16 +997,23 @@
 
       return `
         <div onclick="openScoreModal(${boardIdx})" class="board-card cursor-pointer rounded-xl border ${cardBorder} p-3 flex flex-col justify-between gap-2">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-black px-2.5 py-0.5 rounded bg-slate-800 text-slate-200 border border-slate-700">
-              다트 ${boardIdx + 1}번 · ${rMeta.badge}
-            </span>
+          <!-- 상단 메인 타이틀: 다트 N번 + 라운드 배지 확실히 강조 -->
+          <div class="flex items-center justify-between gap-2 bg-slate-900/95 border border-slate-700/80 rounded-xl px-3 py-2 shadow-sm">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="board-main-title text-lg md:text-xl font-black tracking-tight text-white flex items-center gap-1.5">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-400 shadow shadow-amber-400/60"></span>
+                다트 ${boardIdx + 1}번
+              </span>
+              <span class="board-round-pill text-xs md:text-sm font-black px-2.5 py-0.5 rounded-lg border ${rMeta.badgeStyle}">
+                ${rMeta.badge}
+              </span>
+            </div>
             ${
               isHomeWin
-                ? `<span class="text-xs font-black text-sky-300 bg-sky-500/20 px-2.5 py-0.5 rounded-full">🏆 ${homeCls.name} 승</span>`
+                ? `<span class="text-xs md:text-sm font-black text-sky-300 bg-sky-500/25 border border-sky-400/50 px-2.5 py-1 rounded-lg">🏆 ${homeCls.name} 승</span>`
                 : isAwayWin
-                ? `<span class="text-xs font-black text-rose-300 bg-rose-500/20 px-2.5 py-0.5 rounded-full">🏆 ${awayCls.name} 승</span>`
-                : `<span class="text-[11px] font-bold text-indigo-400">터치 입력 ▸</span>`
+                ? `<span class="text-xs md:text-sm font-black text-rose-300 bg-rose-500/25 border border-rose-400/50 px-2.5 py-1 rounded-lg">🏆 ${awayCls.name} 승</span>`
+                : `<span class="text-xs font-extrabold text-indigo-300 bg-indigo-500/15 border border-indigo-500/30 px-2 py-0.5 rounded-md">입력 ▸</span>`
             }
           </div>
 
@@ -1078,7 +1112,7 @@
       }
 
       const prefixLabel = state.viewMode === 'FINAL' ? '🏆 결승전' : `MATCH ${board.matchId}`;
-      document.getElementById('modalBoardBadge').textContent = `${prefixLabel} · ${activeBoardIndex + 1}번 보드`;
+      document.getElementById('modalBoardBadge').textContent = `${prefixLabel} · 다트 ${activeBoardIndex + 1}번`;
       document.getElementById('modalRoundTitle').textContent = rMeta.title;
 
       document.getElementById('modalHomeTeam').textContent = homeCls.name;
@@ -1098,8 +1132,8 @@
       const homeLineup = getRoundLineup(homeCls.id, board.roundIndex);
       const awayLineup = getRoundLineup(awayCls.id, board.roundIndex);
 
-      document.getElementById('modalHomePlayers').innerHTML = homeLineup.map(p => renderSelectablePlayerBtn('home', homeCls.name, p, rMeta.type === 'mixed')).join('');
-      document.getElementById('modalAwayPlayers').innerHTML = awayLineup.map(p => renderSelectablePlayerBtn('away', awayCls.name, p, rMeta.type === 'mixed')).join('');
+      document.getElementById('modalHomePlayers').innerHTML = homeLineup.map(p => renderSelectablePlayerBtn('home', homeCls.name, p)).join('');
+      document.getElementById('modalAwayPlayers').innerHTML = awayLineup.map(p => renderSelectablePlayerBtn('away', awayCls.name, p)).join('');
 
       updateSelectedPlayerNotice();
 
@@ -1112,20 +1146,18 @@
       }
     }
 
-    function renderSelectablePlayerBtn(side, teamName, player, showGender) {
+    function renderSelectablePlayerBtn(side, teamName, player) {
       const stat = getPlayerStat(player.id);
       const isSelected = selectedPlayerInfo && selectedPlayerInfo.playerId === player.id;
       const baseStyle = side === 'home'
         ? (isSelected ? 'bg-sky-500 text-slate-950 border-sky-300 ring-2 ring-sky-300 font-black' : 'bg-slate-900 hover:bg-slate-800 text-slate-200 border-slate-700')
         : (isSelected ? 'bg-rose-500 text-white border-rose-300 ring-2 ring-rose-300 font-black' : 'bg-slate-900 hover:bg-slate-800 text-slate-200 border-slate-700');
 
-      const genderTag = showGender
-        ? `<span class="text-[10px] px-1 rounded ${isSelected ? 'bg-black/25 text-white' : (player.gender === 'M' ? 'bg-sky-500/20 text-sky-300' : 'bg-rose-500/20 text-rose-300')}">${player.gender === 'M' ? '남' : '여'}</span>`
-        : '';
+      const genderTag = `<span class="text-[10px] px-1 rounded font-black ${isSelected ? 'bg-black/25 text-white' : (player.gender === 'M' ? 'bg-sky-500/20 text-sky-300' : 'bg-rose-500/20 text-rose-300')}">${player.gender === 'M' ? '남' : '여'}</span>`;
 
       return `
         <button type="button" onclick="selectThrower('${side}', '${teamName}', '${player.id}', '${player.name}')" class="px-2.5 py-2 rounded-lg border text-left transition flex items-center justify-between ${baseStyle}">
-          <div class="flex items-center gap-1 truncate">
+          <div class="flex items-center gap-1.5 truncate">
             ${genderTag}
             <span class="text-xs font-bold truncate">${player.name}</span>
           </div>
