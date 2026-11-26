@@ -173,20 +173,28 @@
       <span class="hidden md:inline">📱 <b>학생 접속:</b> 상단 [🔗 링크 · QR 공유]를 눌러 QR코드를 화면에 띄워주세요</span>
     </div>
     <div class="flex items-center gap-3">
-      <button type="button" onclick="requireHelperAuth(() => resetAllBoardsOnly())" class="text-amber-400 hover:text-amber-300 font-medium underline">현재 보드 점수만 501 초기화</button>
-      <button type="button" onclick="requireHelperAuth(() => factoryReset())" class="text-rose-400 hover:text-rose-300 font-medium underline">전체 데이터 초기화</button>
+      <button type="button" onclick="confirmResetWithPin('현재 보드 점수만 501 초기화', '6개 보드의 현재 점수와 승패 기록이 모두 501 : 501로 초기화됩니다.', () => resetAllBoardsOnly())" class="text-amber-400 hover:text-amber-300 font-medium underline">현재 보드 점수만 501 초기화</button>
+      <button type="button" onclick="confirmResetWithPin('전체 데이터 초기화', '모든 경기 점수, 개인 누적 득점, 반/팀 명단이 초기 상태로 완전히 삭제됩니다!', () => factoryReset())" class="text-rose-400 hover:text-rose-300 font-medium underline">전체 데이터 초기화</button>
     </div>
   </footer>
 
-  <!-- MODAL AUTH: 도우미 비밀번호 모달 -->
+  <!-- MODAL AUTH: 도우미 비밀번호 모달 (일반 인증 & 초기화 주의 재확인 공용) -->
   <div id="pinAuthModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[80] hidden items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xs shadow-2xl overflow-hidden">
-      <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
-        <div class="flex items-center gap-2"><span>🔐</span><h2 class="text-sm font-black text-white">도우미 인증 비밀번호</h2></div>
+    <div id="pinAuthCard" class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xs shadow-2xl overflow-hidden transition-colors">
+      <div id="pinAuthHeader" class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span id="pinAuthIcon">🔐</span>
+          <h2 id="pinAuthTitle" class="text-sm font-black text-white">도우미 인증 비밀번호</h2>
+        </div>
         <button type="button" onclick="closeModal('pinAuthModal')" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs font-bold">✕</button>
       </div>
       <div class="p-5 space-y-4">
-        <p class="text-xs text-slate-400 text-center">점수 입력 및 대표 명단 관리를 위해<br>도우미 비밀번호 4자리를 입력하세요.</p>
+        <!-- 초기화 전용 빨간 주의 경고 배너 -->
+        <div id="pinWarningBox" class="hidden bg-rose-950/85 border-2 border-rose-500/80 rounded-xl p-3 text-center space-y-1 shadow-lg">
+          <div class="text-xs font-black text-rose-300 tracking-wide">⚠️ 주의! 실수 방지 재확인</div>
+          <div id="pinWarningDetail" class="text-[11px] text-rose-100 leading-relaxed font-medium"></div>
+        </div>
+        <p id="pinDefaultDesc" class="text-xs text-slate-400 text-center">점수 입력 및 대표 명단 관리를 위해<br>도우미 비밀번호 4자리를 입력하세요.</p>
         <div class="flex justify-center gap-2.5" id="pinDotsDisplay">
           <div class="w-11 h-12 rounded-xl bg-slate-950 border-2 border-slate-700 flex items-center justify-center font-score text-2xl font-black text-amber-400"></div>
           <div class="w-11 h-12 rounded-xl bg-slate-950 border-2 border-slate-700 flex items-center justify-center font-score text-2xl font-black text-amber-400"></div>
@@ -299,7 +307,7 @@
         </div>
         <div>
           <div class="flex items-center justify-between mb-1.5">
-            <label class="text-xs font-bold text-slate-300">① 방금 다트를 던진 학생</label>
+            <label class="text-xs font-bold text-slate-300">① 방금 다트를 던진 선수</label>
             <span id="selectedPlayerNotice" class="text-xs font-bold text-emerald-400">선택됨: 없음</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -506,7 +514,7 @@
       </div>
       <div class="px-5 py-2.5 bg-slate-900 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
         <div class="flex items-center gap-1.5 flex-wrap" id="leaderboardFilterTabs"></div>
-        <button type="button" onclick="requireHelperAuth(() => resetPlayerStatsOnly())" class="text-xs text-rose-400 hover:underline font-medium">개인 누적 득점만 0으로 초기화</button>
+        <button type="button" onclick="confirmResetWithPin('개인 누적 득점 초기화', '전체 참가자의 누적 득점과 턴 수 기록이 모두 0으로 초기화됩니다.', () => resetPlayerStatsOnly())" class="text-xs text-rose-400 hover:underline font-medium">개인 누적 득점만 0으로 초기화</button>
       </div>
       <div class="p-4 overflow-y-auto flex-1">
         <table class="w-full text-left border-collapse">
@@ -577,7 +585,6 @@
         playTone(440, 0, 0.13, 'sawtooth', 0.24); playTone(554.37, 0.11, 0.13, 'sawtooth', 0.26);
         playTone(659.25, 0.22, 0.15, 'sawtooth', 0.28); playTone(880, 0.34, 0.48, 'square', 0.2); playTone(1108.73, 0.34, 0.48, 'triangle', 0.26);
       } else if (type === 'HATTRICK') {
-        // 불(BULL) 3연발 착탄 + 화려한 팡파레
         playTone(783.99, 0.00, 0.12, 'square', 0.24);
         playTone(987.77, 0.13, 0.12, 'square', 0.26);
         playTone(1174.66, 0.26, 0.14, 'square', 0.28);
@@ -718,8 +725,34 @@
       } else requireHelperAuth(() => {});
     };
 
+    function resetPinModalStyle() {
+      document.getElementById('pinAuthCard').className = 'bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xs shadow-2xl overflow-hidden transition-colors';
+      document.getElementById('pinAuthHeader').className = 'px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between';
+      document.getElementById('pinAuthIcon').textContent = '🔐';
+      document.getElementById('pinAuthTitle').textContent = '도우미 인증 비밀번호';
+      document.getElementById('pinAuthTitle').className = 'text-sm font-black text-white';
+      document.getElementById('pinWarningBox').classList.add('hidden');
+      document.getElementById('pinDefaultDesc').innerHTML = '점수 입력 및 대표 명단 관리를 위해<br>도우미 비밀번호 4자리를 입력하세요.';
+    }
+
     window.requireHelperAuth = function(callback) {
       if (isHelperAuthenticated) { if (typeof callback === 'function') callback(); return; }
+      resetPinModalStyle();
+      pendingAuthCallback = callback; currentPinBuffer = '';
+      document.getElementById('pinErrorMsg').textContent = ''; renderPinDots(); openModal('pinAuthModal');
+    };
+
+    // 초기화 전용: 이미 로그인되어 있어도 무조건 비밀번호 재입력 + 주의 문구 표시
+    window.confirmResetWithPin = function(actionTitle, warningMessage, callback) {
+      document.getElementById('pinAuthCard').className = 'bg-slate-900 border-2 border-rose-500/80 rounded-2xl w-full max-w-xs shadow-2xl overflow-hidden transition-colors';
+      document.getElementById('pinAuthHeader').className = 'px-5 py-3.5 bg-rose-950/90 border-b border-rose-800 flex items-center justify-between';
+      document.getElementById('pinAuthIcon').textContent = '⚠️';
+      document.getElementById('pinAuthTitle').textContent = actionTitle;
+      document.getElementById('pinAuthTitle').className = 'text-sm font-black text-rose-200';
+      document.getElementById('pinWarningDetail').textContent = warningMessage;
+      document.getElementById('pinWarningBox').classList.remove('hidden');
+      document.getElementById('pinDefaultDesc').innerHTML = '실수로 눌렀다면 <b>[✕]</b>를 눌러 취소하시고,<br>정말 초기화하려면 <b>비밀번호 4자리</b>를 입력하세요.';
+
       pendingAuthCallback = callback; currentPinBuffer = '';
       document.getElementById('pinErrorMsg').textContent = ''; renderPinDots(); openModal('pinAuthModal');
     };
@@ -1196,7 +1229,7 @@
 
       const el = document.getElementById('selectedPlayerNotice');
       if (selectedPlayerInfo) { el.textContent = `다음 입력 대상: [${selectedPlayerInfo.teamName}] ${selectedPlayerInfo.playerName}`; el.className = 'text-xs font-black text-emerald-400'; }
-      else { el.textContent = '선택됨: 없음 (학생을 먼저 눌러주세요)'; el.className = 'text-xs font-bold text-amber-400'; }
+      else { el.textContent = '선택됨: 없음 (선수를 먼저 눌러주세요)'; el.className = 'text-xs font-bold text-amber-400'; }
 
       const lastLogEl = document.getElementById('modalLastLog');
       if (board.history.length > 0) {
@@ -1216,11 +1249,11 @@
     }
 
     window.selectThrower = function(side, teamName, playerId, playerName, playerIndex = 0) { selectedPlayerInfo = { side, teamName, playerId, playerName, playerIndex }; renderScoreModalContent(); document.getElementById('turnScoreInput').focus(); };
-    window.quickAddScore = function(val) { if (!selectedPlayerInfo) { alert('먼저 방금 다트를 던진 학생 이름을 선택해 주세요!'); return; } document.getElementById('turnScoreInput').value = val; submitTurnScore(); };
+    window.quickAddScore = function(val) { if (!selectedPlayerInfo) { alert('먼저 방금 다트를 던진 선수를 선택해 주세요!'); return; } document.getElementById('turnScoreInput').value = val; submitTurnScore(); };
 
     window.submitTurnScore = async function() {
       if (activeBoardIndex === null) return;
-      if (!selectedPlayerInfo) { alert('먼저 방금 다트를 던진 학생 이름을 선택해 주세요!'); return; }
+      if (!selectedPlayerInfo) { alert('먼저 방금 다트를 던진 선수를 선택해 주세요!'); return; }
       const board = state.boards[activeBoardIndex];
       if (board.winner) { alert('이미 승패가 확정된 보드입니다.'); return; }
       const rawVal = parseInt(document.getElementById('turnScoreInput').value, 10);
@@ -1366,10 +1399,10 @@
     window.clearCurrentClassInputs = function() {
       const cls = state.classes[window.selectedRosterClass]; if (!cls) return;
       if (cls.locked) { alert('잠금 해제 후 비워주세요.'); return; }
-      if (!confirm(`${cls.name}의 명단과 학번 칸을 모두 비우시겠습니까?`)) return;
-      cls.males.forEach((_, i) => { document.getElementById(`m_num_${i}`).value = ''; document.getElementById(`m_name_${i}`).value = ''; });
-      cls.females.forEach((_, i) => { document.getElementById(`f_num_${i}`).value = ''; document.getElementById(`f_name_${i}`).value = ''; });
-      cls.mixed.forEach((_, i) => { document.getElementById(`x_num_${i}`).value = ''; document.getElementById(`x_name_${i}`).value = ''; });
+      if (!confirm(`${cls.name}의 명단을 모두 비우시겠습니까?`)) return;
+      cls.males.forEach((_, i) => { const n1 = document.getElementById(`m_num_${i}`); if (n1) n1.value = ''; document.getElementById(`m_name_${i}`).value = ''; });
+      cls.females.forEach((_, i) => { const n1 = document.getElementById(`f_num_${i}`); if (n1) n1.value = ''; document.getElementById(`f_name_${i}`).value = ''; });
+      cls.mixed.forEach((_, i) => { const n1 = document.getElementById(`x_num_${i}`); if (n1) n1.value = ''; document.getElementById(`x_name_${i}`).value = ''; });
     };
 
     window.clearAllClassesRoster = async function() {
@@ -1386,14 +1419,16 @@
     function renderClassRosterForm(classId) {
       const cls = state.classes[classId]; if (!cls) return;
       const isLocked = Boolean(cls.locked), disabledAttr = isLocked ? 'disabled' : '';
-      document.getElementById('editingClassBadge').textContent = cls.isCustom ? '커스텀 팀' : `${classId.replace('c', '')}반 설정`;
+      const isCustomTeam = Boolean(cls.isCustom);
+
+      document.getElementById('editingClassBadge').textContent = isCustomTeam ? '커스텀 팀' : `${classId.replace('c', '')}반 설정`;
       const nameInput = document.getElementById('editingClassDisplayName'); nameInput.value = cls.name; nameInput.disabled = isLocked;
       const lockBtn = document.getElementById('toggleClassLockBtn'), lockBanner = document.getElementById('classLockedBanner');
       if (isLocked) { lockBtn.className = 'px-3 py-1 rounded-lg bg-rose-600 text-white border border-rose-400 text-xs font-black shadow'; lockBtn.textContent = '🔒 잠금 보호 중 (클릭 시 해제)'; lockBanner.classList.remove('hidden'); }
       else { lockBtn.className = 'px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/40 text-xs font-black'; lockBtn.textContent = '🔓 수정 가능 (클릭 시 반 잠금)'; lockBanner.classList.add('hidden'); }
 
       const delBtn = document.getElementById('deleteCustomClassBtn');
-      if (cls.isCustom && state.customRosterMode) delBtn.classList.remove('hidden'); else delBtn.classList.add('hidden');
+      if (isCustomTeam && state.customRosterMode) delBtn.classList.remove('hidden'); else delBtn.classList.add('hidden');
 
       ['maleAdjustControls', 'femaleAdjustControls', 'mixedAdjustControls'].forEach(id => {
         const el = document.getElementById(id);
@@ -1406,12 +1441,24 @@
       document.getElementById('mixedCountLabel').textContent = cls.mixed.length;
       document.getElementById('rosterSummaryCountText').textContent = `총원: 1R 남자 ${cls.males.length}명 + 2R 여자 ${cls.females.length}명 + 3R 혼성 ${cls.mixed.length}명 = ${cls.males.length + cls.females.length + cls.mixed.length}명`;
 
-      document.getElementById('maleRosterInputs').innerHTML = cls.males.map((p, idx) => `<div class="flex items-center gap-1.5 bg-slate-900 p-2 rounded-lg border border-slate-800 ${isLocked ? 'opacity-70' : ''}"><span class="text-[11px] font-black text-sky-400 w-7">남${idx + 1}</span><input id="m_num_${idx}" type="text" ${disabledAttr} value="${p.num || ''}" placeholder="학번" class="w-16 bg-slate-950 border border-slate-700 rounded px-1.5 py-1 text-xs text-slate-300 text-center" /><input id="m_name_${idx}" type="text" ${disabledAttr} value="${p.name || ''}" placeholder="남학생 ${idx + 1} 이름" class="flex-1 min-w-0 bg-slate-950 border border-slate-700 focus:border-sky-400 rounded px-2.5 py-1 text-xs font-bold text-white outline-none" /></div>`).join('');
-      document.getElementById('femaleRosterInputs').innerHTML = cls.females.map((p, idx) => `<div class="flex items-center gap-1.5 bg-slate-900 p-2 rounded-lg border border-slate-800 ${isLocked ? 'opacity-70' : ''}"><span class="text-[11px] font-black text-rose-400 w-7">여${idx + 1}</span><input id="f_num_${idx}" type="text" ${disabledAttr} value="${p.num || ''}" placeholder="학번" class="w-16 bg-slate-950 border border-slate-700 rounded px-1.5 py-1 text-xs text-slate-300 text-center" /><input id="f_name_${idx}" type="text" ${disabledAttr} value="${p.name || ''}" placeholder="여학생 ${idx + 1} 이름" class="flex-1 min-w-0 bg-slate-950 border border-slate-700 focus:border-rose-400 rounded px-2.5 py-1 text-xs font-bold text-white outline-none" /></div>`).join('');
+      document.getElementById('maleRosterInputs').innerHTML = cls.males.map((p, idx) => {
+        const numInputHtml = isCustomTeam ? '' : `<input id="m_num_${idx}" type="text" ${disabledAttr} value="${p.num || ''}" placeholder="학번" class="w-16 bg-slate-950 border border-slate-700 rounded px-1.5 py-1 text-xs text-slate-300 text-center" />`;
+        const namePlaceholder = isCustomTeam ? `남 ${idx + 1} 이름` : `남학생 ${idx + 1} 이름`;
+        return `<div class="flex items-center gap-1.5 bg-slate-900 p-2 rounded-lg border border-slate-800 ${isLocked ? 'opacity-70' : ''}"><span class="text-[11px] font-black text-sky-400 w-7">남${idx + 1}</span>${numInputHtml}<input id="m_name_${idx}" type="text" ${disabledAttr} value="${p.name || ''}" placeholder="${namePlaceholder}" class="flex-1 min-w-0 bg-slate-950 border border-slate-700 focus:border-sky-400 rounded px-2.5 py-1 text-xs font-bold text-white outline-none" /></div>`;
+      }).join('');
+
+      document.getElementById('femaleRosterInputs').innerHTML = cls.females.map((p, idx) => {
+        const numInputHtml = isCustomTeam ? '' : `<input id="f_num_${idx}" type="text" ${disabledAttr} value="${p.num || ''}" placeholder="학번" class="w-16 bg-slate-950 border border-slate-700 rounded px-1.5 py-1 text-xs text-slate-300 text-center" />`;
+        const namePlaceholder = isCustomTeam ? `여 ${idx + 1} 이름` : `여학생 ${idx + 1} 이름`;
+        return `<div class="flex items-center gap-1.5 bg-slate-900 p-2 rounded-lg border border-slate-800 ${isLocked ? 'opacity-70' : ''}"><span class="text-[11px] font-black text-rose-400 w-7">여${idx + 1}</span>${numInputHtml}<input id="f_name_${idx}" type="text" ${disabledAttr} value="${p.name || ''}" placeholder="${namePlaceholder}" class="flex-1 min-w-0 bg-slate-950 border border-slate-700 focus:border-rose-400 rounded px-2.5 py-1 text-xs font-bold text-white outline-none" /></div>`;
+      }).join('');
+
       document.getElementById('mixedRosterInputs').innerHTML = cls.mixed.map((p, idx) => {
-        const isMale = p.gender === 'M', label = isMale ? '혼남' : '혼여', labelColor = isMale ? 'text-sky-300' : 'text-rose-300';
-        const toggleGenderBtn = (state.customRosterMode && !isLocked) ? `<button type="button" onclick="toggleMixedPlayerGender(${idx})" class="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 ${labelColor} font-black">${label}⇄</button>` : `<span class="text-[11px] font-black ${labelColor} w-8">${label}</span>`;
-        return `<div class="flex items-center gap-1.5 bg-slate-900 p-2 rounded-lg border border-slate-800 ${isLocked ? 'opacity-70' : ''}">${toggleGenderBtn}<input id="x_num_${idx}" type="text" ${disabledAttr} value="${p.num || ''}" placeholder="학번" class="w-16 bg-slate-950 border border-slate-700 rounded px-1.5 py-1 text-xs text-slate-300 text-center" /><input id="x_name_${idx}" type="text" ${disabledAttr} value="${p.name || ''}" placeholder="${isMale ? '혼성 남학생' : '혼성 여학생'} 이름" class="flex-1 min-w-0 bg-slate-950 border border-slate-700 focus:border-purple-400 rounded px-2.5 py-1 text-xs font-bold text-white outline-none" /></div>`;
+        const isMale = p.gender === 'M', label = isMale ? '남' : '여', labelColor = isMale ? 'text-sky-300' : 'text-rose-300';
+        const toggleGenderBtn = (state.customRosterMode && !isLocked) ? `<button type="button" onclick="toggleMixedPlayerGender(${idx})" class="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 ${labelColor} font-black">${label}⇄</button>` : `<span class="text-[11px] font-black ${labelColor} w-7">${label}</span>`;
+        const numInputHtml = isCustomTeam ? '' : `<input id="x_num_${idx}" type="text" ${disabledAttr} value="${p.num || ''}" placeholder="학번" class="w-16 bg-slate-950 border border-slate-700 rounded px-1.5 py-1 text-xs text-slate-300 text-center" />`;
+        const namePlaceholder = isCustomTeam ? `${isMale ? '남' : '여'} ${idx + 1} 이름` : `${isMale ? '혼성 남학생' : '혼성 여학생'} 이름`;
+        return `<div class="flex items-center gap-1.5 bg-slate-900 p-2 rounded-lg border border-slate-800 ${isLocked ? 'opacity-70' : ''}">${toggleGenderBtn}${numInputHtml}<input id="x_name_${idx}" type="text" ${disabledAttr} value="${p.name || ''}" placeholder="${namePlaceholder}" class="flex-1 min-w-0 bg-slate-950 border border-slate-700 focus:border-purple-400 rounded px-2.5 py-1 text-xs font-bold text-white outline-none" /></div>`;
       }).join('');
     }
 
@@ -1515,9 +1562,9 @@
       const list = [];
       getOrderedClassIds().forEach(cid => {
         const cls = state.classes[cid]; if (!cls) return;
-        (cls.males || []).forEach((p, idx) => { const s = getPlayerStat(p.id); list.push({ ...p, roundTag: p.roundTag || '1R 남자', displayName: getDisplayPlayerName(p, idx), classId: cid, className: cls.name, points: s.points, turns: s.turns }); });
-        (cls.females || []).forEach((p, idx) => { const s = getPlayerStat(p.id); list.push({ ...p, roundTag: p.roundTag || '2R 여자', displayName: getDisplayPlayerName(p, idx), classId: cid, className: cls.name, points: s.points, turns: s.turns }); });
-        (cls.mixed || []).forEach((p, idx) => { const s = getPlayerStat(p.id); list.push({ ...p, roundTag: p.roundTag || (p.gender === 'M' ? '3R 혼성(남)' : '3R 혼성(여)'), displayName: getDisplayPlayerName(p, idx), classId: cid, className: cls.name, points: s.points, turns: s.turns }); });
+        (cls.males || []).forEach((p, idx) => { const s = getPlayerStat(p.id); list.push({ ...p, roundTag: p.roundTag || '1R 남자', displayName: getDisplayPlayerName(p, idx), classId: cid, className: cls.name, isCustom: cls.isCustom, points: s.points, turns: s.turns }); });
+        (cls.females || []).forEach((p, idx) => { const s = getPlayerStat(p.id); list.push({ ...p, roundTag: p.roundTag || '2R 여자', displayName: getDisplayPlayerName(p, idx), classId: cid, className: cls.name, isCustom: cls.isCustom, points: s.points, turns: s.turns }); });
+        (cls.mixed || []).forEach((p, idx) => { const s = getPlayerStat(p.id); list.push({ ...p, roundTag: p.roundTag || (p.gender === 'M' ? '3R 혼성(남)' : '3R 혼성(여)'), displayName: getDisplayPlayerName(p, idx), classId: cid, className: cls.name, isCustom: cls.isCustom, points: s.points, turns: s.turns }); });
       });
       return list;
     }
@@ -1530,29 +1577,33 @@
         const avg = p.turns > 0 ? (p.points / p.turns).toFixed(1) : '0.0';
         const rankBadge = idx === 0 && p.points > 0 ? '🥇 1' : idx === 1 && p.points > 0 ? '🥈 2' : idx === 2 && p.points > 0 ? '🥉 3' : `${idx + 1}`;
         const tagColor = p.roundTag.includes('혼성') ? 'text-purple-300' : p.gender === 'M' ? 'text-sky-400' : 'text-rose-400';
-        return `<tr class="hover:bg-slate-800/40"><td class="py-2 px-3 font-black text-slate-300">${rankBadge}</td><td class="py-2 px-3 font-bold text-indigo-300">${p.className}</td><td class="py-2 px-3 font-bold text-white"><span class="text-slate-400 font-normal mr-1.5">${p.num || ''}</span>${p.displayName}</td><td class="py-2 px-3 text-xs font-bold ${tagColor}">${p.roundTag}</td><td class="py-2 px-3 text-right text-slate-300">${p.turns}턴</td><td class="py-2 px-3 text-right text-slate-300">${avg}</td><td class="py-2 px-3 text-right font-score font-black text-amber-400 text-base">${p.points}</td></tr>`;
+        const numSpan = (!p.isCustom && p.num) ? `<span class="text-slate-400 font-normal mr-1.5">${p.num}</span>` : '';
+        return `<tr class="hover:bg-slate-800/40"><td class="py-2 px-3 font-black text-slate-300">${rankBadge}</td><td class="py-2 px-3 font-bold text-indigo-300">${p.className}</td><td class="py-2 px-3 font-bold text-white">${numSpan}${p.displayName}</td><td class="py-2 px-3 text-xs font-bold ${tagColor}">${p.roundTag}</td><td class="py-2 px-3 text-right text-slate-300">${p.turns}턴</td><td class="py-2 px-3 text-right text-slate-300">${avg}</td><td class="py-2 px-3 text-right font-score font-black text-amber-400 text-base">${p.points}</td></tr>`;
       }).join('');
     }
 
     window.exportCSV = function() {
       const allPlayers = getAllPlayersList().sort((a, b) => b.points - a.points);
       let csv = '\uFEFF순위,학급/팀,학번,이름,출전구분,투구턴수,턴당평균,총누적득점\n';
-      allPlayers.forEach((p, idx) => { csv += `${idx + 1},${p.className},${p.num || ''},${p.displayName},${p.roundTag},${p.turns},${p.turns > 0 ? (p.points / p.turns).toFixed(1) : '0.0'},${p.points}\n`; });
+      allPlayers.forEach((p, idx) => { csv += `${idx + 1},${p.className},${p.isCustom ? '' : (p.num || '')},${p.displayName},${p.roundTag},${p.turns},${p.turns > 0 ? (p.points / p.turns).toFixed(1) : '0.0'},${p.points}\n`; });
       const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' })); a.download = `LUNCH_LEAGUE_501_개인득점순위_${new Date().toISOString().slice(0,10)}.csv`; a.click();
     };
 
-    window.resetPlayerStatsOnly = async function() { if (!confirm('모든 학생의 개인 누적 득점을 0점으로 초기화하시겠습니까?')) return; state.playerStats = {}; renderAll(); renderLeaderboard(); await syncStatsToCloud(); };
+    window.resetPlayerStatsOnly = async function() {
+      state.playerStats = {}; renderAll(); renderLeaderboard(); await syncStatsToCloud();
+      alert('개인 누적 득점이 모두 0으로 초기화되었습니다.');
+    };
     window.resetAllBoardsOnly = async function() {
-      if (!confirm('현재 진행 중인 보드의 점수만 모두 501 : 501로 초기화하시겠습니까?')) return;
       const promises = []; state.boards.forEach((b, idx) => { b.homeScore = 501; b.awayScore = 501; b.winner = null; b.history = []; promises.push(syncBoardToCloud(idx)); });
       renderAll(); await Promise.all(promises);
+      alert('현재 보드 점수가 모두 501 : 501로 초기화되었습니다.');
     };
     window.factoryReset = async function() {
-      if (!confirm('모든 점수와 반/팀 명단을 기본값으로 완전히 초기화하시겠습니까?')) return;
       localStorage.removeItem(LOCAL_STORAGE_KEY);
       state = { classes: buildDefaultClasses(false), matches: { A: { homeClassId: 'c1', awayClassId: 'c2' }, B: { homeClassId: 'c3', awayClassId: 'c4' } }, boards: buildDefaultBoards(), playerStats: {}, viewMode: 'BOTH', customRosterMode: false };
       applyViewModeUI(); renderAll();
       await Promise.all([syncMetaToCloud(), syncStatsToCloud(), ...state.boards.map((_, idx) => syncBoardToCloud(idx))]);
+      alert('전체 데이터가 초기 상태로 초기화되었습니다.');
     };
 
     window.openModal = function(id) { const el = document.getElementById(id); if (el) { el.classList.remove('hidden'); el.classList.add('flex'); } };
