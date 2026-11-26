@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>다트 런치리그 6보드 실시간 클라우드 현황판 (1~10반)</title>
+  <title>다트 런치리그 실시간 클라우드 현황판 (1~10반)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <style>
@@ -44,42 +44,69 @@
       display: none !important;
     }
     body.scoreboard-only #mainWorkspace {
-      height: 100vh !important;
+      min-height: 100vh !important;
       padding: 0.65rem !important;
     }
-    body.scoreboard-only #exitFocusBtn {
+    body.scoreboard-only #floatingFocusControls {
       display: flex !important;
     }
-    body.scoreboard-only .score-number {
-      font-size: 3.1rem !important;
+
+    /* 2경기(3열 x 2행) 기본 가독성 스타일 */
+    .score-number {
+      font-size: 2.35rem;
+      line-height: 1.05;
     }
-    body.scoreboard-only .score-colon {
-      font-size: 2.1rem !important;
+    @media (min-width: 1280px) {
+      .score-number {
+        font-size: 2.85rem;
+      }
     }
-    body.scoreboard-only .team-label {
-      font-size: 1.05rem !important;
+
+    /* 1경기 단독 크게 보기 / 결승전 모드 초대형 스케일 */
+    body.single-match-view .score-number {
+      font-size: 3.35rem !important;
     }
-    body.scoreboard-only .player-pill {
-      padding-top: 0.45rem !important;
-      padding-bottom: 0.45rem !important;
-      font-size: 0.9rem !important;
+    body.single-match-view .score-colon {
+      font-size: 2.4rem !important;
+    }
+    body.single-match-view .team-label {
+      font-size: 1.25rem !important;
+    }
+    body.single-match-view .player-pill {
+      padding-top: 0.55rem !important;
+      padding-bottom: 0.55rem !important;
+      padding-left: 0.65rem !important;
+      padding-right: 0.65rem !important;
+      font-size: 0.98rem !important;
+    }
+    body.single-match-view .player-pts {
+      font-size: 0.95rem !important;
+    }
+    body.single-match-view .live-banner {
+      padding-top: 0.65rem !important;
+      padding-bottom: 0.65rem !important;
+      font-size: 0.95rem !important;
     }
     @media (min-width: 1536px) {
-      body.scoreboard-only .score-number {
-        font-size: 3.85rem !important;
+      body.single-match-view .score-number {
+        font-size: 4.35rem !important;
       }
-      body.scoreboard-only .player-pill {
-        font-size: 0.98rem !important;
+      body.single-match-view .player-pill {
+        font-size: 1.12rem !important;
       }
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
-  <!-- 전체화면 전광판 종료 플로팅 버튼 -->
-  <button id="exitFocusBtn" onclick="exitScoreboardOnlyMode()" class="hidden fixed top-3 right-3 z-50 bg-slate-900/85 hover:bg-rose-600 text-slate-300 hover:text-white border border-slate-600/80 px-3 py-1.5 rounded-lg text-xs font-bold items-center gap-1.5 shadow-xl backdrop-blur-sm transition opacity-45 hover:opacity-100">
-    <span>✕ 전체화면 종료</span>
-  </button>
+  <!-- 전체화면 전광판 전용 플로팅 전환 및 종료 바 -->
+  <div id="floatingFocusControls" class="hidden fixed top-3 right-3 z-50 items-center gap-1.5 bg-slate-900/90 border border-slate-700 p-1.5 rounded-xl shadow-2xl backdrop-blur-md opacity-60 hover:opacity-100 transition">
+    <button onclick="setViewMode('BOTH')" data-vmode="BOTH" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">2경기 전체</button>
+    <button onclick="setViewMode('ONLY_A')" data-vmode="ONLY_A" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">A만 크게</button>
+    <button onclick="setViewMode('ONLY_B')" data-vmode="ONLY_B" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">B만 크게</button>
+    <button onclick="setViewMode('FINAL')" data-vmode="FINAL" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">🏆 결승</button>
+    <button onclick="exitScoreboardOnlyMode()" class="ml-1 bg-rose-600 hover:bg-rose-500 text-white px-2.5 py-1 rounded-lg text-xs font-black">✕ 종료</button>
+  </div>
 
   <!-- 상단 컨트롤 헤더 -->
   <header id="topHeader" class="bg-slate-900/95 border-b border-slate-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 sticky top-0 z-30 shadow-lg">
@@ -88,14 +115,19 @@
         🎯
       </div>
       <div>
-        <div class="flex items-center gap-2">
-          <h1 class="text-base md:text-lg font-black tracking-tight text-white">다트 런치리그 501 실시간 현황판</h1>
-          <span class="px-2 py-0.5 text-[11px] font-bold rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">1~10반 자동연동</span>
+        <div class="flex items-center gap-2 flex-wrap">
+          <h1 class="text-base md:text-lg font-black tracking-tight text-white">다트 런치리그 501 현황판</h1>
           <span id="syncStatusBadge" onclick="openModal('firebaseModal')" title="클릭하여 연결 상태 확인" class="cursor-pointer px-2 py-0.5 text-[11px] font-bold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1 hover:bg-amber-500/30 transition">
             <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> 서버 연결 중...
           </span>
         </div>
-        <p class="text-[11px] text-slate-400 hidden sm:block">1R 남자 4v4 · 2R 여자 4v4 · 3R 혼성(남2·여2) 4v4 | 대형 스크린 & 도우미 6명 실시간 동기화</p>
+        <!-- 경기 수 & 확대 보기 전환 탭 -->
+        <div class="flex items-center gap-1 mt-1 flex-wrap">
+          <button onclick="setViewMode('BOTH')" data-vmode="BOTH" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">📊 2경기 동시 (예선 3×2)</button>
+          <button onclick="setViewMode('ONLY_A')" data-vmode="ONLY_A" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">🔍 MATCH A만 크게</button>
+          <button onclick="setViewMode('ONLY_B')" data-vmode="ONLY_B" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">🔍 MATCH B만 크게</button>
+          <button onclick="setViewMode('FINAL')" data-vmode="FINAL" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">🏆 결승전 모드 (1경기)</button>
+        </div>
       </div>
     </div>
 
@@ -121,51 +153,61 @@
     </div>
   </header>
 
-  <!-- 메인 6보드 전광판 영역 -->
-  <main id="mainWorkspace" class="flex-1 p-2.5 md:p-4 max-w-[1920px] w-full mx-auto grid grid-cols-1 xl:grid-cols-2 gap-3.5 items-stretch">
+  <!-- 메인 전광판 영역 (3열 x 2행 와이드 배치 또는 1경기 3열 초대형 배치) -->
+  <main id="mainWorkspace" class="flex-1 p-2.5 md:p-3.5 max-w-[1920px] w-full mx-auto flex flex-col gap-3.5 justify-center">
     
     <!-- MATCH A 구역 (다트 1, 2, 3번 보드) -->
-    <section class="bg-slate-900/75 border border-slate-800/90 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl">
-      <div class="flex items-center justify-between bg-slate-950/80 border border-slate-800 rounded-xl px-3.5 py-2 mb-2.5">
+    <section id="sectionMatchA" class="bg-slate-900/80 border border-slate-800/90 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl flex-1">
+      <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-2 mb-2.5">
         <div class="flex items-center gap-2">
-          <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-black tracking-wider">MATCH A</span>
-          <span class="text-xs text-slate-400 hidden sm:inline">다트 1~3번 보드</span>
+          <span id="matchA_badgeLabel" class="px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs md:text-sm font-black tracking-wider">MATCH A</span>
+          <span class="text-xs text-slate-400 hidden sm:inline">다트 1 · 2 · 3번 보드</span>
         </div>
-        <div class="flex items-center gap-2.5 md:gap-4">
-          <span id="matchA_homeName" class="text-base md:text-xl font-black text-sky-400">1반</span>
-          <div class="flex items-center gap-1.5 bg-slate-900 px-3 py-0.5 rounded-lg border border-slate-700">
-            <span id="matchA_homeWins" class="font-score text-xl md:text-2xl font-black text-white">0</span>
-            <span class="text-slate-500 font-bold">:</span>
-            <span id="matchA_awayWins" class="font-score text-xl md:text-2xl font-black text-white">0</span>
+        <div class="flex items-center gap-3 md:gap-6">
+          <span id="matchA_homeName" class="text-lg md:text-2xl font-black text-sky-400">1반</span>
+          <div class="flex items-center gap-2 bg-slate-900 px-3.5 py-0.5 rounded-xl border border-slate-700">
+            <span id="matchA_homeWins" class="font-score text-2xl md:text-3xl font-black text-white">0</span>
+            <span class="text-slate-500 font-bold text-lg">:</span>
+            <span id="matchA_awayWins" class="font-score text-2xl md:text-3xl font-black text-white">0</span>
           </div>
-          <span id="matchA_awayName" class="text-base md:text-xl font-black text-rose-400">2반</span>
+          <span id="matchA_awayName" class="text-lg md:text-2xl font-black text-rose-400">2반</span>
         </div>
-        <div id="matchA_statusBadge" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300">진행 중</div>
+        <div class="flex items-center gap-2">
+          <div id="matchA_statusBadge" class="text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-slate-800 text-slate-300">진행 중</div>
+          <button id="matchA_zoomBtn" onclick="toggleSingleMatch('ONLY_A')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-indigo-600 text-slate-200 hover:text-white text-xs font-bold border border-slate-700 transition">
+            ⤢ 크게 보기
+          </button>
+        </div>
       </div>
 
-      <div id="matchA_boards" class="grid grid-cols-1 md:grid-cols-3 gap-2.5 flex-1"></div>
+      <div id="matchA_boards" class="grid grid-cols-1 lg:grid-cols-3 gap-3 flex-1"></div>
     </section>
 
     <!-- MATCH B 구역 (다트 4, 5, 6번 보드) -->
-    <section class="bg-slate-900/75 border border-slate-800/90 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl">
-      <div class="flex items-center justify-between bg-slate-950/80 border border-slate-800 rounded-xl px-3.5 py-2 mb-2.5">
+    <section id="sectionMatchB" class="bg-slate-900/80 border border-slate-800/90 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl flex-1">
+      <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-2 mb-2.5">
         <div class="flex items-center gap-2">
-          <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-black tracking-wider">MATCH B</span>
-          <span class="text-xs text-slate-400 hidden sm:inline">다트 4~6번 보드</span>
+          <span class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs md:text-sm font-black tracking-wider">MATCH B</span>
+          <span class="text-xs text-slate-400 hidden sm:inline">다트 4 · 5 · 6번 보드</span>
         </div>
-        <div class="flex items-center gap-2.5 md:gap-4">
-          <span id="matchB_homeName" class="text-base md:text-xl font-black text-sky-400">3반</span>
-          <div class="flex items-center gap-1.5 bg-slate-900 px-3 py-0.5 rounded-lg border border-slate-700">
-            <span id="matchB_homeWins" class="font-score text-xl md:text-2xl font-black text-white">0</span>
-            <span class="text-slate-500 font-bold">:</span>
-            <span id="matchB_awayWins" class="font-score text-xl md:text-2xl font-black text-white">0</span>
+        <div class="flex items-center gap-3 md:gap-6">
+          <span id="matchB_homeName" class="text-lg md:text-2xl font-black text-sky-400">3반</span>
+          <div class="flex items-center gap-2 bg-slate-900 px-3.5 py-0.5 rounded-xl border border-slate-700">
+            <span id="matchB_homeWins" class="font-score text-2xl md:text-3xl font-black text-white">0</span>
+            <span class="text-slate-500 font-bold text-lg">:</span>
+            <span id="matchB_awayWins" class="font-score text-2xl md:text-3xl font-black text-white">0</span>
           </div>
-          <span id="matchB_awayName" class="text-base md:text-xl font-black text-rose-400">4반</span>
+          <span id="matchB_awayName" class="text-lg md:text-2xl font-black text-rose-400">4반</span>
         </div>
-        <div id="matchB_statusBadge" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300">진행 중</div>
+        <div class="flex items-center gap-2">
+          <div id="matchB_statusBadge" class="text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-slate-800 text-slate-300">진행 중</div>
+          <button id="matchB_zoomBtn" onclick="toggleSingleMatch('ONLY_B')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-indigo-600 text-slate-200 hover:text-white text-xs font-bold border border-slate-700 transition">
+            ⤢ 크게 보기
+          </button>
+        </div>
       </div>
 
-      <div id="matchB_boards" class="grid grid-cols-1 md:grid-cols-3 gap-2.5 flex-1"></div>
+      <div id="matchB_boards" class="grid grid-cols-1 lg:grid-cols-3 gap-3 flex-1"></div>
     </section>
 
   </main>
@@ -173,12 +215,12 @@
   <!-- 하단 안내 바 -->
   <footer id="bottomFooter" class="bg-slate-950 border-t border-slate-800/80 px-4 py-2 text-xs text-slate-400 flex flex-wrap items-center justify-between gap-2">
     <div class="flex items-center gap-3">
-      <span>💡 <b>전광판 PC:</b> [🖥️ 전체화면 전광판] 클릭</span>
+      <span>💡 <b>예선:</b> 2경기 동시 (3열×2행) | <b>결승:</b> [🏆 결승전 모드 (1경기)] 클릭</span>
       <span class="hidden md:inline">|</span>
-      <span class="hidden md:inline">📱 <b>도우미 학생 6명:</b> 상단 [📱 도우미 1보드 모드] 선택 후 담당 보드 점수 입력</span>
+      <span class="hidden md:inline">📱 <b>도우미 학생:</b> [📱 도우미 1보드 모드] 선택 후 담당 보드 입력</span>
     </div>
     <div class="flex items-center gap-3">
-      <button onclick="resetAllBoardsOnly()" class="text-amber-400 hover:text-amber-300 font-medium underline">현재 6보드 점수만 501 초기화</button>
+      <button onclick="resetAllBoardsOnly()" class="text-amber-400 hover:text-amber-300 font-medium underline">현재 보드 점수만 501 초기화</button>
       <button onclick="factoryReset()" class="text-rose-400 hover:text-rose-300 font-medium underline">전체 데이터 초기화</button>
     </div>
   </footer>
@@ -200,7 +242,7 @@
         <div class="bg-emerald-950/40 border border-emerald-500/40 rounded-xl p-4 space-y-2.5">
           <div class="font-black text-emerald-300 text-sm">✅ Firebase 프로젝트(dart-lunch-league)가 기본 내장되어 있습니다!</div>
           <p class="text-slate-300 leading-relaxed">
-            별도의 코드 입력 없이 <b>현재 페이지 주소 그대로</b> 대형 스크린 PC와 도우미 학생 6명의 스마트폰에서 접속하면 모든 점수와 명단이 실시간으로 동시 연동됩니다.
+            별도의 코드 입력 없이 <b>현재 페이지 주소 그대로</b> 대형 스크린 PC와 도우미 학생들의 스마트폰에서 접속하면 모든 점수와 명단이 실시간으로 동시 연동됩니다.
           </p>
           <div class="flex gap-2 pt-1">
             <input id="generatedShareUrl" type="text" readonly class="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-2 text-xs text-slate-200 font-mono" />
@@ -220,7 +262,7 @@
       <!-- 도우미 1보드 모드 전용 상단 보드 전환 바 -->
       <div id="helperBoardSwitcher" class="hidden bg-slate-950 border-b border-slate-800 px-3 py-2 flex items-center justify-between gap-1 overflow-x-auto">
         <span class="text-[11px] font-black text-cyan-400 whitespace-nowrap mr-1">📱 내 담당 보드:</span>
-        <div class="flex items-center gap-1">
+        <div class="flex items-center gap-1" id="helperBoardTabList">
           <button onclick="switchHelperBoard(0)" data-hboard="0" class="hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300">1번(A-남)</button>
           <button onclick="switchHelperBoard(1)" data-hboard="1" class="hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300">2번(A-여)</button>
           <button onclick="switchHelperBoard(2)" data-hboard="2" class="hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300">3번(A-혼)</button>
@@ -239,7 +281,6 @@
       </div>
 
       <div class="p-3.5 md:p-4 overflow-y-auto space-y-3.5">
-        <!-- 현재 501 : 501 점수 비교 헤더 -->
         <div class="grid grid-cols-11 items-center gap-2 bg-slate-950/90 p-3 rounded-xl border border-slate-800">
           <div id="modalHomeBox" class="col-span-5 text-center p-2 rounded-lg border border-sky-500/30 bg-sky-500/5">
             <div id="modalHomeTeam" class="text-xs md:text-sm font-black text-sky-400">1반</div>
@@ -254,7 +295,6 @@
           </div>
         </div>
 
-        <!-- 1단계: 방금 던진 선수 선택 (좌 4명 vs 우 4명) -->
         <div>
           <div class="flex items-center justify-between mb-1.5">
             <label class="text-xs font-bold text-slate-300">① 방금 다트를 던진 학생 선택 <span class="text-amber-400">(팀 차감 + 개인 득점 합산)</span></label>
@@ -272,7 +312,6 @@
           </div>
         </div>
 
-        <!-- 2단계: 획득 점수 입력 -->
         <div class="bg-slate-950/90 p-3 rounded-xl border border-slate-800 space-y-2.5">
           <div class="flex items-center justify-between">
             <label class="text-xs font-bold text-slate-300">② 3발 합계 점수 입력 (0 ~ 180)</label>
@@ -296,7 +335,6 @@
           </div>
         </div>
 
-        <!-- 최근 투구 로그 & 취소 -->
         <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-950/60 px-3 py-2 rounded-xl border border-slate-800/80">
           <div class="text-xs text-slate-400 truncate max-w-[65%]">
             최근 기록: <span id="modalLastLog" class="text-slate-200 font-medium">아직 입력된 기록이 없습니다.</span>
@@ -307,7 +345,6 @@
           </div>
         </div>
 
-        <!-- 머신 자체 계산용 바로 승리 처리 -->
         <div class="pt-1 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
           <span class="text-[11px] text-slate-400">※ 머신에서 승패가 이미 결정된 경우 바로 승리 처리:</span>
           <div class="flex items-center gap-2">
@@ -381,22 +418,22 @@
   </div>
 
   <!-- ========================================================= -->
-  <!-- MODAL 3: 오늘의 대진 선택 모달 (1~10반 드롭다운 자동 연동) -->
+  <!-- MODAL 3: 오늘의 대진 선택 모달 (1경기 결승 / 2경기 예선 자동 대응) -->
   <!-- ========================================================= -->
   <div id="matchSetupModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-3">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
       <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
         <div>
           <h2 class="text-base font-black text-white">⚔️ 대진 선택 (1~10반 선택 시 대표 명단 자동 불러오기)</h2>
-          <p class="text-xs text-slate-400">반을 선택하면 등록된 남자 4명 · 여자 4명 · 혼성(남2·여2) 명단이 자동으로 6보드에 세팅됩니다.</p>
+          <p class="text-xs text-slate-400">결승전 모드일 경우 <b>MATCH A (결승전 1~3번 보드)</b> 1경기만 설정하면 됩니다.</p>
         </div>
         <button onclick="closeModal('matchSetupModal')" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold">✕</button>
       </div>
 
-      <div class="p-4 md:p-5 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div id="matchSetupGrid" class="p-4 md:p-5 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="bg-slate-950/90 border border-rose-500/30 rounded-xl p-4 space-y-3">
           <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-400 text-xs font-black">MATCH A (1~3번 보드)</span>
+            <span id="setupMatchALabel" class="px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-400 text-xs font-black">MATCH A (1~3번 보드)</span>
           </div>
           <div class="grid grid-cols-11 items-center gap-2">
             <select id="selectMatchA_home" onchange="updateMatchPreview()" class="col-span-5 bg-slate-900 border border-sky-500/40 rounded-lg px-3 py-2 text-sm font-black text-sky-400 outline-none"></select>
@@ -406,7 +443,7 @@
           <div id="previewMatchA" class="bg-slate-900/90 border border-slate-800 rounded-lg p-3 text-xs space-y-2"></div>
         </div>
 
-        <div class="bg-slate-950/90 border border-amber-500/30 rounded-xl p-4 space-y-3">
+        <div id="setupMatchBCard" class="bg-slate-950/90 border border-amber-500/30 rounded-xl p-4 space-y-3">
           <div class="flex items-center justify-between">
             <span class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-400 text-xs font-black">MATCH B (4~6번 보드)</span>
           </div>
@@ -422,7 +459,7 @@
       <div class="px-5 py-3.5 bg-slate-950 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
         <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
           <input id="resetScoresOnMatchApply" type="checkbox" checked class="w-4 h-4 accent-indigo-500" />
-          <span>새 대진 적용 시 6개 보드 점수를 <b>501 : 501</b>로 새 출발 (개인 누적 득점은 유지)</span>
+          <span>새 대진 적용 시 보드 점수를 <b>501 : 501</b>로 새 출발 (개인 누적 득점은 유지)</span>
         </label>
         <div class="flex items-center gap-2">
           <button onclick="closeModal('matchSetupModal')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300">취소</button>
@@ -477,7 +514,7 @@
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    const LOCAL_STORAGE_KEY = 'dart_lunch_league_10classes_v2';
+    const LOCAL_STORAGE_KEY = 'dart_lunch_league_10classes_v3';
     const ROOM_ID = 'main_league_room';
 
     const DEFAULT_FIREBASE_CONFIG = {
@@ -558,7 +595,8 @@
         B: { homeClassId: 'c3', awayClassId: 'c4' }
       },
       boards: buildDefaultBoards(),
-      playerStats: {}
+      playerStats: {},
+      viewMode: 'BOTH' // 'BOTH' (2경기 예선) | 'ONLY_A' | 'ONLY_B' | 'FINAL' (결승전 1경기)
     };
 
     let db = null;
@@ -578,7 +616,7 @@
         if (saved) {
           const parsed = JSON.parse(saved);
           if (parsed && parsed.classes && parsed.boards && parsed.boards.length === 6) {
-            state = parsed;
+            state = { viewMode: 'BOTH', ...parsed };
           }
         }
       } catch (e) { console.warn(e); }
@@ -628,7 +666,9 @@
               const data = snap.data();
               if (data.classes) state.classes = data.classes;
               if (data.matches) state.matches = data.matches;
+              if (data.viewMode) state.viewMode = data.viewMode;
               saveLocalState();
+              applyViewModeUI();
               renderAll();
             } else {
               syncMetaToCloud();
@@ -680,6 +720,7 @@
         await setDoc(doc(db, 'dart_leagues', ROOM_ID, 'state_docs', 'meta'), {
           classes: state.classes,
           matches: state.matches,
+          viewMode: state.viewMode,
           updatedAt: Date.now()
         });
       } catch (e) { console.error(e); }
@@ -707,10 +748,75 @@
       } catch (e) { console.error(e); }
     }
 
+    // =========================================================
+    // 화면 보기 모드 전환 (2경기 예선 / A 단독 / B 단독 / 결승 1경기)
+    // =========================================================
+    window.setViewMode = async function(mode) {
+      state.viewMode = mode;
+      applyViewModeUI();
+      renderAll();
+      await syncMetaToCloud();
+    };
+
+    window.toggleSingleMatch = function(targetMode) {
+      if (state.viewMode === targetMode) {
+        setViewMode('BOTH');
+      } else {
+        setViewMode(targetMode);
+      }
+    };
+
+    function applyViewModeUI() {
+      const mode = state.viewMode || 'BOTH';
+      const secA = document.getElementById('sectionMatchA');
+      const secB = document.getElementById('sectionMatchB');
+      const badgeA = document.getElementById('matchA_badgeLabel');
+      const zoomA = document.getElementById('matchA_zoomBtn');
+      const zoomB = document.getElementById('matchB_zoomBtn');
+
+      if (mode === 'BOTH') {
+        document.body.classList.remove('single-match-view');
+        secA.classList.remove('hidden');
+        secB.classList.remove('hidden');
+        badgeA.textContent = 'MATCH A';
+        badgeA.className = 'px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs md:text-sm font-black tracking-wider';
+        zoomA.textContent = '⤢ 크게 보기';
+        zoomB.textContent = '⤢ 크게 보기';
+      } else if (mode === 'ONLY_A') {
+        document.body.classList.add('single-match-view');
+        secA.classList.remove('hidden');
+        secB.classList.add('hidden');
+        badgeA.textContent = 'MATCH A (단독 확대)';
+        badgeA.className = 'px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs md:text-sm font-black tracking-wider';
+        zoomA.textContent = '⤡ 2경기 전체로 복귀';
+      } else if (mode === 'ONLY_B') {
+        document.body.classList.add('single-match-view');
+        secA.classList.add('hidden');
+        secB.classList.remove('hidden');
+        zoomB.textContent = '⤡ 2경기 전체로 복귀';
+      } else if (mode === 'FINAL') {
+        document.body.classList.add('single-match-view');
+        secA.classList.remove('hidden');
+        secB.classList.add('hidden');
+        badgeA.textContent = '🏆 FINAL 결승전';
+        badgeA.className = 'px-3 py-0.5 rounded bg-amber-500/25 text-amber-300 border border-amber-400/50 text-xs md:text-sm font-black tracking-wider';
+        zoomA.textContent = '⤡ 2경기(예선) 모드로 복귀';
+      }
+
+      document.querySelectorAll('.vmode-btn').forEach(btn => {
+        const bMode = btn.getAttribute('data-vmode');
+        if (bMode === mode) {
+          btn.className = 'vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black bg-indigo-600 text-white shadow transition';
+        } else {
+          btn.className = 'vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
+        }
+      });
+    }
+
     window.copyStudentAutoLink = function() {
       const url = `${window.location.origin}${window.location.pathname}`;
       navigator.clipboard.writeText(url).then(() => {
-        alert('현재 전광판 주소가 복사되었습니다!\n이 주소를 도우미 학생 6명에게 보내면 바로 실시간으로 연결됩니다.');
+        alert('현재 전광판 주소가 복사되었습니다!\n이 주소를 도우미 학생들에게 보내면 바로 실시간으로 연결됩니다.');
       });
     };
 
@@ -777,13 +883,13 @@
       const statusBadge = document.getElementById(`match${matchKey}_statusBadge`);
       if (homeWins >= 2) {
         statusBadge.textContent = `🏆 ${homeCls.name} 최종 승리!`;
-        statusBadge.className = 'text-xs font-black px-2.5 py-1 rounded-lg bg-sky-500/25 text-sky-300 border border-sky-400/40';
+        statusBadge.className = 'text-xs md:text-sm font-black px-3 py-1 rounded-lg bg-sky-500/25 text-sky-300 border border-sky-400/40';
       } else if (awayWins >= 2) {
         statusBadge.textContent = `🏆 ${awayCls.name} 최종 승리!`;
-        statusBadge.className = 'text-xs font-black px-2.5 py-1 rounded-lg bg-rose-500/25 text-rose-300 border border-rose-400/40';
+        statusBadge.className = 'text-xs md:text-sm font-black px-3 py-1 rounded-lg bg-rose-500/25 text-rose-300 border border-rose-400/40';
       } else {
         statusBadge.textContent = '진행 중';
-        statusBadge.className = 'text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300';
+        statusBadge.className = 'text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-slate-800 text-slate-300';
       }
 
       const container = document.getElementById(containerId);
@@ -818,24 +924,24 @@
       let liveThrowBanner = '';
       if (lastTurn) {
         const sideColor = lastTurn.side === 'home'
-          ? 'text-sky-300 border-sky-500/30 bg-sky-950/35'
-          : 'text-rose-300 border-rose-500/30 bg-rose-950/35';
+          ? 'text-sky-300 border-sky-500/35 bg-sky-950/40'
+          : 'text-rose-300 border-rose-500/35 bg-rose-950/40';
         const scoreBadge = lastTurn.isBust
           ? `<span class="text-rose-400 font-black">BUST (0점)</span>`
-          : `<span class="font-score text-amber-300 font-black text-sm">-${lastTurn.appliedPoints}</span>`;
+          : `<span class="font-score text-amber-300 font-black text-base">-${lastTurn.appliedPoints}</span>`;
         liveThrowBanner = `
-          <div class="my-2 px-2.5 py-2 rounded-xl border ${sideColor} flex items-center justify-between gap-1.5 shadow-inner">
+          <div class="live-banner px-3 py-1.5 rounded-xl border ${sideColor} flex items-center justify-between gap-2 shadow-inner">
             <div class="flex items-center gap-1.5 truncate">
-              <span class="text-xs">🎯</span>
-              <span class="text-[11px] font-black truncate">${lastTurn.teamName} ${lastTurn.playerName}</span>
+              <span>🎯</span>
+              <span class="font-black truncate">${lastTurn.teamName} ${lastTurn.playerName}</span>
             </div>
             ${scoreBadge}
           </div>
         `;
       } else {
         liveThrowBanner = `
-          <div class="my-2 px-2.5 py-2 rounded-xl border border-slate-800/80 bg-slate-900/50 flex items-center justify-center text-[11px] text-slate-500 font-medium">
-            투구 대기 중 · 터치하여 점수 입력
+          <div class="live-banner px-3 py-1.5 rounded-xl border border-slate-800/80 bg-slate-900/50 flex items-center justify-center text-xs text-slate-500 font-medium">
+            투구 대기 중 · 터치하여 입력
           </div>
         `;
       }
@@ -845,43 +951,43 @@
           const stat = getPlayerStat(p.id);
           const isLastThrower = lastTurn && lastTurn.playerId === p.id;
           const highlightCls = isLastThrower
-            ? 'border-amber-400/70 bg-amber-500/10'
-            : 'border-slate-800/90 bg-slate-900/90';
+            ? 'border-amber-400/75 bg-amber-500/15'
+            : 'border-slate-800/90 bg-slate-900/95';
           const genderDot = rMeta.type === 'mixed'
-            ? `<span class="text-[9px] px-1 rounded font-black ${p.gender === 'M' ? 'bg-sky-500/20 text-sky-300' : 'bg-rose-500/20 text-rose-300'}">${p.gender === 'M' ? '남' : '여'}</span>`
+            ? `<span class="text-[10px] px-1 rounded font-black ${p.gender === 'M' ? 'bg-sky-500/20 text-sky-300' : 'bg-rose-500/20 text-rose-300'}">${p.gender === 'M' ? '남' : '여'}</span>`
             : '';
           return `
-            <div class="player-pill flex items-center justify-between ${highlightCls} px-2 py-1.5 rounded-lg border text-[11px] transition">
-              <div class="flex items-center gap-1 truncate">
+            <div class="player-pill flex items-center justify-between ${highlightCls} px-2.5 py-1.5 rounded-lg border text-xs md:text-sm transition">
+              <div class="flex items-center gap-1.5 truncate">
                 ${genderDot}
                 <span class="text-slate-100 font-bold truncate">${p.name}</span>
               </div>
-              <span class="font-score text-[11px] font-bold text-amber-400 ml-1">+${stat.points}</span>
+              <span class="player-pts font-score text-xs font-bold text-amber-400 ml-1">+${stat.points}</span>
             </div>
           `;
         }).join('');
       };
 
       return `
-        <div onclick="openScoreModal(${boardIdx})" class="board-card cursor-pointer rounded-xl border ${cardBorder} p-2.5 flex flex-col justify-center gap-1.5">
+        <div onclick="openScoreModal(${boardIdx})" class="board-card cursor-pointer rounded-xl border ${cardBorder} p-3 flex flex-col justify-between gap-2">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] font-black px-2 py-0.5 rounded bg-slate-800 text-slate-200 border border-slate-700">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded bg-slate-800 text-slate-200 border border-slate-700">
               다트 ${boardIdx + 1}번 · ${rMeta.badge}
             </span>
             ${
               isHomeWin
-                ? `<span class="text-[11px] font-black text-sky-300 bg-sky-500/20 px-2 py-0.5 rounded-full">🏆 ${homeCls.name} 승</span>`
+                ? `<span class="text-xs font-black text-sky-300 bg-sky-500/20 px-2.5 py-0.5 rounded-full">🏆 ${homeCls.name} 승</span>`
                 : isAwayWin
-                ? `<span class="text-[11px] font-black text-rose-300 bg-rose-500/20 px-2 py-0.5 rounded-full">🏆 ${awayCls.name} 승</span>`
-                : `<span class="text-[10px] font-bold text-indigo-400">터치하여 입력 ▸</span>`
+                ? `<span class="text-xs font-black text-rose-300 bg-rose-500/20 px-2.5 py-0.5 rounded-full">🏆 ${awayCls.name} 승</span>`
+                : `<span class="text-[11px] font-bold text-indigo-400">터치 입력 ▸</span>`
             }
           </div>
 
           <div class="bg-slate-900/95 border border-slate-800/90 rounded-xl p-2.5">
             <div class="grid grid-cols-11 items-center text-center">
               <div class="col-span-5">
-                <div class="team-label text-xs font-black text-sky-400 truncate">${homeCls.name}</div>
-                <div class="score-number font-score text-2xl xl:text-3xl font-black ${isHomeWin ? 'text-sky-300' : 'text-white'} tracking-tight my-0.5">
+                <div class="team-label text-sm md:text-base font-black text-sky-400 truncate">${homeCls.name}</div>
+                <div class="score-number font-score font-black ${isHomeWin ? 'text-sky-300' : 'text-white'} tracking-tight my-1">
                   ${board.homeScore}
                 </div>
                 <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
@@ -890,12 +996,12 @@
               </div>
 
               <div class="col-span-1 flex flex-col items-center justify-center">
-                <span class="score-colon font-score text-lg font-black text-slate-500">:</span>
+                <span class="score-colon font-score text-xl font-black text-slate-500">:</span>
               </div>
 
               <div class="col-span-5">
-                <div class="team-label text-xs font-black text-rose-400 truncate">${awayCls.name}</div>
-                <div class="score-number font-score text-2xl xl:text-3xl font-black ${isAwayWin ? 'text-rose-300' : 'text-white'} tracking-tight my-0.5">
+                <div class="team-label text-sm md:text-base font-black text-rose-400 truncate">${awayCls.name}</div>
+                <div class="score-number font-score font-black ${isAwayWin ? 'text-rose-300' : 'text-white'} tracking-tight my-1">
                   ${board.awayScore}
                 </div>
                 <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
@@ -907,7 +1013,7 @@
 
           ${liveThrowBanner}
 
-          <div class="grid grid-cols-2 gap-1.5 pt-1.5 border-t border-slate-800/80">
+          <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-800/80">
             <div class="space-y-1.5">
               ${renderPlayerMiniList(homeLineup)}
             </div>
@@ -958,15 +1064,21 @@
       if (isHelperSingleMode) {
         document.querySelectorAll('.hboard-tab').forEach(btn => {
           const bIdx = Number(btn.getAttribute('data-hboard'));
-          if (bIdx === activeBoardIndex) {
-            btn.className = 'hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-cyan-500 text-slate-950 shadow';
+          if (state.viewMode === 'FINAL' && bIdx >= 3) {
+            btn.classList.add('hidden');
           } else {
-            btn.className = 'hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300 hover:bg-slate-700';
+            btn.classList.remove('hidden');
+          }
+          if (bIdx === activeBoardIndex) {
+            btn.className = `hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-cyan-500 text-slate-950 shadow ${state.viewMode === 'FINAL' && bIdx >= 3 ? 'hidden' : ''}`;
+          } else {
+            btn.className = `hboard-tab px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-slate-300 hover:bg-slate-700 ${state.viewMode === 'FINAL' && bIdx >= 3 ? 'hidden' : ''}`;
           }
         });
       }
 
-      document.getElementById('modalBoardBadge').textContent = `MATCH ${board.matchId} · ${activeBoardIndex + 1}번 보드`;
+      const prefixLabel = state.viewMode === 'FINAL' ? '🏆 결승전' : `MATCH ${board.matchId}`;
+      document.getElementById('modalBoardBadge').textContent = `${prefixLabel} · ${activeBoardIndex + 1}번 보드`;
       document.getElementById('modalRoundTitle').textContent = rMeta.title;
 
       document.getElementById('modalHomeTeam').textContent = homeCls.name;
@@ -1336,6 +1448,21 @@
         el.value = currentVals[idx];
       });
 
+      const isFinal = state.viewMode === 'FINAL';
+      const setupGrid = document.getElementById('matchSetupGrid');
+      const setupBCard = document.getElementById('setupMatchBCard');
+      const setupALabel = document.getElementById('setupMatchALabel');
+
+      if (isFinal) {
+        setupGrid.className = 'p-4 md:p-5 overflow-y-auto grid grid-cols-1 gap-4';
+        setupBCard.classList.add('hidden');
+        setupALabel.textContent = '🏆 FINAL 결승전 (1~3번 보드)';
+      } else {
+        setupGrid.className = 'p-4 md:p-5 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-4';
+        setupBCard.classList.remove('hidden');
+        setupALabel.textContent = 'MATCH A (1~3번 보드)';
+      }
+
       updateMatchPreview();
       openModal('matchSetupModal');
     };
@@ -1381,13 +1508,15 @@
       const bHome = document.getElementById('selectMatchB_home').value;
       const bAway = document.getElementById('selectMatchB_away').value;
 
-      if (aHome === aAway || bHome === bAway) {
+      if (aHome === aAway || (state.viewMode !== 'FINAL' && bHome === bAway)) {
         alert('같은 반끼리는 대진을 설정할 수 없습니다. 서로 다른 반을 선택해 주세요.');
         return;
       }
 
       state.matches.A = { homeClassId: aHome, awayClassId: aAway };
-      state.matches.B = { homeClassId: bHome, awayClassId: bAway };
+      if (state.viewMode !== 'FINAL') {
+        state.matches.B = { homeClassId: bHome, awayClassId: bAway };
+      }
 
       const shouldResetScores = document.getElementById('resetScoresOnMatchApply').checked;
       const syncPromises = [syncMetaToCloud()];
@@ -1502,7 +1631,7 @@
     };
 
     window.resetAllBoardsOnly = async function() {
-      if (!confirm('현재 진행 중인 6개 보드의 점수만 모두 501 : 501로 초기화하시겠습니까? (명단 및 개인 누적 득점은 유지됩니다)')) return;
+      if (!confirm('현재 진행 중인 보드의 점수만 모두 501 : 501로 초기화하시겠습니까? (명단 및 개인 누적 득점은 유지됩니다)')) return;
       const promises = [];
       state.boards.forEach((b, idx) => {
         b.homeScore = 501;
@@ -1525,8 +1654,10 @@
           B: { homeClassId: 'c3', awayClassId: 'c4' }
         },
         boards: buildDefaultBoards(),
-        playerStats: {}
+        playerStats: {},
+        viewMode: 'BOTH'
       };
+      applyViewModeUI();
       renderAll();
       await Promise.all([
         syncMetaToCloud(),
@@ -1552,6 +1683,7 @@
     });
 
     loadLocalState();
+    applyViewModeUI();
     renderAll();
     initFirebaseAuto();
   </script>
