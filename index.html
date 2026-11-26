@@ -91,8 +91,8 @@
         <div class="flex items-center gap-2">
           <h1 class="text-base md:text-lg font-black tracking-tight text-white">다트 런치리그 501 실시간 현황판</h1>
           <span class="px-2 py-0.5 text-[11px] font-bold rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">1~10반 자동연동</span>
-          <span id="syncStatusBadge" onclick="openModal('firebaseModal')" title="클릭하여 Firebase 설정" class="cursor-pointer px-2 py-0.5 text-[11px] font-bold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1 hover:bg-amber-500/30 transition">
-            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> 로컬 모드 (Firebase 미연결)
+          <span id="syncStatusBadge" onclick="openModal('firebaseModal')" title="클릭하여 연결 상태 확인" class="cursor-pointer px-2 py-0.5 text-[11px] font-bold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1 hover:bg-amber-500/30 transition">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> 서버 연결 중...
           </span>
         </div>
         <p class="text-[11px] text-slate-400 hidden sm:block">1R 남자 4v4 · 2R 여자 4v4 · 3R 혼성(남2·여2) 4v4 | 대형 스크린 & 도우미 6명 실시간 동기화</p>
@@ -100,8 +100,8 @@
     </div>
 
     <div class="flex flex-wrap items-center gap-1.5">
-      <button onclick="openModal('firebaseModal')" id="firebaseTopBtn" class="px-2.5 py-1.5 rounded-lg bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 border border-amber-500/40 text-xs font-bold flex items-center gap-1 transition">
-        🔥 Firebase 연결
+      <button onclick="openModal('firebaseModal')" id="firebaseTopBtn" class="px-2.5 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 text-xs font-bold flex items-center gap-1 transition">
+        🔗 링크 공유
       </button>
       <button onclick="openHelperSingleMode(0)" class="px-2.5 py-1.5 rounded-lg bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 border border-cyan-500/40 text-xs font-bold flex items-center gap-1 transition">
         📱 도우미 1보드 모드
@@ -184,55 +184,27 @@
   </footer>
 
   <!-- ========================================================= -->
-  <!-- MODAL 0: Firebase 실시간 연결 설정 모달 -->
+  <!-- MODAL 0: Firebase 연결 상태 & 링크 공유 모달 -->
   <!-- ========================================================= -->
   <div id="firebaseModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-3">
-    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden flex flex-col">
       <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <span class="text-lg">🔥</span>
-          <h2 class="text-base font-black text-white">Firebase 실시간 클라우드 동기화 설정</h2>
+          <h2 class="text-base font-black text-white">실시간 클라우드 동기화 및 기기 연결</h2>
         </div>
         <button onclick="closeModal('firebaseModal')" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold">✕</button>
       </div>
 
-      <div class="p-5 overflow-y-auto space-y-4 text-xs text-slate-300">
-        <div class="bg-indigo-950/50 border border-indigo-500/30 rounded-xl p-3.5 space-y-1.5">
-          <div class="font-black text-indigo-300 text-sm">📌 연결 방법 (최초 1회만 설정)</div>
-          <ol class="list-decimal list-inside space-y-1 text-slate-300 leading-relaxed">
-            <li><a href="https://console.firebase.google.com/" target="_blank" class="text-sky-400 underline font-bold">Firebase 콘솔</a>에서 프로젝트 생성 후 <b>웹 앱(&lt;/&gt;)</b>을 추가합니다.</li>
-            <li><b>Authentication</b> → 시작하기 → 로그인 방법에서 <b>익명(Anonymous)</b>을 <b>사용 설정</b>합니다.</li>
-            <li><b>Firestore Database</b> → 데이터베이스 만들기 → <b>테스트 모드에서 시작</b>으로 생성합니다.</li>
-            <li>프로젝트 설정의 <code class="bg-slate-800 px-1.5 py-0.5 rounded text-amber-300">const firebaseConfig = { ... };</code> 코드를 아래 칸에 붙여넣고 <b>[저장 및 실시간 연결]</b>을 누르세요.</li>
-          </ol>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-slate-400 mb-1.5">Firebase Config 코드 또는 JSON 붙여넣기</label>
-          <textarea id="firebaseConfigInput" rows="7" placeholder='const firebaseConfig = {
-  apiKey: "AIzaSy...",
-  authDomain: "your-app.firebaseapp.com",
-  projectId: "your-app",
-  storageBucket: "your-app.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef"
-};' class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 font-mono text-xs text-emerald-300 focus:border-amber-400 outline-none"></textarea>
-        </div>
-
-        <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
-          <button onclick="disconnectFirebase()" class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-rose-900/50 text-slate-400 hover:text-rose-300 font-bold transition">연결 해제 (로컬 모드 전환)</button>
-          <button onclick="saveAndConnectFirebase()" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm shadow-lg transition">⚡ 저장 및 실시간 연결</button>
-        </div>
-
-        <!-- 도우미 학생 원클릭 자동 연결 링크 공유 영역 -->
-        <div id="shareStudentLinkBox" class="hidden bg-emerald-950/40 border border-emerald-500/40 rounded-xl p-3.5 space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="font-black text-emerald-300 text-sm">✅ 실시간 연결 완료! 도우미 학생 전용 자동연결 링크</span>
-          </div>
-          <p class="text-[11px] text-slate-300">아래 버튼을 눌러 복사된 링크를 도우미 학생 6명에게 카톡/QR로 보내면, <b>학생들은 복잡한 설정 없이 링크만 열어도 자동으로 서버에 연결</b>됩니다.</p>
-          <div class="flex gap-2">
-            <input id="generatedShareUrl" type="text" readonly class="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-[11px] text-slate-300 font-mono" />
-            <button onclick="copyStudentAutoLink()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs whitespace-nowrap shadow">🔗 학생용 자동연결 링크 복사</button>
+      <div class="p-5 space-y-4 text-xs text-slate-300">
+        <div class="bg-emerald-950/40 border border-emerald-500/40 rounded-xl p-4 space-y-2.5">
+          <div class="font-black text-emerald-300 text-sm">✅ Firebase 프로젝트(dart-lunch-league)가 기본 내장되어 있습니다!</div>
+          <p class="text-slate-300 leading-relaxed">
+            별도의 코드 입력 없이 <b>현재 페이지 주소 그대로</b> 대형 스크린 PC와 도우미 학생 6명의 스마트폰에서 접속하면 모든 점수와 명단이 실시간으로 동시 연동됩니다.
+          </p>
+          <div class="flex gap-2 pt-1">
+            <input id="generatedShareUrl" type="text" readonly class="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-2 text-xs text-slate-200 font-mono" />
+            <button onclick="copyStudentAutoLink()" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs whitespace-nowrap shadow">🔗 현재 주소 복사</button>
           </div>
         </div>
       </div>
@@ -506,8 +478,18 @@
     import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     const LOCAL_STORAGE_KEY = 'dart_lunch_league_10classes_v2';
-    const FIREBASE_CFG_KEY = 'dart_lunch_league_firebase_cfg_v1';
     const ROOM_ID = 'main_league_room';
+
+    // 선생님 Firebase 프로젝트 설정 내장
+    const DEFAULT_FIREBASE_CONFIG = {
+      apiKey: "AIzaSyD1XuAOGjWUt1iRMc0XZJvrHNqmlEUe4z8",
+      authDomain: "dart-lunch-league.firebaseapp.com",
+      projectId: "dart-lunch-league",
+      storageBucket: "dart-lunch-league.firebasestorage.app",
+      messagingSenderId: "673708049068",
+      appId: "1:673708049068:web:2f529d1bd176c409acd509",
+      measurementId: "G-CB0L0SKMLB"
+    };
 
     const ROUND_META = [
       { key: 'R1', num: 1, title: '1라운드 · 남자 4 vs 4', badge: '남자 4v4', type: 'male' },
@@ -580,7 +562,6 @@
       playerStats: {}
     };
 
-    // Firebase 런타임 변수
     let db = null;
     let auth = null;
     let isCloudConnected = false;
@@ -610,78 +591,27 @@
       } catch (e) { console.warn(e); }
     }
 
-    // URL 파라미터(?cfg=...)에 Firebase 설정이 담겨온 경우 자동 추출
-    function checkUrlConfigParam() {
-      try {
-        const params = new URLSearchParams(window.location.search);
-        const encoded = params.get('cfg');
-        if (encoded) {
-          const decoded = decodeURIComponent(escape(atob(encoded)));
-          const parsed = JSON.parse(decoded);
-          if (parsed && parsed.apiKey && parsed.projectId) {
-            localStorage.setItem(FIREBASE_CFG_KEY, JSON.stringify(parsed));
-            // 주소창 깔끔하게 정리
-            window.history.replaceState({}, document.title, window.location.pathname);
-          }
-        }
-      } catch (e) {
-        console.warn('URL 설정 파싱 오류:', e);
-      }
-    }
-
-    function parseFirebaseConfigText(raw) {
-      let text = raw.trim();
-      if (!text) return null;
-      // JS 객체 형태(const firebaseConfig = { ... };)도 파싱 지원
-      const firstBrace = text.indexOf('{');
-      const lastBrace = text.lastIndexOf('}');
-      if (firstBrace !== -1 && lastBrace !== -1) {
-        text = text.slice(firstBrace, lastBrace + 1);
-      }
-      // 키 이름에 따옴표가 없는 JS 객체 표기법 보정
-      const jsonReady = text
-        .replace(/(['"])?([a-zA-Z0-9_]+)(['"])?\s*:/g, '"$2":')
-        .replace(/'/g, '"')
-        .replace(/,\s*}/g, '}');
-      return JSON.parse(jsonReady);
-    }
-
     function updateSyncBadge(connected, labelText) {
       const badge = document.getElementById('syncStatusBadge');
-      const shareBox = document.getElementById('shareStudentLinkBox');
       const shareInput = document.getElementById('generatedShareUrl');
+      if (shareInput) {
+        shareInput.value = `${window.location.origin}${window.location.pathname}`;
+      }
       if (connected) {
         badge.className = 'cursor-pointer px-2 py-0.5 text-[11px] font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1 hover:bg-emerald-500/30 transition';
         badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> ${labelText || '실시간 클라우드 동기화됨'}`;
-        const savedCfg = localStorage.getItem(FIREBASE_CFG_KEY);
-        if (savedCfg && shareBox && shareInput) {
-          const encoded = btoa(unescape(encodeURIComponent(savedCfg)));
-          const fullUrl = `${window.location.origin}${window.location.pathname}?cfg=${encoded}`;
-          shareInput.value = fullUrl;
-          shareBox.classList.remove('hidden');
-        }
       } else {
         badge.className = 'cursor-pointer px-2 py-0.5 text-[11px] font-bold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1 hover:bg-amber-500/30 transition';
-        badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> ${labelText || '로컬 모드 (Firebase 미연결)'}`;
-        if (shareBox) shareBox.classList.add('hidden');
+        badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> ${labelText || '서버 연결 중...'}`;
       }
     }
 
-    async function initFirebaseFromSaved() {
-      const rawCfg = localStorage.getItem(FIREBASE_CFG_KEY);
-      if (!rawCfg) {
-        updateSyncBadge(false);
-        return;
-      }
-      const cfgInputEl = document.getElementById('firebaseConfigInput');
-      if (cfgInputEl) cfgInputEl.value = rawCfg;
-
+    async function initFirebaseAuto() {
       try {
-        const configObj = JSON.parse(rawCfg);
         unsubscribers.forEach(fn => fn());
         unsubscribers = [];
 
-        const app = initializeApp(configObj, 'dartLeagueApp_' + Date.now());
+        const app = initializeApp(DEFAULT_FIREBASE_CONFIG);
         auth = getAuth(app);
         db = getFirestore(app);
 
@@ -694,7 +624,6 @@
 
           const baseCol = collection(db, 'dart_leagues', ROOM_ID, 'state_docs');
 
-          // 1) 설정(학급 명단 및 대진) 실시간 구독
           const unsubMeta = onSnapshot(doc(baseCol, 'meta'), (snap) => {
             if (snap.exists()) {
               const data = snap.data();
@@ -708,7 +637,6 @@
           });
           unsubscribers.push(unsubMeta);
 
-          // 2) 6개 보드 각각 독립 실시간 구독 (동시 입력 충돌 방지)
           for (let i = 0; i < 6; i++) {
             const unsubBoard = onSnapshot(doc(baseCol, `board_${i}`), (snap) => {
               if (snap.exists()) {
@@ -725,7 +653,6 @@
             unsubscribers.push(unsubBoard);
           }
 
-          // 3) 개인 누적 득점 실시간 구독
           const unsubStats = onSnapshot(doc(baseCol, 'player_stats'), (snap) => {
             if (snap.exists()) {
               state.playerStats = snap.data().stats || {};
@@ -743,7 +670,7 @@
       } catch (err) {
         console.error('Firebase 연결 오류:', err);
         isCloudConnected = false;
-        updateSyncBadge(false, 'Firebase 연결 오류 (설정 확인)');
+        updateSyncBadge(false, 'Firebase 연결 오류 (콘솔 설정 확인)');
       }
     }
 
@@ -781,36 +708,10 @@
       } catch (e) { console.error(e); }
     }
 
-    window.saveAndConnectFirebase = async function() {
-      const raw = document.getElementById('firebaseConfigInput').value;
-      try {
-        const parsed = parseFirebaseConfigText(raw);
-        if (!parsed || !parsed.apiKey || !parsed.projectId) {
-          alert('올바른 firebaseConfig 코드를 붙여넣어 주세요. (apiKey, projectId 필수)');
-          return;
-        }
-        localStorage.setItem(FIREBASE_CFG_KEY, JSON.stringify(parsed));
-        await initFirebaseFromSaved();
-        alert('Firebase 연결이 저장되었습니다! 상단에 초록색 [실시간 클라우드 동기화됨] 배지를 확인하세요.');
-      } catch (e) {
-        alert('설정 코드 형식이 올바르지 않습니다. Firebase 콘솔의 const firebaseConfig = { ... }; 부분을 그대로 복사해 붙여넣어 주세요.');
-      }
-    };
-
-    window.disconnectFirebase = function() {
-      localStorage.removeItem(FIREBASE_CFG_KEY);
-      unsubscribers.forEach(fn => fn());
-      unsubscribers = [];
-      isCloudConnected = false;
-      document.getElementById('firebaseConfigInput').value = '';
-      updateSyncBadge(false);
-    };
-
     window.copyStudentAutoLink = function() {
-      const input = document.getElementById('generatedShareUrl');
-      if (!input || !input.value) return;
-      navigator.clipboard.writeText(input.value).then(() => {
-        alert('도우미 학생용 자동연결 링크가 복사되었습니다!\n이 링크를 도우미 학생 6명에게 보내면 별도 설정 없이 바로 연결됩니다.');
+      const url = `${window.location.origin}${window.location.pathname}`;
+      navigator.clipboard.writeText(url).then(() => {
+        alert('현재 전광판 주소가 복사되었습니다!\n이 주소를 도우미 학생 6명에게 보내면 바로 실시간으로 연결됩니다.');
       });
     };
 
@@ -831,7 +732,6 @@
       return [...mList, ...fList];
     }
 
-    // 전체화면 전광판 집중 모드
     window.enterScoreboardOnlyMode = function() {
       document.body.classList.add('scoreboard-only');
       if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
@@ -852,7 +752,6 @@
       }
     });
 
-    // 메인 6보드 렌더링
     function renderAll() {
       renderMatchSection('A', [0, 1, 2], 'matchA_boards');
       renderMatchSection('B', [3, 4, 5], 'matchB_boards');
@@ -988,9 +887,6 @@
       `;
     }
 
-    // =========================================================
-    // 도우미 학생 점수 입력 & 1보드 집중 모드
-    // =========================================================
     window.openHelperSingleMode = function(boardIdx = 0) {
       isHelperSingleMode = true;
       document.getElementById('helperBoardSwitcher').classList.remove('hidden');
@@ -1027,7 +923,6 @@
       const awayCls = state.classes[matchCfg.awayClassId];
       const rMeta = ROUND_META[board.roundIndex];
 
-      // 1보드 모드 상단 탭 하이라이트
       if (isHelperSingleMode) {
         document.querySelectorAll('.hboard-tab').forEach(btn => {
           const bIdx = Number(btn.getAttribute('data-hboard'));
@@ -1235,9 +1130,6 @@
       await syncBoardToCloud(activeBoardIndex);
     };
 
-    // =========================================================
-    // 1~10반 마스터 명단 관리 모달
-    // =========================================================
     window.openRosterManagerModal = function(classId = 'c1') {
       selectedRosterClass = classId;
       renderClassTabs();
@@ -1392,9 +1284,6 @@
       reader.readAsText(file);
     };
 
-    // =========================================================
-    // 오늘의 대진 선택 모달
-    // =========================================================
     window.openMatchSetupModal = function() {
       const selects = ['selectMatchA_home', 'selectMatchA_away', 'selectMatchB_home', 'selectMatchB_away'];
       const currentVals = [
@@ -1486,9 +1375,6 @@
       await Promise.all(syncPromises);
     };
 
-    // =========================================================
-    // 1~10반 통합 개인 누적 득점 순위표 & CSV
-    // =========================================================
     window.openLeaderboardModal = function() {
       currentLeaderboardFilter = 'ALL';
       renderLeaderboardFilterTabs();
@@ -1633,11 +1519,10 @@
       if (e.key === 'Enter') submitTurnScore();
     });
 
-    // 초기화 실행
-    checkUrlConfigParam();
+    // 초기화 실행 (내장된 Firebase로 즉시 자동 연결)
     loadLocalState();
     renderAll();
-    initFirebaseFromSaved();
+    initFirebaseAuto();
   </script>
 </body>
 </html>
