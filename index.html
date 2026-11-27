@@ -72,7 +72,7 @@
     body.scoreboard-only:not(.single-match-view) .live-log-row { padding: 0.15rem 0.45rem !important; font-size: 0.7rem !important; }
     body.scoreboard-only:not(.single-match-view) .player-grid-wrap { padding-top: 0.22rem !important; gap: 0.25rem !important; }
     body.scoreboard-only:not(.single-match-view) .player-col-stack { gap: 0.18rem !important; }
-    body.scoreboard-only:not(.single-match-view) .player-pill { padding: 0.15rem 0.38rem !important; font-size: 0.72rem !important; border-radius: 0.4rem !important; }
+    body.scoreboard-only:not(.single-match-view) .player-pill { padding: 0.18rem 0.42rem !important; font-size: 0.78rem !important; border-radius: 0.4rem !important; }
     body.scoreboard-only:not(.single-match-view) .player-pts { font-size: 0.68rem !important; }
 
     .score-number { font-size: 2.2rem; line-height: 1.05; }
@@ -90,17 +90,17 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
-  <!-- 초대형 스페셜 이펙트 오버레이 -->
+  <!-- 스페셜 이펙트 오버레이 -->
   <div id="shoutoutOverlay" onclick="hideShoutoutOverlay()" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-md p-4 cursor-pointer select-none">
     <div class="relative flex items-center justify-center">
       <div id="shoutoutWaveRing" class="absolute w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-amber-400/70 animate-ring-wave"></div>
       <div id="shoutoutCard" class="animate-shout-box relative bg-gradient-to-br from-rose-600 via-amber-500 to-rose-600 p-1.5 rounded-3xl shadow-2xl max-w-2xl w-full">
         <div class="bg-slate-950/95 rounded-[22px] px-8 py-8 md:px-14 md:py-10 text-center space-y-3 border border-white/15">
-          <div id="shoutoutBoardTag" class="inline-block px-3.5 py-1 rounded-full bg-white/10 text-amber-300 text-xs md:text-sm font-black tracking-widest uppercase">MATCH A · 다트 1번 보드</div>
+          <div id="shoutoutBoardTag" class="inline-block px-3.5 py-1 rounded-full bg-white/10 text-amber-300 text-xs md:text-sm font-black tracking-widest uppercase">다트 1번 보드</div>
           <div id="shoutoutEmoji" class="text-6xl md:text-8xl leading-none py-1">🎯</div>
           <div id="shoutoutMainTitle" class="font-score text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-white to-rose-300">BULLSEYE!</div>
           <div id="shoutoutSubBadge" class="hidden inline-block px-4 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-sm md:text-lg font-black tracking-wide">🎯 BULL 3연속 명중! 150점!</div>
-          <div id="shoutoutPlayerText" class="text-2xl md:text-4xl font-black text-white pt-1">1반 김민준 선수!</div>
+          <div id="shoutoutPlayerText" class="text-2xl md:text-4xl font-black text-white pt-1">1번 김민준 선수!</div>
           <div class="text-xs text-slate-400 pt-2">화면을 터치하면 닫힙니다 (자동 닫힘)</div>
         </div>
       </div>
@@ -111,11 +111,11 @@
   <div id="floatingFocusControls" class="hidden fixed bottom-2.5 right-2.5 z-50 items-center gap-1.5 bg-slate-900/95 border border-slate-700 p-1.5 rounded-xl shadow-2xl backdrop-blur-md opacity-80 hover:opacity-100 transition flex-wrap">
     <button type="button" onclick="setLeagueCategory('TEAM')" class="cat-switch-btn px-2.5 py-1 rounded-lg text-xs font-black" data-cat="TEAM">🏫 학급 단체전</button>
     <button type="button" onclick="setLeagueCategory('SOLO')" class="cat-switch-btn px-2.5 py-1 rounded-lg text-xs font-black" data-cat="SOLO">🎯 커스텀 개인전 (3~5인)</button>
-    <span class="text-slate-600">|</span>
-    <button type="button" onclick="setViewMode('BOTH', true)" data-vmode="BOTH" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">2그룹 전체</button>
-    <button type="button" onclick="setViewMode('ONLY_A', true)" data-vmode="ONLY_A" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">1~3번 크게</button>
-    <button type="button" onclick="setViewMode('ONLY_B', true)" data-vmode="ONLY_B" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">4~6번 크게</button>
-    <button type="button" onclick="toggleAutoCycleMode()" class="auto-cycle-btn px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-amber-300 border border-amber-500/40">🔄 자동전환 OFF</button>
+    <span id="floatingViewSep" class="text-slate-600">|</span>
+    <button type="button" onclick="setViewMode('BOTH', true)" data-vmode="BOTH" class="vmode-btn floating-team-vmode px-2.5 py-1 rounded-lg text-xs font-black">2그룹 전체</button>
+    <button type="button" onclick="setViewMode('ONLY_A', true)" data-vmode="ONLY_A" class="vmode-btn floating-team-vmode px-2.5 py-1 rounded-lg text-xs font-black">1~3번 크게</button>
+    <button type="button" onclick="setViewMode('ONLY_B', true)" data-vmode="ONLY_B" class="vmode-btn floating-team-vmode px-2.5 py-1 rounded-lg text-xs font-black">4~6번 크게</button>
+    <button type="button" onclick="toggleAutoCycleMode()" class="auto-cycle-btn floating-team-vmode px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-amber-300 border border-amber-500/40">🔄 자동전환 OFF</button>
     <div class="flex items-center gap-0.5 bg-slate-950 border border-slate-700 rounded-lg px-1.5 py-0.5 text-[11px] font-bold text-slate-300">
       <button type="button" onclick="adjustWorkspaceZoom(-0.05)" class="px-1.5 py-0.5 hover:text-amber-300 font-black">−</button>
       <span id="floatingZoomLabel" class="font-score text-[10px] w-9 text-center">100%</span>
@@ -134,7 +134,6 @@
             <span>LUNCH LEAGUE</span>
             <span id="headerModeTag" class="px-1.5 py-0.5 text-[10px] font-black rounded bg-rose-600 text-white tracking-widest">501 LIVE</span>
           </h1>
-          <!-- 기존 학급 단체전 vs 커스텀 개인전 전환 탭 -->
           <div class="inline-flex bg-slate-950 p-0.5 rounded-lg border border-slate-700">
             <button type="button" onclick="setLeagueCategory('TEAM')" data-cat="TEAM" class="cat-switch-btn px-2.5 py-0.5 rounded-md text-[11px] font-black bg-indigo-600 text-white shadow transition">🏫 학급 단체전</button>
             <button type="button" onclick="setLeagueCategory('SOLO')" data-cat="SOLO" class="cat-switch-btn px-2.5 py-0.5 rounded-md text-[11px] font-bold text-slate-400 hover:text-white transition">🎯 커스텀 · 개인전 (3~5인)</button>
@@ -145,7 +144,7 @@
           <span id="authLockBadge" onclick="toggleHelperAuthStatus()" class="cursor-pointer px-2 py-0.5 text-[11px] font-bold rounded-full bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-1 hover:bg-slate-700 transition">🔒 관전 모드</span>
           <button type="button" id="soundToggleBtn" onclick="toggleSoundEffect()" class="px-2 py-0.5 text-[11px] font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 transition">🔊 효과음 ON</button>
         </div>
-        <div class="flex items-center gap-1 mt-1 flex-wrap">
+        <div id="teamViewModeBar" class="flex items-center gap-1 mt-1 flex-wrap">
           <button type="button" onclick="setViewMode('BOTH', true)" data-vmode="BOTH" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">📊 2그룹 동시 (6보드)</button>
           <button type="button" onclick="setViewMode('ONLY_A', true)" data-vmode="ONLY_A" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">🔍 1~3번 보드 크게</button>
           <button type="button" onclick="setViewMode('ONLY_B', true)" data-vmode="ONLY_B" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">🔍 4~6번 보드 크게</button>
@@ -166,13 +165,10 @@
     <div class="flex flex-wrap items-center gap-1.5">
       <button type="button" onclick="openBracketModal()" class="px-2.5 py-1.5 rounded-lg bg-purple-600/25 hover:bg-purple-600/40 text-purple-200 border border-purple-400/50 text-xs font-black flex items-center gap-1 shadow-sm transition">🗓️ 대진표</button>
       <button type="button" onclick="openShareModal()" class="px-2.5 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 text-xs font-bold flex items-center gap-1 transition">🔗 QR 공유</button>
-      <!-- 개인전 전용 버튼 -->
       <button type="button" id="soloBulkBatchBtn" onclick="requireHelperAuth(() => openSoloBulkAssignModal())" class="hidden px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 text-xs font-black flex items-center gap-1 shadow-md transition">📋 명렬표 일괄 배정 · 랜덤 조편성</button>
-      <button type="button" id="soloSetupHeaderBtn" onclick="requireHelperAuth(() => openSoloSetupModal(0))" class="hidden px-2.5 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-black flex items-center gap-1 transition">⚙️ 보드별 개별 수정</button>
-      <!-- 단체전 전용 버튼 -->
+      <button type="button" id="soloSetupHeaderBtn" onclick="requireHelperAuth(() => openSoloSetupModal(0))" class="hidden px-2.5 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-black flex items-center gap-1 transition">⚙️ 보드별 개별 수정 (결석·추가)</button>
       <button type="button" id="teamRosterHeaderBtn" onclick="requireHelperAuth(() => openRosterManagerModal())" class="px-2.5 py-1.5 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 text-xs font-bold flex items-center gap-1 transition">📋 팀 · 명단 관리</button>
       <button type="button" id="teamMatchHeaderBtn" onclick="requireHelperAuth(() => openMatchSetupModal())" class="px-2.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1 shadow-md transition">⚔️ 대진 선택</button>
-      <!-- 공통 버튼 -->
       <button type="button" onclick="requireHelperAuth(() => openHelperSingleMode(0))" class="px-2.5 py-1.5 rounded-lg bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 border border-cyan-500/40 text-xs font-bold flex items-center gap-1 transition">📱 심판·도우미 1보드</button>
       <button type="button" onclick="openLeaderboardModal()" class="px-2.5 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 text-xs font-bold flex items-center gap-1 transition">🏆 순위 · 기록표</button>
       <button type="button" onclick="enterScoreboardOnlyMode()" class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-black flex items-center gap-1 shadow-md transition">🖥️ 전체화면 전광판</button>
@@ -181,13 +177,32 @@
 
   <!-- 메인 전광판 영역 -->
   <main id="mainWorkspace" class="flex-1 p-2.5 md:p-3.5 max-w-[1920px] w-full mx-auto flex flex-col gap-3.5 justify-center">
+
+    <!-- [커스텀 개인전 전용] 단일 통합 섹션 (1, 2, 3, 6, 7, 8번 보드) -->
+    <section id="sectionSoloAll" class="hidden match-section-box bg-gradient-to-b from-sky-950/35 via-slate-900/95 to-amber-950/25 border-2 border-amber-500/45 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl flex-1">
+      <div class="match-header-bar flex flex-wrap items-center justify-between gap-2 bg-gradient-to-r from-sky-950/90 via-slate-950 to-amber-950/90 border border-amber-500/45 rounded-xl px-4 py-2.5 mb-2.5 shadow-md">
+        <div class="flex items-center gap-2">
+          <span class="px-3 py-1 rounded-lg bg-amber-400 text-slate-950 text-xs md:text-sm font-black tracking-wider shadow">CUSTOM</span>
+          <span class="text-xs md:text-sm text-slate-300 font-bold hidden sm:inline">다트 1 · 2 · 3 · 6 · 7 · 8번</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="soloLeagueMainTitle" class="text-xl md:text-3xl font-black text-amber-300 tracking-tight drop-shadow">🎯 301 개인전 리그</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="soloTotalCountBadge" class="text-xs md:text-sm font-black px-3 py-1 rounded-lg bg-slate-900 text-emerald-300 border border-emerald-500/30">총 24명 출전</span>
+        </div>
+      </div>
+      <div id="soloAll_boards" class="boards-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 flex-1"></div>
+    </section>
+
+    <!-- [학급 단체전 전용] MATCH A (1, 2, 3번 보드) -->
     <section id="sectionMatchA" class="match-section-box bg-gradient-to-b from-sky-950/35 to-slate-900/90 border-2 border-sky-500/45 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl flex-1">
       <div class="match-header-bar flex flex-wrap items-center justify-between gap-2 bg-gradient-to-r from-sky-950/90 via-slate-950 to-indigo-950/90 border border-sky-500/45 rounded-xl px-4 py-2.5 mb-2.5 shadow-md">
         <div class="flex items-center gap-2.5">
-          <span id="matchA_badgeLabel" class="px-3 py-1 rounded-lg bg-sky-500 text-slate-950 text-xs md:text-sm font-black tracking-wider shadow">MATCH A</span>
-          <span id="matchA_subLabel" class="text-xs md:text-sm text-sky-200 font-bold hidden sm:inline">다트 1 · 2 · 3번 보드</span>
+          <span class="px-3 py-1 rounded-lg bg-sky-500 text-slate-950 text-xs md:text-sm font-black tracking-wider shadow">MATCH A</span>
+          <span class="text-xs md:text-sm text-sky-200 font-bold hidden sm:inline">다트 1 · 2 · 3번 보드</span>
         </div>
-        <div id="matchA_teamScoreCenter" class="flex items-center gap-3 md:gap-6">
+        <div class="flex items-center gap-3 md:gap-6">
           <span id="matchA_homeName" class="match-team-title text-xl md:text-3xl font-black text-sky-300 tracking-tight drop-shadow">1반</span>
           <div class="match-win-box flex items-center gap-3 bg-slate-950 px-5 py-1.5 rounded-2xl border-2 border-sky-400/65 shadow-inner">
             <span id="matchA_homeWins" class="match-win-score font-score text-3xl md:text-5xl font-black text-sky-300 leading-none">0</span>
@@ -196,24 +211,22 @@
           </div>
           <span id="matchA_awayName" class="match-team-title text-xl md:text-3xl font-black text-rose-400 tracking-tight drop-shadow">2반</span>
         </div>
-        <div id="matchA_soloCenterTitle" class="hidden items-center gap-2">
-          <span id="matchA_soloHeaderText" class="text-base md:text-2xl font-black text-sky-200 tracking-tight">🎯 수행평가 개인전 리그 · 1 · 2 · 3번 보드</span>
-        </div>
         <div class="flex items-center gap-2">
           <div id="matchA_statusBadge" class="text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-sky-950/80 text-sky-200 border border-sky-500/30">진행 중</div>
-          <button type="button" id="matchA_zoomBtn" onclick="toggleSingleMatch('ONLY_A')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-sky-600 text-slate-200 hover:text-white text-xs font-bold border border-slate-700 transition">⤢ 크게 보기</button>
+          <button type="button" onclick="toggleSingleMatch('ONLY_A')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-sky-600 text-slate-200 hover:text-white text-xs font-bold border border-slate-700 transition">⤢ 크게 보기</button>
         </div>
       </div>
       <div id="matchA_boards" class="boards-grid grid grid-cols-1 lg:grid-cols-3 gap-3 flex-1"></div>
     </section>
 
+    <!-- [학급 단체전 전용] MATCH B (4, 5, 6번 보드) -->
     <section id="sectionMatchB" class="match-section-box bg-gradient-to-b from-amber-950/30 to-slate-900/90 border-2 border-amber-500/45 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl flex-1">
       <div class="match-header-bar flex flex-wrap items-center justify-between gap-2 bg-gradient-to-r from-amber-950/90 via-slate-950 to-orange-950/90 border border-amber-500/45 rounded-xl px-4 py-2.5 mb-2.5 shadow-md">
         <div class="flex items-center gap-2.5">
-          <span id="matchB_badgeLabel" class="px-3 py-1 rounded-lg bg-amber-400 text-slate-950 text-xs md:text-sm font-black tracking-wider shadow">MATCH B</span>
-          <span id="matchB_subLabel" class="text-xs md:text-sm text-amber-200 font-bold hidden sm:inline">다트 4 · 5 · 6번 보드</span>
+          <span class="px-3 py-1 rounded-lg bg-amber-400 text-slate-950 text-xs md:text-sm font-black tracking-wider shadow">MATCH B</span>
+          <span class="text-xs md:text-sm text-amber-200 font-bold hidden sm:inline">다트 4 · 5 · 6번 보드</span>
         </div>
-        <div id="matchB_teamScoreCenter" class="flex items-center gap-3 md:gap-6">
+        <div class="flex items-center gap-3 md:gap-6">
           <span id="matchB_homeName" class="match-team-title text-xl md:text-3xl font-black text-sky-300 tracking-tight drop-shadow">3반</span>
           <div class="match-win-box flex items-center gap-3 bg-slate-950 px-5 py-1.5 rounded-2xl border-2 border-amber-400/65 shadow-inner">
             <span id="matchB_homeWins" class="match-win-score font-score text-3xl md:text-5xl font-black text-sky-300 leading-none">0</span>
@@ -222,12 +235,9 @@
           </div>
           <span id="matchB_awayName" class="match-team-title text-xl md:text-3xl font-black text-rose-400 tracking-tight drop-shadow">4반</span>
         </div>
-        <div id="matchB_soloCenterTitle" class="hidden items-center gap-2">
-          <span id="matchB_soloHeaderText" class="text-base md:text-2xl font-black text-amber-200 tracking-tight">🎯 수행평가 개인전 리그 · 4 · 5 · 6번 보드</span>
-        </div>
         <div class="flex items-center gap-2">
           <div id="matchB_statusBadge" class="text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-amber-950/80 text-amber-200 border border-amber-500/30">진행 중</div>
-          <button type="button" id="matchB_zoomBtn" onclick="toggleSingleMatch('ONLY_B')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-amber-600 text-slate-200 hover:text-white text-xs font-bold border border-slate-700 transition">⤢ 크게 보기</button>
+          <button type="button" onclick="toggleSingleMatch('ONLY_B')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-amber-600 text-slate-200 hover:text-white text-xs font-bold border border-slate-700 transition">⤢ 크게 보기</button>
         </div>
       </div>
       <div id="matchB_boards" class="boards-grid grid grid-cols-1 lg:grid-cols-3 gap-3 flex-1"></div>
@@ -249,10 +259,10 @@
 
   <!-- MODAL AUTH: 도우미·심판 비밀번호 모달 -->
   <div id="pinAuthModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[80] hidden items-center justify-center p-4">
-    <div id="pinAuthCard" class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xs shadow-2xl overflow-hidden transition-colors">
-      <div id="pinAuthHeader" class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xs shadow-2xl overflow-hidden">
+      <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <span id="pinAuthIcon">🔐</span>
+          <span>🔐</span>
           <h2 id="pinAuthTitle" class="text-sm font-black text-white">도우미 · 심판 인증</h2>
         </div>
         <button type="button" onclick="closeModal('pinAuthModal')" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs font-bold">✕</button>
@@ -288,13 +298,13 @@
     </div>
   </div>
 
-  <!-- MODAL SOLO BULK: 명렬표 붙여넣기 → 6개 보드 자동 배분 & 랜덤 조 편성 모달 -->
+  <!-- MODAL SOLO BULK: 명렬표 붙여넣기 → 6개 보드(1,2,3,6,7,8번) 자동 배분 & 랜덤 조 편성 모달 -->
   <div id="soloBulkAssignModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-3">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-5xl shadow-2xl overflow-hidden flex flex-col max-h-[94vh]">
       <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
         <div>
-          <h2 class="text-base md:text-lg font-black text-white">📋 명렬표 일괄 배정 & 랜덤 조 편성 <span class="text-amber-300 text-xs md:text-sm font-bold">(6개 다트 보드 자동 균등 분배)</span></h2>
-          <p class="text-xs text-slate-400 mt-0.5">엑셀·한글·나이스 명렬표를 복사해 붙여넣으면 <b>총인원(예: 25~26명)을 6개 보드에 균등 배분(4~5명씩)</b>하고 랜덤으로 조를 짜줍니다.</p>
+          <h2 class="text-base md:text-lg font-black text-white">📋 명렬표 일괄 배정 & 랜덤 조 편성 <span class="text-amber-300 text-xs md:text-sm font-bold">(다트 1·2·3·6·7·8번 자동 균등 분배)</span></h2>
+          <p class="text-xs text-slate-400 mt-0.5">엑셀·한글·나이스 명렬표를 복사해 붙여넣으면 <b>출석번호와 이름</b>을 추출해 6개 보드에 고르게 배정합니다.</p>
         </div>
         <button type="button" onclick="closeModal('soloBulkAssignModal')" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold">✕</button>
       </div>
@@ -302,17 +312,11 @@
       <div class="p-4 md:p-5 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 gap-4">
         <!-- 좌측: 명렬표 입력 및 옵션 -->
         <div class="lg:col-span-5 space-y-3 flex flex-col">
-          <div class="grid grid-cols-2 gap-2 bg-slate-950 p-3 rounded-xl border border-slate-800">
-            <div>
-              <label class="block text-[11px] font-bold text-slate-400 mb-1">학급 / 수업 라벨</label>
-              <input id="bulkClassTagInput" type="text" value="2학년 3반" placeholder="예: 2학년 3반" oninput="updateBulkPreview(false)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-bold text-white" />
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-slate-400 mb-1">전 보드 시작 점수</label>
-              <div class="grid grid-cols-2 gap-1">
-                <button type="button" id="bulkStart301Btn" onclick="setBulkStartScore(301)" class="py-1.5 rounded-lg font-score text-xs font-black bg-emerald-600 text-white shadow">301점</button>
-                <button type="button" id="bulkStart501Btn" onclick="setBulkStartScore(501)" class="py-1.5 rounded-lg font-score text-xs font-black bg-slate-800 text-slate-300">501점</button>
-              </div>
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+            <label class="block text-[11px] font-bold text-slate-400 mb-1.5">전 보드 시작 점수 (상단 타이틀 자동 반영)</label>
+            <div class="grid grid-cols-2 gap-1.5">
+              <button type="button" id="bulkStart301Btn" onclick="setBulkStartScore(301)" class="py-2 rounded-lg font-score text-xs font-black bg-emerald-600 text-white shadow">301 개인전 리그</button>
+              <button type="button" id="bulkStart501Btn" onclick="setBulkStartScore(501)" class="py-2 rounded-lg font-score text-xs font-black bg-slate-800 text-slate-300">501 개인전 리그</button>
             </div>
           </div>
 
@@ -324,7 +328,7 @@
                 <button type="button" onclick="document.getElementById('bulkRosterTextarea').value=''; updateBulkPreview(false);" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-bold text-rose-300 border border-slate-700">비우기</button>
               </div>
             </div>
-            <textarea id="bulkRosterTextarea" rows="11" oninput="updateBulkPreview(false)" placeholder="엑셀이나 한글 명렬표를 그대로 복사(Ctrl+C)해서 붙여넣으세요(Ctrl+V)!&#10;&#10;예시 1 (줄바꿈):&#10;김민준&#10;이서연&#10;박도윤&#10;...&#10;&#10;예시 2 (번호 포함도 자동 인식):&#10;1 김민준&#10;2 이서연&#10;10303 박도윤" class="w-full flex-1 bg-slate-900 border border-slate-700 focus:border-amber-400 rounded-xl p-3 text-xs text-white leading-relaxed outline-none resize-none"></textarea>
+            <textarea id="bulkRosterTextarea" rows="11" oninput="updateBulkPreview(false)" placeholder="엑셀이나 한글 명렬표를 그대로 복사(Ctrl+C)해서 붙여넣으세요(Ctrl+V)!&#10;&#10;예시 1 (번호 + 이름):&#10;1 이동호&#10;2 정세은&#10;3 황서현&#10;&#10;예시 2 (이름만 붙여넣어도 1번부터 자동 번호 부여):&#10;이동호&#10;정세은&#10;황서현" class="w-full flex-1 bg-slate-900 border border-slate-700 focus:border-amber-400 rounded-xl p-3 text-xs text-white leading-relaxed outline-none resize-none"></textarea>
             <div class="flex items-center justify-between text-[11px] text-slate-400">
               <span>인식된 총 학생 수: <b id="bulkParsedCount" class="text-emerald-400 font-score text-sm">0</b>명</span>
               <span id="bulkDistributionSummary" class="text-amber-300 font-bold">6개 보드 배분 대기</span>
@@ -344,18 +348,18 @@
         <!-- 우측: 6개 보드 실시간 조 편성 미리보기 -->
         <div class="lg:col-span-7 bg-slate-950/90 p-3.5 rounded-xl border border-slate-800 flex flex-col justify-between space-y-3">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-black text-emerald-300">② 6개 다트 보드 조 편성 미리보기 (투구 순서)</span>
+            <span class="text-xs font-black text-emerald-300">② 다트 1 · 2 · 3 · 6 · 7 · 8번 조 편성 미리보기</span>
             <span id="bulkShuffleModeBadge" class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/40 text-[11px] font-bold">🎲 랜덤 편성됨</span>
           </div>
           <div id="bulkPreviewGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 flex-1"></div>
           <div class="text-[11px] text-slate-400 bg-slate-900/90 px-3 py-2 rounded-lg border border-slate-800">
-            💡 총원이 26명이면 <b>5·5·4·4·4·4명</b>, 25명이면 <b>5·4·4·4·4·4명</b>으로 6개 다트 보드에 가장 고르게 자동 분배됩니다. 적용 후 특정 보드만 개별 수정할 수도 있습니다.
+            💡 당일 결석생이 있거나 인원을 추가할 때는 배정 후 <b>[보드별 개별 수정]</b> 버튼에서 바로 삭제하거나 추가할 수 있습니다.
           </div>
         </div>
       </div>
 
       <div class="px-5 py-3.5 bg-slate-950 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
-        <span class="text-xs text-slate-400">※ 적용 시 6개 보드의 개인전 점수가 모두 선택한 점수(301/501)로 새 출발합니다.</span>
+        <span class="text-xs text-slate-400">※ 적용 시 6개 보드 모두 선택한 점수(301/501)로 시작합니다.</span>
         <div class="flex items-center gap-2">
           <button type="button" onclick="closeModal('soloBulkAssignModal')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300">취소</button>
           <button type="button" onclick="applyBulkSoloAssignment()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 text-xs md:text-sm font-black shadow-lg">✓ 6개 보드에 한 번에 배정하고 시작하기</button>
@@ -364,13 +368,13 @@
     </div>
   </div>
 
-  <!-- MODAL SOLO SETUP: 보드별 개별 수정 모달 -->
+  <!-- MODAL SOLO SETUP: 보드별 개별 수정 모달 (결석 삭제 · 학생 추가 지원) -->
   <div id="soloSetupModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-3">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
       <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
         <div>
-          <h2 class="text-base md:text-lg font-black text-white">🎯 보드별 개인전 개별 수정 (3~5인)</h2>
-          <p class="text-xs text-slate-400">특정 보드의 인원수(3~5명), 선수 이름, 시작 점수(301/501)를 개별 조정합니다.</p>
+          <h2 class="text-base md:text-lg font-black text-white">🎯 보드별 개별 수정 <span class="text-amber-300 text-xs md:text-sm font-bold">(결석생 삭제 · 학생 추가 · 번호/이름 수정)</span></h2>
+          <p class="text-xs text-slate-400">당일 결석한 학생은 <b class="text-rose-300">[✕ 삭제]</b>로 바로 빼고, 추가 인원은 <b class="text-emerald-300">[+ 선수 추가]</b>로 넣으세요.</p>
         </div>
         <button type="button" onclick="closeModal('soloSetupModal')" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold">✕</button>
       </div>
@@ -378,48 +382,49 @@
       <div class="p-4 md:p-5 overflow-y-auto space-y-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
           <div>
-            <label class="block text-xs font-bold text-slate-400 mb-1.5">① 게임 방식 (시작 점수)</label>
+            <label class="block text-xs font-bold text-slate-400 mb-1.5">① 이 보드 시작 점수</label>
             <div class="grid grid-cols-2 gap-2">
               <button type="button" id="soloStart301Btn" onclick="setSoloBoardStartScore(301)" class="py-2 rounded-xl font-score text-sm font-black bg-emerald-600 text-white shadow">301 GAME</button>
               <button type="button" id="soloStart501Btn" onclick="setSoloBoardStartScore(501)" class="py-2 rounded-xl font-score text-sm font-black bg-slate-800 text-slate-300 hover:bg-slate-700">501 GAME</button>
             </div>
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-400 mb-1.5">② 이 보드 출전 인원</label>
-            <div class="grid grid-cols-3 gap-2">
-              <button type="button" onclick="setSoloBoardPlayerCount(3)" data-scount="3" class="scount-btn py-2 rounded-xl text-xs font-black bg-slate-800 text-slate-300">3명 (1:1:1)</button>
-              <button type="button" onclick="setSoloBoardPlayerCount(4)" data-scount="4" class="scount-btn py-2 rounded-xl text-xs font-black bg-amber-500 text-slate-950 shadow">4명 (1:1:1:1)</button>
-              <button type="button" onclick="setSoloBoardPlayerCount(5)" data-scount="5" class="scount-btn py-2 rounded-xl text-xs font-black bg-slate-800 text-slate-300">5명 (1:1:1:1:1)</button>
+            <label class="block text-xs font-bold text-slate-400 mb-1.5">② 빠른 인원 맞춤 / 선수 추가</label>
+            <div class="grid grid-cols-4 gap-1.5">
+              <button type="button" onclick="setSoloBoardPlayerCount(3)" data-scount="3" class="scount-btn py-2 rounded-xl text-xs font-black bg-slate-800 text-slate-300">3명</button>
+              <button type="button" onclick="setSoloBoardPlayerCount(4)" data-scount="4" class="scount-btn py-2 rounded-xl text-xs font-black bg-amber-500 text-slate-950 shadow">4명</button>
+              <button type="button" onclick="setSoloBoardPlayerCount(5)" data-scount="5" class="scount-btn py-2 rounded-xl text-xs font-black bg-slate-800 text-slate-300">5명</button>
+              <button type="button" onclick="addSoloPlayerRow()" class="py-2 rounded-xl text-xs font-black bg-emerald-600 hover:bg-emerald-500 text-white shadow">+ 추가</button>
             </div>
           </div>
         </div>
         <div class="space-y-2.5">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-black text-amber-300">③ 투구 순서대로 선수 소속(반/번호) 및 이름 입력</span>
-            <button type="button" onclick="clearSoloSetupInputs()" class="text-xs font-bold text-rose-400 hover:underline">🧹 이름 전체 비우기</button>
+            <span class="text-xs font-black text-amber-300">③ 출전 선수 명단 (번호 + 이름 · 결석생은 우측 삭제 버튼 클릭)</span>
+            <button type="button" onclick="addSoloPlayerRow()" class="px-2.5 py-1 rounded-lg bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/40 text-xs font-black">+ 선수 1명 추가</button>
           </div>
           <div id="soloPlayerSetupInputs" class="space-y-2"></div>
         </div>
       </div>
       <div class="px-5 py-3.5 bg-slate-950 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
         <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
-          <input id="resetSoloScoreOnSave" type="checkbox" checked class="w-4 h-4 accent-amber-500" />
-          <span>저장 시 이 보드 점수를 시작 점수(301/501)로 초기화</span>
+          <input id="resetSoloScoreOnSave" type="checkbox" class="w-4 h-4 accent-amber-500" />
+          <span>저장 시 이 보드 점수를 시작 점수(301/501)로 초기화 <span class="text-slate-400">(체크 해제 시 기존 점수 유지)</span></span>
         </label>
         <div class="flex items-center gap-2">
           <button type="button" onclick="closeModal('soloSetupModal')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300">닫기</button>
-          <button type="button" onclick="saveSoloBoardConfig()" class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black shadow-lg">✓ 이 보드 적용하기</button>
+          <button type="button" onclick="saveSoloBoardConfig()" class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black shadow-lg">✓ 변경사항 저장</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 1: 도우미 · 학생 심판 점수 입력 모달 (단체전 & 개인전 3~5인 공용) -->
+  <!-- MODAL 1: 도우미 · 학생 심판 점수 입력 모달 (단체전 & 개인전 공용) -->
   <div id="scoreModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-2 md:p-4">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[96vh]">
       <div id="helperBoardSwitcher" class="hidden bg-slate-950 border-b border-slate-800 px-3 py-2 flex items-center justify-between gap-1.5 overflow-x-auto">
         <div class="flex items-center gap-1" id="helperBoardTabList"></div>
-        <button type="button" id="helperQuickSetupBtn" onclick="openContextSetupFromScoreModal()" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-black whitespace-nowrap">📋 명단·편성</button>
+        <button type="button" id="helperQuickSetupBtn" onclick="openContextSetupFromScoreModal()" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-black whitespace-nowrap">⚙️ 결석·추가 수정</button>
       </div>
       <div class="px-4 py-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
         <div class="flex items-center gap-2">
@@ -447,11 +452,11 @@
           </div>
         </div>
 
-        <!-- [개인전 3~5인용] 심판 원터치 선수 카드 & 차례 선택 -->
+        <!-- [개인전용] 심판 원터치 선수 카드 & 차례 선택 -->
         <div id="soloModalPlayersSection" class="hidden space-y-2">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-black text-amber-300">🎯 출전 선수 (투구 차례 자동 전환 · 다른 선수 터치 시 수동 선택 가능)</span>
-            <button type="button" onclick="const b=activeBoardIndex; closeScoreModal(); openSoloSetupModal(b);" class="text-[11px] font-black text-cyan-300 hover:underline">⚙️ 이 보드 수정</button>
+            <span class="text-xs font-black text-amber-300">🎯 출전 선수 (투구 차례 자동 전환 · 결석 시 상단 [결석·추가 수정] 이용)</span>
+            <button type="button" onclick="const b=activeBoardIndex; closeScoreModal(); openSoloSetupModal(b);" class="text-[11px] font-black text-cyan-300 hover:underline">⚙️ 결석·추가 수정</button>
           </div>
           <div id="soloModalPlayerCards" class="grid grid-cols-2 sm:grid-cols-3 gap-2"></div>
         </div>
@@ -537,7 +542,7 @@
     </div>
   </div>
 
-  <!-- MODAL 2: 팀 · 대표선수 명단 관리 모달 (단체전용 + 커스텀 개인전 전환 버튼 포함) -->
+  <!-- MODAL 2: 팀 · 대표선수 명단 관리 모달 (단체전용) -->
   <div id="rosterManagerModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-3">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[93vh]">
       <div class="px-5 py-3 bg-slate-950 border-b border-slate-800/80 flex items-center justify-between gap-3">
@@ -653,9 +658,12 @@
   </div>
 
 <script>
-const STORAGE_KEY = 'lunch_league_dart_v3_solo';
+const STORAGE_KEY = 'lunch_league_dart_v4_custom123678';
 const AUTH_PIN_KEY = 'lunch_league_helper_pin';
 const DEFAULT_PIN = '0000';
+
+// 커스텀(개인전) 모드 전용 보드 번호: 1, 2, 3, 6, 7, 8번
+const SOLO_BOARD_NUMBERS = [1, 2, 3, 6, 7, 8];
 
 let isHelperAuthenticated = false;
 let pendingAuthCallback = null;
@@ -674,20 +682,21 @@ let bulkPreviewGroups = [];
 let bulkIsShuffled = true;
 
 const BOARD_ACCENTS = [
-  { border: 'border-sky-500/50', badge: 'bg-sky-500 text-slate-950', text: 'text-sky-300', bar: 'bg-sky-500' },
-  { border: 'border-emerald-500/50', badge: 'bg-emerald-500 text-slate-950', text: 'text-emerald-300', bar: 'bg-emerald-500' },
-  { border: 'border-indigo-500/50', badge: 'bg-indigo-500 text-white', text: 'text-indigo-300', bar: 'bg-indigo-500' },
-  { border: 'border-amber-500/50', badge: 'bg-amber-400 text-slate-950', text: 'text-amber-300', bar: 'bg-amber-400' },
-  { border: 'border-rose-500/50', badge: 'bg-rose-500 text-white', text: 'text-rose-300', bar: 'bg-rose-500' },
-  { border: 'border-purple-500/50', badge: 'bg-purple-500 text-white', text: 'text-purple-300', bar: 'bg-purple-500' }
+  { border: 'border-sky-500/50', badge: 'bg-sky-500 text-slate-950', text: 'text-sky-300' },
+  { border: 'border-emerald-500/50', badge: 'bg-emerald-500 text-slate-950', text: 'text-emerald-300' },
+  { border: 'border-indigo-500/50', badge: 'bg-indigo-500 text-white', text: 'text-indigo-300' },
+  { border: 'border-amber-500/50', badge: 'bg-amber-400 text-slate-950', text: 'text-amber-300' },
+  { border: 'border-rose-500/50', badge: 'bg-rose-500 text-white', text: 'text-rose-300' },
+  { border: 'border-purple-500/50', badge: 'bg-purple-500 text-white', text: 'text-purple-300' }
 ];
 
 function createDefaultSoloBoard(boardIdx, startScore = 301, count = 4) {
+  const boardNum = SOLO_BOARD_NUMBERS[boardIdx] || (boardIdx + 1);
   const players = [];
   for (let i = 0; i < count; i++) {
     players.push({
       id: `b${boardIdx}_p${i}`,
-      group: '수업반',
+      num: `${boardIdx * count + i + 1}`,
       name: `선수 ${i + 1}`,
       score: startScore,
       totalScored: 0,
@@ -697,7 +706,7 @@ function createDefaultSoloBoard(boardIdx, startScore = 301, count = 4) {
     });
   }
   return {
-    boardNumber: boardIdx + 1,
+    boardNumber: boardNum,
     startScore,
     players,
     turnIndex: 0,
@@ -740,13 +749,19 @@ function loadState() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (parsed && parsed.soloBoards && parsed.teamBoards) return parsed;
+      if (parsed && parsed.soloBoards && parsed.teamBoards) {
+        // 보드 번호 1, 2, 3, 6, 7, 8 보정
+        parsed.soloBoards.forEach((b, idx) => {
+          b.boardNumber = SOLO_BOARD_NUMBERS[idx];
+        });
+        return parsed;
+      }
     }
   } catch (e) {}
   return {
-    category: 'TEAM', // 'TEAM' | 'SOLO'
-    viewMode: 'BOTH', // 'BOTH' | 'ONLY_A' | 'ONLY_B' | 'FINAL'
-    soloClassTitle: '수행평가 301 개인전 리그',
+    category: 'TEAM',
+    viewMode: 'BOTH',
+    soloLeagueMode: 301, // 301 | 501
     matchA: { home: '1반', away: '2반' },
     matchB: { home: '3반', away: '4반' },
     rosters: createDefaultRosters(),
@@ -762,7 +777,7 @@ function saveState() {
   } catch (e) {}
 }
 
-/* ==================== 모드 전환 (단체전 <-> 커스텀 개인전) ==================== */
+/* ==================== 모드 전환 ==================== */
 function setLeagueCategory(cat) {
   state.category = cat;
   saveState();
@@ -780,7 +795,7 @@ function toggleSingleMatch(mode) {
   setViewMode(state.viewMode === mode ? 'BOTH' : mode, true);
 }
 
-/* ==================== 인증 (비밀번호 0000) ==================== */
+/* ==================== 인증 (기본 0000) ==================== */
 function getStoredPin() {
   return localStorage.getItem(AUTH_PIN_KEY) || DEFAULT_PIN;
 }
@@ -867,7 +882,6 @@ function updateAuthBadge() {
 function renderAll() {
   const isSolo = state.category === 'SOLO';
 
-  // 상단 탭 스타일
   document.querySelectorAll('.cat-switch-btn').forEach(btn => {
     const active = btn.dataset.cat === state.category;
     btn.className = active
@@ -875,9 +889,8 @@ function renderAll() {
       : 'cat-switch-btn px-2.5 py-0.5 rounded-md text-[11px] font-bold text-slate-400 hover:text-white transition';
   });
 
-  // 헤더 모드 태그 및 전용 버튼 표시 전환
   const headerTag = document.getElementById('headerModeTag');
-  headerTag.textContent = isSolo ? 'CUSTOM 301/501' : '501 LIVE';
+  headerTag.textContent = isSolo ? `${state.soloLeagueMode || 301} 개인전` : '501 LIVE';
   headerTag.className = isSolo
     ? 'px-1.5 py-0.5 text-[10px] font-black rounded bg-amber-500 text-slate-950 tracking-widest'
     : 'px-1.5 py-0.5 text-[10px] font-black rounded bg-rose-600 text-white tracking-widest';
@@ -886,66 +899,58 @@ function renderAll() {
   document.getElementById('soloSetupHeaderBtn').classList.toggle('hidden', !isSolo);
   document.getElementById('teamRosterHeaderBtn').classList.toggle('hidden', isSolo);
   document.getElementById('teamMatchHeaderBtn').classList.toggle('hidden', isSolo);
-  document.getElementById('finalViewModeBtn').classList.toggle('hidden', isSolo);
+  document.getElementById('teamViewModeBar').classList.toggle('hidden', isSolo);
+  document.getElementById('floatingViewSep').classList.toggle('hidden', isSolo);
+  document.querySelectorAll('.floating-team-vmode').forEach(el => el.classList.toggle('hidden', isSolo));
 
-  // 뷰 모드 버튼 활성화
-  document.querySelectorAll('.vmode-btn').forEach(btn => {
-    const active = btn.dataset.vmode === state.viewMode;
-    btn.className = active
-      ? 'vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black bg-indigo-600 text-white shadow transition'
-      : 'vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
-  });
-
-  // 섹션 A / B 표시 제어
+  const secSolo = document.getElementById('sectionSoloAll');
   const secA = document.getElementById('sectionMatchA');
   const secB = document.getElementById('sectionMatchB');
-  document.body.classList.toggle('single-match-view', state.viewMode === 'ONLY_A' || state.viewMode === 'ONLY_B' || state.viewMode === 'FINAL');
 
-  if (state.viewMode === 'ONLY_A' || state.viewMode === 'FINAL') {
-    secA.classList.remove('hidden');
-    secB.classList.add('hidden');
-  } else if (state.viewMode === 'ONLY_B') {
-    secA.classList.add('hidden');
-    secB.classList.remove('hidden');
-  } else {
-    secA.classList.remove('hidden');
-    secB.classList.remove('hidden');
-  }
-
-  // 헤더 바 내용 전환
-  document.getElementById('matchA_teamScoreCenter').classList.toggle('hidden', isSolo);
-  document.getElementById('matchB_teamScoreCenter').classList.toggle('hidden', isSolo);
-  document.getElementById('matchA_soloCenterTitle').classList.toggle('hidden', !isSolo);
-  document.getElementById('matchB_soloCenterTitle').classList.toggle('hidden', !isSolo);
   if (isSolo) {
-    document.getElementById('matchA_soloCenterTitle').classList.add('flex');
-    document.getElementById('matchB_soloCenterTitle').classList.add('flex');
-    document.getElementById('matchA_badgeLabel').textContent = 'GROUP A';
-    document.getElementById('matchB_badgeLabel').textContent = 'GROUP B';
-    document.getElementById('matchA_soloHeaderText').textContent = `🎯 ${state.soloClassTitle || '수행평가 개인전'} · 1 · 2 · 3번 보드`;
-    document.getElementById('matchB_soloHeaderText').textContent = `🎯 ${state.soloClassTitle || '수행평가 개인전'} · 4 · 5 · 6번 보드`;
-    const activeCountA = state.soloBoards.slice(0, 3).reduce((acc, b) => acc + b.players.length, 0);
-    const activeCountB = state.soloBoards.slice(3, 6).reduce((acc, b) => acc + b.players.length, 0);
-    document.getElementById('matchA_statusBadge').textContent = `출전 ${activeCountA}명`;
-    document.getElementById('matchB_statusBadge').textContent = `출전 ${activeCountB}명`;
+    secSolo.classList.remove('hidden');
+    secA.classList.add('hidden');
+    secB.classList.add('hidden');
+    document.body.classList.remove('single-match-view');
+
+    const modeNum = state.soloLeagueMode || 301;
+    document.getElementById('soloLeagueMainTitle').textContent = `🎯 ${modeNum} 개인전 리그`;
+    const totalPlayers = state.soloBoards.reduce((acc, b) => acc + b.players.length, 0);
+    document.getElementById('soloTotalCountBadge').textContent = `총 ${totalPlayers}명 출전`;
     renderSoloBoards();
   } else {
-    document.getElementById('matchA_badgeLabel').textContent = 'MATCH A';
-    document.getElementById('matchB_badgeLabel').textContent = 'MATCH B';
+    secSolo.classList.add('hidden');
+    document.querySelectorAll('.vmode-btn').forEach(btn => {
+      const active = btn.dataset.vmode === state.viewMode;
+      btn.className = active
+        ? 'vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black bg-indigo-600 text-white shadow transition'
+        : 'vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
+    });
+
+    document.body.classList.toggle('single-match-view', state.viewMode === 'ONLY_A' || state.viewMode === 'ONLY_B' || state.viewMode === 'FINAL');
+    if (state.viewMode === 'ONLY_A' || state.viewMode === 'FINAL') {
+      secA.classList.remove('hidden');
+      secB.classList.add('hidden');
+    } else if (state.viewMode === 'ONLY_B') {
+      secA.classList.add('hidden');
+      secB.classList.remove('hidden');
+    } else {
+      secA.classList.remove('hidden');
+      secB.classList.remove('hidden');
+    }
     renderTeamBoards();
   }
   updateAuthBadge();
 }
 
-/* ==================== 개인전(3~5인) 보드 카드 렌더링 ==================== */
+/* ==================== 개인전(1, 2, 3, 6, 7, 8번 보드) 렌더링 ==================== */
 function renderSoloBoards() {
-  const containerA = document.getElementById('matchA_boards');
-  const containerB = document.getElementById('matchB_boards');
-  containerA.innerHTML = '';
-  containerB.innerHTML = '';
+  const container = document.getElementById('soloAll_boards');
+  container.innerHTML = '';
 
   state.soloBoards.forEach((board, idx) => {
     const accent = BOARD_ACCENTS[idx];
+    const boardNum = SOLO_BOARD_NUMBERS[idx];
     const finishedCount = board.players.filter(p => p.finishedRank > 0).length;
     const isAllDone = finishedCount >= board.players.length - 1 && board.players.length > 1;
 
@@ -954,28 +959,30 @@ function renderSoloBoards() {
       const isWinner = p.finishedRank === 1;
       const ppd = p.turns > 0 ? (p.totalScored / p.turns).toFixed(1) : '0.0';
 
-      let rowStyle = 'bg-slate-950/80 border-slate-800 text-slate-200';
+      let rowStyle = 'bg-slate-950/85 border-slate-800 text-slate-200';
       if (isWinner) rowStyle = 'bg-emerald-950/80 border-emerald-400 text-emerald-200 win-glow';
       else if (p.finishedRank > 1) rowStyle = 'bg-slate-900/90 border-amber-500/40 text-amber-200';
       else if (isTurn) rowStyle = 'bg-amber-500/15 border-amber-400 text-white shadow-md';
 
-      const rankBadge = p.finishedRank === 1
-        ? '<span class="px-1.5 py-0.5 rounded bg-emerald-500 text-slate-950 text-[10px] font-black">🥇 1위</span>'
+      const turnBadge = p.finishedRank === 1
+        ? '<span class="px-1.5 py-0.5 rounded bg-emerald-500 text-slate-950 text-[10px] font-black shrink-0">🥇 1위</span>'
         : p.finishedRank > 1
-          ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300 text-[10px] font-black">${p.finishedRank}위</span>`
+          ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300 text-[10px] font-black shrink-0">${p.finishedRank}위</span>`
           : isTurn
-            ? '<span class="px-1.5 py-0.5 rounded bg-amber-400 text-slate-950 text-[10px] font-black animate-pulse">🎯 차례</span>'
-            : `<span class="text-[11px] font-bold text-slate-500 w-4 text-center">${pIdx + 1}</span>`;
+            ? '<span class="px-1.5 py-0.5 rounded bg-amber-400 text-slate-950 text-[10px] font-black animate-pulse shrink-0">🎯 차례</span>'
+            : '';
+
+      const numTag = p.num ? `<span class="font-score text-xs md:text-sm font-black text-amber-300/90 shrink-0">${escapeHtml(p.num)}</span>` : '';
 
       return `
-        <div class="player-pill flex items-center justify-between px-2.5 py-1.5 rounded-xl border ${rowStyle} transition">
-          <div class="flex items-center gap-1.5 min-w-0">
-            ${rankBadge}
-            <span class="text-[11px] text-slate-400 font-bold shrink-0">${escapeHtml(p.group)}</span>
-            <span class="font-black truncate text-sm md:text-base">${escapeHtml(p.name)}</span>
+        <div class="player-pill flex items-center justify-between px-3 py-1.5 rounded-xl border ${rowStyle} transition">
+          <div class="flex items-center gap-2 min-w-0">
+            ${turnBadge}
+            ${numTag}
+            <span class="font-black truncate text-sm md:text-base text-white">${escapeHtml(p.name)}</span>
           </div>
-          <div class="flex items-center gap-2 shrink-0">
-            <span class="player-pts text-[10px] text-slate-400 hidden sm:inline">평균 ${ppd}</span>
+          <div class="flex items-center gap-2.5 shrink-0">
+            <span class="player-pts text-[11px] text-slate-400 hidden sm:inline">평균 ${ppd}</span>
             <span class="font-score text-lg md:text-2xl font-black ${isWinner ? 'text-emerald-400' : isTurn ? 'text-amber-300' : 'text-white'}">${p.score}</span>
           </div>
         </div>
@@ -988,24 +995,22 @@ function renderSoloBoards() {
     card.innerHTML = `
       <div class="board-top-bar flex items-center justify-between bg-slate-950/90 px-3 py-1.5 rounded-xl border border-slate-800">
         <div class="flex items-center gap-2">
-          <span class="px-2 py-0.5 rounded-md ${accent.badge} font-score text-xs font-black">BOARD ${board.boardNumber}</span>
-          <span class="board-main-title font-black text-white text-sm md:text-base">${board.boardNumber}번 다트 (${board.players.length}인전)</span>
+          <span class="px-2 py-0.5 rounded-md ${accent.badge} font-score text-xs font-black">BOARD ${boardNum}</span>
+          <span class="board-main-title font-black text-white text-sm md:text-base">${boardNum}번 다트 (${board.players.length}인)</span>
         </div>
-        <span class="board-round-pill px-2 py-0.5 rounded-md bg-slate-800 text-amber-300 font-score text-xs font-black border border-slate-700">${board.startScore} GAME</span>
+        <span class="board-round-pill px-2 py-0.5 rounded-md bg-slate-800 text-amber-300 font-score text-xs font-black border border-slate-700">${board.startScore}</span>
       </div>
 
       <div class="player-col-stack flex flex-col gap-1.5 flex-1 justify-center">
-        ${playersHtml}
+        ${playersHtml || '<div class="text-center text-xs text-slate-500 py-4">배정된 선수가 없습니다</div>'}
       </div>
 
       <div class="live-log-row bg-slate-950/80 px-2.5 py-1.5 rounded-lg border border-slate-800/80 text-[11px] text-slate-300 flex items-center justify-between gap-2">
         <span class="truncate">📝 ${escapeHtml(board.lastLog)}</span>
-        <span class="text-cyan-400 font-bold shrink-0">터치해 심판 입력 ›</span>
+        <span class="text-cyan-400 font-bold shrink-0">심판 입력 ›</span>
       </div>
     `;
-
-    if (idx < 3) containerA.appendChild(card);
-    else containerB.appendChild(card);
+    container.appendChild(card);
   });
 }
 
@@ -1082,55 +1087,66 @@ function renderTeamBoards() {
   document.getElementById('matchB_awayWins').textContent = winsBAway;
 }
 
-/* ==================== 명렬표 일괄 배정 & 랜덤 조 편성 (핵심 기능) ==================== */
+/* ==================== 명렬표 일괄 배정 & 랜덤 조 편성 (번호 + 이름만 깔끔 추출) ==================== */
 function openSoloBulkAssignModal() {
-  document.getElementById('bulkClassTagInput').value = state.soloClassTitle || '2학년 3반';
-  updateBulkPreview(false);
+  bulkStartScore = state.soloLeagueMode || 301;
+  setBulkStartScore(bulkStartScore);
   openModal('soloBulkAssignModal');
 }
 
 function setBulkStartScore(score) {
   bulkStartScore = score;
   document.getElementById('bulkStart301Btn').className = score === 301
-    ? 'py-1.5 rounded-lg font-score text-xs font-black bg-emerald-600 text-white shadow'
-    : 'py-1.5 rounded-lg font-score text-xs font-black bg-slate-800 text-slate-300';
+    ? 'py-2 rounded-lg font-score text-xs font-black bg-emerald-600 text-white shadow'
+    : 'py-2 rounded-lg font-score text-xs font-black bg-slate-800 text-slate-300';
   document.getElementById('bulkStart501Btn').className = score === 501
-    ? 'py-1.5 rounded-lg font-score text-xs font-black bg-indigo-600 text-white shadow'
-    : 'py-1.5 rounded-lg font-score text-xs font-black bg-slate-800 text-slate-300';
+    ? 'py-2 rounded-lg font-score text-xs font-black bg-indigo-600 text-white shadow'
+    : 'py-2 rounded-lg font-score text-xs font-black bg-slate-800 text-slate-300';
   updateBulkPreview(false);
 }
 
 function fillSample26Roster() {
   const sample = [
-    '1 김민준', '2 이서연', '3 박도윤', '4 최지우', '5 정하준',
-    '6 강서윤', '7 조은우', '8 윤지민', '9 장시우', '10 임하윤',
-    '11 한주원', '12 오수아', '13 서지호', '14 신지아', '15 권예준',
-    '16 황채원', '17 안유준', '18 송다은', '19 전건우', '20 홍소율',
-    '21 유현우', '22 고지안', '23 문선우', '24 양서아', '25 손연우',
-    '26 배하린'
+    '1 이동호', '2 정세은', '3 황서현', '4 홍예서', '5 양승우',
+    '6 송채이', '7 김다은', '8 백연아', '9 김민준', '10 함서연',
+    '11 양예찬', '12 김은호', '13 이은서', '14 김동욱', '15 박수연',
+    '16 최지우', '17 정하준', '18 강서윤', '19 조은우', '20 윤지민',
+    '21 장시우', '22 임하윤', '23 한주원', '24 오수아', '25 서지호',
+    '26 신지아'
   ].join('\n');
   document.getElementById('bulkRosterTextarea').value = sample;
   updateBulkPreview(true);
 }
 
-function parseRosterNames(rawText) {
-  const lines = rawText.split(/[\n,\t]+/).map(s => s.trim()).filter(Boolean);
-  return lines.map(line => {
-    // 앞쪽 출석번호/학번(예: "1 ", "01.", "10301 ") 제거 후 이름 추출
-    const cleaned = line.replace(/^[\d\-\.\)\(\[\]]+\s*/, '').trim();
-    return cleaned || line;
+// 명렬표 파싱: "1 이동호" -> { num: "1", name: "이동호" }, 이름만 있으면 1번부터 자동 번호 부여
+function parseRosterStudents(rawText) {
+  const lines = rawText.split(/[\n,]+/).map(s => s.trim()).filter(Boolean);
+  return lines.map((line, idx) => {
+    // 탭이나 공백으로 구분된 앞의 숫자(출석번호/학번) 인식
+    const match = line.match(/^(\d+)[\s\.\)\-\t]+(.+)$/);
+    if (match) {
+      let rawNum = match[1];
+      // 5자리 학번(예: 10105)인 경우 뒤 2자리 출석번호(5)로 정리
+      if (rawNum.length >= 4) {
+        rawNum = String(Number(rawNum.slice(-2)));
+      } else {
+        rawNum = String(Number(rawNum));
+      }
+      return { num: rawNum, name: match[2].trim() };
+    }
+    return { num: String(idx + 1), name: line };
   });
 }
 
-function distributeIntoSixBoards(names) {
-  const total = names.length;
+function distributeIntoSixBoards(students) {
+  const total = students.length;
   const base = Math.floor(total / 6);
   const rem = total % 6;
   const groups = [];
   let cursor = 0;
   for (let b = 0; b < 6; b++) {
     const count = base + (b < rem ? 1 : 0);
-    groups.push(names.slice(cursor, cursor + count));
+    groups.push(students.slice(cursor, cursor + count));
     cursor += count;
   }
   return groups;
@@ -1138,28 +1154,26 @@ function distributeIntoSixBoards(names) {
 
 function updateBulkPreview(doShuffle = false, forceSequential = false) {
   const raw = document.getElementById('bulkRosterTextarea').value;
-  let names = parseRosterNames(raw);
-  const classTag = document.getElementById('bulkClassTagInput').value.trim() || '수업반';
+  let students = parseRosterStudents(raw);
 
-  document.getElementById('bulkParsedCount').textContent = names.length;
+  document.getElementById('bulkParsedCount').textContent = students.length;
 
   if (forceSequential) bulkIsShuffled = false;
   else if (doShuffle) bulkIsShuffled = true;
 
-  if (names.length > 0 && bulkIsShuffled) {
-    // Fisher-Yates 셔플
-    const arr = [...names];
+  if (students.length > 0 && bulkIsShuffled) {
+    const arr = [...students];
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    names = arr;
+    students = arr;
   }
 
-  bulkPreviewGroups = distributeIntoSixBoards(names);
+  bulkPreviewGroups = distributeIntoSixBoards(students);
 
   const countsText = bulkPreviewGroups.map(g => g.length).join('·');
-  document.getElementById('bulkDistributionSummary').textContent = names.length > 0
+  document.getElementById('bulkDistributionSummary').textContent = students.length > 0
     ? `보드별 인원: ${countsText}명 (${bulkStartScore}점)`
     : '명렬표를 붙여넣으면 자동 계산됩니다';
 
@@ -1174,20 +1188,21 @@ function updateBulkPreview(doShuffle = false, forceSequential = false) {
   for (let b = 0; b < 6; b++) {
     const members = bulkPreviewGroups[b] || [];
     const accent = BOARD_ACCENTS[b];
+    const boardNum = SOLO_BOARD_NUMBERS[b];
     const box = document.createElement('div');
     box.className = `bg-slate-900 border ${accent.border} rounded-xl p-2.5 space-y-1.5`;
     box.innerHTML = `
       <div class="flex items-center justify-between border-b border-slate-800 pb-1">
-        <span class="px-2 py-0.5 rounded ${accent.badge} font-score text-[11px] font-black">다트 ${b + 1}번</span>
+        <span class="px-2 py-0.5 rounded ${accent.badge} font-score text-[11px] font-black">다트 ${boardNum}번</span>
         <span class="text-[11px] font-black text-slate-300">${members.length}명</span>
       </div>
       <div class="space-y-1">
         ${members.length === 0
           ? '<div class="text-[11px] text-slate-600 py-2 text-center">대기 중</div>'
-          : members.map((m, i) => `
-              <div class="flex items-center justify-between bg-slate-950/90 px-2 py-1 rounded text-xs">
-                <span class="text-slate-400 font-bold text-[10px]">${i + 1}번 · ${escapeHtml(classTag)}</span>
-                <span class="font-black text-white">${escapeHtml(m)}</span>
+          : members.map(m => `
+              <div class="flex items-center gap-2 bg-slate-950/90 px-2.5 py-1 rounded text-xs">
+                <span class="font-score font-black text-amber-300 w-5">${escapeHtml(m.num)}</span>
+                <span class="font-black text-white">${escapeHtml(m.name)}</span>
               </div>
             `).join('')
         }
@@ -1199,22 +1214,22 @@ function updateBulkPreview(doShuffle = false, forceSequential = false) {
 
 function applyBulkSoloAssignment() {
   const total = bulkPreviewGroups.reduce((acc, g) => acc + g.length, 0);
-  if (total < 6) {
-    alert('최소 6명 이상의 학생 명렬표를 입력해 주세요. (예: 25~26명)');
+  if (total < 1) {
+    alert('학생 명렬표를 먼저 입력해 주세요.');
     return;
   }
-  const classTag = document.getElementById('bulkClassTagInput').value.trim() || '수업반';
-  state.soloClassTitle = `${classTag} (${bulkStartScore} 개인전)`;
+  state.soloLeagueMode = bulkStartScore;
 
   for (let b = 0; b < 6; b++) {
     const members = bulkPreviewGroups[b];
+    const boardNum = SOLO_BOARD_NUMBERS[b];
     state.soloBoards[b] = {
-      boardNumber: b + 1,
+      boardNumber: boardNum,
       startScore: bulkStartScore,
-      players: members.map((name, pIdx) => ({
+      players: members.map((st, pIdx) => ({
         id: `b${b}_p${pIdx}_${Date.now()}`,
-        group: classTag,
-        name,
+        num: st.num,
+        name: st.name,
         score: bulkStartScore,
         totalScored: 0,
         turns: 0,
@@ -1223,7 +1238,7 @@ function applyBulkSoloAssignment() {
       })),
       turnIndex: 0,
       history: [],
-      lastLog: `${members.length}명 편성 완료 (${bulkStartScore}점 시작)`
+      lastLog: `${members.length}명 배정 완료 (${bulkStartScore}점 시작)`
     };
   }
 
@@ -1233,110 +1248,158 @@ function applyBulkSoloAssignment() {
   renderAll();
 }
 
-/* ==================== 보드별 개별 수정 모달 (SOLO) ==================== */
+/* ==================== 보드별 개별 수정 모달 (결석 삭제 · 추가 지원) ==================== */
+let tempSoloEditList = [];
+let tempSoloStartScore = 301;
+
 function openSoloSetupModal(boardIdx = 0) {
   editingSoloBoardIdx = boardIdx;
+  loadTempSoloBoardData();
   renderSoloSetupModal();
   openModal('soloSetupModal');
+}
+
+function loadTempSoloBoardData() {
+  const board = state.soloBoards[editingSoloBoardIdx];
+  tempSoloStartScore = board.startScore;
+  tempSoloEditList = board.players.map(p => ({ ...p }));
 }
 
 function renderSoloSetupModal() {
   const tabs = document.getElementById('soloBoardSetupTabs');
   tabs.innerHTML = '';
   for (let i = 0; i < 6; i++) {
+    const boardNum = SOLO_BOARD_NUMBERS[i];
+    const count = i === editingSoloBoardIdx ? tempSoloEditList.length : state.soloBoards[i].players.length;
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.onclick = () => { editingSoloBoardIdx = i; renderSoloSetupModal(); };
+    btn.onclick = () => {
+      editingSoloBoardIdx = i;
+      loadTempSoloBoardData();
+      renderSoloSetupModal();
+    };
     btn.className = i === editingSoloBoardIdx
       ? 'px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-black text-xs whitespace-nowrap shadow'
       : 'px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs whitespace-nowrap';
-    btn.textContent = `다트 ${i + 1}번 (${state.soloBoards[i].players.length}명)`;
+    btn.textContent = `다트 ${boardNum}번 (${count}명)`;
     tabs.appendChild(btn);
   }
 
-  const board = state.soloBoards[editingSoloBoardIdx];
-  document.getElementById('soloStart301Btn').className = board.startScore === 301
+  document.getElementById('soloStart301Btn').className = tempSoloStartScore === 301
     ? 'py-2 rounded-xl font-score text-sm font-black bg-emerald-600 text-white shadow'
     : 'py-2 rounded-xl font-score text-sm font-black bg-slate-800 text-slate-300';
-  document.getElementById('soloStart501Btn').className = board.startScore === 501
+  document.getElementById('soloStart501Btn').className = tempSoloStartScore === 501
     ? 'py-2 rounded-xl font-score text-sm font-black bg-indigo-600 text-white shadow'
     : 'py-2 rounded-xl font-score text-sm font-black bg-slate-800 text-slate-300';
 
   document.querySelectorAll('.scount-btn').forEach(btn => {
     const cnt = Number(btn.dataset.scount);
-    btn.className = cnt === board.players.length
+    btn.className = cnt === tempSoloEditList.length
       ? 'scount-btn py-2 rounded-xl text-xs font-black bg-amber-500 text-slate-950 shadow'
       : 'scount-btn py-2 rounded-xl text-xs font-black bg-slate-800 text-slate-300';
   });
 
   const wrap = document.getElementById('soloPlayerSetupInputs');
   wrap.innerHTML = '';
-  board.players.forEach((p, idx) => {
+  if (tempSoloEditList.length === 0) {
+    wrap.innerHTML = '<div class="text-center text-xs text-slate-400 py-4 bg-slate-950 rounded-xl border border-slate-800">선수가 없습니다. [+ 선수 1명 추가] 버튼을 눌러주세요.</div>';
+    return;
+  }
+
+  tempSoloEditList.forEach((p, idx) => {
     const row = document.createElement('div');
     row.className = 'grid grid-cols-12 gap-2 items-center bg-slate-950 p-2 rounded-xl border border-slate-800';
     row.innerHTML = `
-      <span class="col-span-2 text-xs font-black text-amber-300 text-center">${idx + 1}번 순서</span>
-      <input type="text" data-field="group" value="${escapeHtml(p.group)}" placeholder="반/소속" class="col-span-4 bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-200" />
-      <input type="text" data-field="name" value="${escapeHtml(p.name)}" placeholder="학생 이름" class="col-span-6 bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-black text-white" />
+      <span class="col-span-2 text-xs font-black text-slate-400 text-center">${idx + 1}번째</span>
+      <input type="text" value="${escapeHtml(p.num || '')}" oninput="tempSoloEditList[${idx}].num = this.value" placeholder="번호" class="col-span-2 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-score font-bold text-amber-300 text-center" />
+      <input type="text" value="${escapeHtml(p.name || '')}" oninput="tempSoloEditList[${idx}].name = this.value" placeholder="학생 이름" class="col-span-6 bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-black text-white" />
+      <button type="button" onclick="removeSoloPlayerRow(${idx})" title="결석생 삭제" class="col-span-2 py-1.5 rounded-lg bg-rose-950/70 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-700/60 text-xs font-black transition">✕ 삭제</button>
     `;
     wrap.appendChild(row);
   });
 }
 
 function setSoloBoardStartScore(score) {
-  state.soloBoards[editingSoloBoardIdx].startScore = score;
+  tempSoloStartScore = score;
   renderSoloSetupModal();
 }
 
 function setSoloBoardPlayerCount(count) {
-  const board = state.soloBoards[editingSoloBoardIdx];
-  const defaultGroup = board.players[0]?.group || '수업반';
-  while (board.players.length < count) {
-    const n = board.players.length + 1;
-    board.players.push({
+  while (tempSoloEditList.length < count) {
+    const n = tempSoloEditList.length + 1;
+    tempSoloEditList.push({
       id: `b${editingSoloBoardIdx}_p${n}_${Date.now()}`,
-      group: defaultGroup,
+      num: '',
       name: `선수 ${n}`,
-      score: board.startScore,
+      score: tempSoloStartScore,
       totalScored: 0,
       turns: 0,
       highTurn: 0,
       finishedRank: 0
     });
   }
-  if (board.players.length > count) {
-    board.players = board.players.slice(0, count);
+  if (tempSoloEditList.length > count) {
+    tempSoloEditList = tempSoloEditList.slice(0, count);
   }
   renderSoloSetupModal();
 }
 
-function clearSoloSetupInputs() {
-  document.querySelectorAll('#soloPlayerSetupInputs input[data-field="name"]').forEach(inp => inp.value = '');
+function addSoloPlayerRow() {
+  if (tempSoloEditList.length >= 8) {
+    alert('한 보드당 최대 8명까지 추가할 수 있습니다.');
+    return;
+  }
+  const n = tempSoloEditList.length + 1;
+  tempSoloEditList.push({
+    id: `b${editingSoloBoardIdx}_add_${Date.now()}_${n}`,
+    num: '',
+    name: '',
+    score: tempSoloStartScore,
+    totalScored: 0,
+    turns: 0,
+    highTurn: 0,
+    finishedRank: 0
+  });
+  renderSoloSetupModal();
+}
+
+function removeSoloPlayerRow(idx) {
+  if (tempSoloEditList.length <= 1) {
+    alert('최소 1명의 선수는 남아 있어야 합니다.');
+    return;
+  }
+  tempSoloEditList.splice(idx, 1);
+  renderSoloSetupModal();
 }
 
 function saveSoloBoardConfig() {
   const board = state.soloBoards[editingSoloBoardIdx];
-  const rows = document.querySelectorAll('#soloPlayerSetupInputs > div');
   const resetScores = document.getElementById('resetSoloScoreOnSave').checked;
 
-  rows.forEach((row, idx) => {
-    const g = row.querySelector('input[data-field="group"]').value.trim() || '수업반';
-    const n = row.querySelector('input[data-field="name"]').value.trim() || `선수 ${idx + 1}`;
-    board.players[idx].group = g;
-    board.players[idx].name = n;
-    if (resetScores) {
-      board.players[idx].score = board.startScore;
-      board.players[idx].totalScored = 0;
-      board.players[idx].turns = 0;
-      board.players[idx].highTurn = 0;
-      board.players[idx].finishedRank = 0;
-    }
+  board.startScore = tempSoloStartScore;
+  board.players = tempSoloEditList.map((p, idx) => {
+    const cleanNum = (p.num || '').trim();
+    const cleanName = (p.name || '').trim() || `선수 ${idx + 1}`;
+    return {
+      ...p,
+      num: cleanNum,
+      name: cleanName,
+      score: resetScores ? tempSoloStartScore : (typeof p.score === 'number' ? p.score : tempSoloStartScore),
+      totalScored: resetScores ? 0 : (p.totalScored || 0),
+      turns: resetScores ? 0 : (p.turns || 0),
+      highTurn: resetScores ? 0 : (p.highTurn || 0),
+      finishedRank: resetScores ? 0 : (p.finishedRank || 0)
+    };
   });
 
-  if (resetScores) {
+  if (board.turnIndex >= board.players.length) {
     board.turnIndex = 0;
+  }
+  if (resetScores) {
     board.history = [];
-    board.lastLog = `${board.players.length}명 편성 완료 (${board.startScore}점)`;
+    board.lastLog = `${board.players.length}명 편성 완료 (${tempSoloStartScore}점)`;
+  } else {
+    board.lastLog = `명단 수정 완료 (현재 ${board.players.length}명)`;
   }
 
   saveState();
@@ -1361,17 +1424,17 @@ function openScoreModal(boardIdx) {
   activeBoardIndex = boardIdx;
   const isSolo = state.category === 'SOLO';
 
-  // 상단 보드 전환 탭 갱신
   const tabList = document.getElementById('helperBoardTabList');
   tabList.innerHTML = '';
   for (let i = 0; i < 6; i++) {
+    const bNum = isSolo ? SOLO_BOARD_NUMBERS[i] : (i + 1);
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.onclick = () => openScoreModal(i);
     btn.className = i === boardIdx
       ? 'px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-black text-xs whitespace-nowrap'
       : 'px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold text-xs whitespace-nowrap';
-    btn.textContent = `${i + 1}번 보드`;
+    btn.textContent = `${bNum}번 다트`;
     tabList.appendChild(btn);
   }
 
@@ -1382,8 +1445,10 @@ function openScoreModal(boardIdx) {
 
   if (isSolo) {
     const board = state.soloBoards[boardIdx];
+    const bNum = SOLO_BOARD_NUMBERS[boardIdx];
+    if (board.turnIndex >= board.players.length) board.turnIndex = 0;
     activeSoloPlayerIdx = board.turnIndex;
-    document.getElementById('modalBoardBadge').textContent = `개인전 · 다트 ${board.boardNumber}번`;
+    document.getElementById('modalBoardBadge').textContent = `개인전 · 다트 ${bNum}번`;
     document.getElementById('modalRoundTitle').textContent = `${board.startScore} GAME (${board.players.length}명)`;
     document.getElementById('modalLastLog').textContent = board.lastLog;
     renderSoloModalPlayerCards();
@@ -1437,10 +1502,10 @@ function renderSoloModalPlayerCards() {
       : 'p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-600 text-left transition';
     btn.innerHTML = `
       <div class="flex items-center justify-between text-[11px] font-bold">
-        <span class="${isSelected ? 'text-amber-300 font-black' : 'text-slate-400'}">${isDone ? `🏅 ${p.finishedRank}위 완료` : isSelected ? '🎯 투구 차례' : `${idx + 1}번 순서`}</span>
-        <span class="text-slate-500">${escapeHtml(p.group)}</span>
+        <span class="${isSelected ? 'text-amber-300 font-black' : 'text-slate-400'}">${isDone ? `🏅 ${p.finishedRank}위 완료` : isSelected ? '🎯 투구 차례' : `${idx + 1}번째`}</span>
+        ${p.num ? `<span class="font-score text-amber-300/80">${escapeHtml(p.num)}번</span>` : ''}
       </div>
-      <div class="font-black text-white text-sm truncate mt-0.5">${escapeHtml(p.name)}</div>
+      <div class="font-black text-white text-sm truncate mt-0.5">${p.num ? `${escapeHtml(p.num)} ` : ''}${escapeHtml(p.name)}</div>
       <div class="font-score text-2xl font-black ${isSelected ? 'text-amber-300' : 'text-emerald-400'} mt-0.5">${p.score}</div>
     `;
     wrap.appendChild(btn);
@@ -1448,7 +1513,7 @@ function renderSoloModalPlayerCards() {
 
   const cur = board.players[activeSoloPlayerIdx];
   document.getElementById('soloSelectedBanner').textContent = cur
-    ? `② [${cur.name}] 선수 점수 입력 (현재 남은 점수: ${cur.score}점)`
+    ? `② [${cur.num ? cur.num + ' ' : ''}${cur.name}] 점수 입력 (남은 점수: ${cur.score}점)`
     : '② 점수 입력 방식:';
 }
 
@@ -1550,7 +1615,6 @@ function submitSoloTurnScore(num) {
       return;
     }
     if (prevScore - num < 0) {
-      // 버스트(Bust) 처리
       scored = 0;
       newScore = prevScore;
     } else {
@@ -1575,17 +1639,17 @@ function submitSoloTurnScore(num) {
   player.turns += 1;
   if (scored > player.highTurn) player.highTurn = scored;
 
-  let logMsg = `${player.name}: -${scored}점 → 남은 ${newScore}점`;
+  const displayName = `${player.num ? player.num + ' ' : ''}${player.name}`;
+  let logMsg = `${displayName}: -${scored}점 → 남은 ${newScore}점`;
   if (newScore === 0 && player.finishedRank === 0) {
     const currentMaxRank = Math.max(0, ...board.players.map(p => p.finishedRank));
     player.finishedRank = currentMaxRank + 1;
-    logMsg = `🎉 ${player.name} ${player.finishedRank}위 피니시! (0점 도달)`;
+    logMsg = `🎉 ${displayName} ${player.finishedRank}위 피니시! (0점 도달)`;
     playFanfare();
   }
 
   board.lastLog = logMsg;
 
-  // 다음 미완료 선수로 차례 자동 이동
   const totalP = board.players.length;
   for (let step = 1; step <= totalP; step++) {
     const nextIdx = (activeSoloPlayerIdx + step) % totalP;
@@ -1635,7 +1699,6 @@ function submitTeamTurnScore(num) {
   if (side === 'home') board.homeScore = newScore;
   else board.awayScore = newScore;
 
-  // 개인 누적 기록 반영
   const statKey = `${selectedTeamPlayer.teamKey}_${selectedTeamPlayer.name}`;
   if (!state.teamPlayerStats[statKey]) {
     state.teamPlayerStats[statKey] = { team: selectedTeamPlayer.teamKey, name: selectedTeamPlayer.name, totalScored: 0, turns: 0, highTurn: 0 };
@@ -1737,11 +1800,11 @@ function forceWin(side) {
 let shoutoutTimer = null;
 function triggerSpecialShoutout(type) {
   const isSolo = state.category === 'SOLO';
-  const boardNum = activeBoardIndex + 1;
+  const boardNum = isSolo ? SOLO_BOARD_NUMBERS[activeBoardIndex] : (activeBoardIndex + 1);
   let playerName = '도전자';
   if (isSolo) {
     const p = state.soloBoards[activeBoardIndex].players[activeSoloPlayerIdx];
-    if (p) playerName = `${p.group} ${p.name}`;
+    if (p) playerName = `${p.num ? p.num + '번 ' : ''}${p.name}`;
   } else if (selectedTeamPlayer) {
     playerName = selectedTeamPlayer.name;
   }
@@ -1809,13 +1872,14 @@ function openLeaderboardModal() {
   const body = document.getElementById('leaderboardBody');
 
   if (isSolo) {
-    document.getElementById('leaderboardTitle').textContent = '🏆 수행평가 개인전 실시간 순위 및 기록표';
+    document.getElementById('leaderboardTitle').textContent = `🏆 ${state.soloLeagueMode || 301} 개인전 리그 실시간 순위 및 기록표`;
     const allPlayers = [];
-    state.soloBoards.forEach(b => {
+    state.soloBoards.forEach((b, idx) => {
+      const bNum = SOLO_BOARD_NUMBERS[idx];
       b.players.forEach(p => {
         allPlayers.push({
-          board: `${b.boardNumber}번 보드`,
-          group: p.group,
+          board: `${bNum}번 다트`,
+          num: p.num || '-',
           name: p.name,
           remaining: p.score,
           totalScored: p.totalScored,
@@ -1840,8 +1904,8 @@ function openLeaderboardModal() {
         <thead>
           <tr class="bg-slate-950 text-slate-400 border-b border-slate-800">
             <th class="py-2.5 px-3">순위</th>
-            <th class="py-2.5 px-3">배정 보드</th>
-            <th class="py-2.5 px-3">소속</th>
+            <th class="py-2.5 px-3">다트 보드</th>
+            <th class="py-2.5 px-3">번호</th>
             <th class="py-2.5 px-3">이름</th>
             <th class="py-2.5 px-3 text-right">남은 점수</th>
             <th class="py-2.5 px-3 text-right">누적 득점</th>
@@ -1854,7 +1918,7 @@ function openLeaderboardModal() {
             <tr class="border-b border-slate-800/70 hover:bg-slate-800/40">
               <td class="py-2 px-3 font-score font-black ${idx < 3 ? 'text-amber-300' : 'text-slate-400'}">${idx + 1}</td>
               <td class="py-2 px-3 text-slate-300 font-bold">${p.board}</td>
-              <td class="py-2 px-3 text-slate-400">${escapeHtml(p.group)}</td>
+              <td class="py-2 px-3 font-score text-amber-300">${escapeHtml(p.num)}</td>
               <td class="py-2 px-3 font-black text-white">${escapeHtml(p.name)} ${p.rank === 1 ? '🥇' : ''}</td>
               <td class="py-2 px-3 text-right font-score font-black text-emerald-400">${p.remaining}</td>
               <td class="py-2 px-3 text-right font-score font-bold text-sky-300">${p.totalScored}</td>
@@ -1881,11 +1945,12 @@ function openLeaderboardModal() {
 function exportLeaderboardCSV() {
   let csv = '\uFEFF';
   if (state.category === 'SOLO') {
-    csv += '보드,소속,이름,남은점수,누적득점,턴수,턴당평균,최고턴점수,보드순위\n';
-    state.soloBoards.forEach(b => {
+    csv += '다트보드,번호,이름,남은점수,누적득점,턴수,턴당평균,최고턴점수,보드순위\n';
+    state.soloBoards.forEach((b, idx) => {
+      const bNum = SOLO_BOARD_NUMBERS[idx];
       b.players.forEach(p => {
         const ppd = p.turns > 0 ? (p.totalScored / p.turns).toFixed(1) : '0.0';
-        csv += `${b.boardNumber}번,${p.group},${p.name},${p.score},${p.totalScored},${p.turns},${ppd},${p.highTurn},${p.finishedRank || '-'}\n`;
+        csv += `${bNum}번 다트,${p.num || ''},${p.name},${p.score},${p.totalScored},${p.turns},${ppd},${p.highTurn},${p.finishedRank || '-'}\n`;
       });
     });
   } else {
@@ -1990,7 +2055,7 @@ function applyMatchSetup() {
   renderAll();
 }
 
-/* ==================== 기타 유틸리티 (전체화면, 자동전환, QR, 초기화) ==================== */
+/* ==================== 기타 유틸리티 ==================== */
 function enterScoreboardOnlyMode() {
   document.body.classList.add('scoreboard-only');
   if (document.documentElement.requestFullscreen) {
@@ -2106,7 +2171,6 @@ function escapeHtml(str) {
   return String(str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 }
 
-// 초기 실행
 renderAll();
 </script>
 </body>
