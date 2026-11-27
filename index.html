@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>LUNCH LEAGUE 501 LIVE</title>
   <meta name="application-name" content="LUNCH LEAGUE 501" />
   <meta name="apple-mobile-web-app-title" content="LUNCH LEAGUE 501" />
@@ -30,9 +33,51 @@
     @keyframes ringExpand { 0% { transform: scale(0.4); opacity: 0.9; } 100% { transform: scale(2.4); opacity: 0; } }
     .animate-shout-box { animation: shoutPopIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards, shoutGlowPulse 1.1s infinite ease-in-out; }
     .animate-ring-wave { animation: ringExpand 1.4s ease-out infinite; }
+
+    /* 전체화면 전광판 모드: 노트북 1화면(100vh) 딱 맞춤 최적화 */
+    body.scoreboard-only { height: 100vh !important; max-height: 100vh !important; overflow: hidden !important; }
     body.scoreboard-only #topHeader, body.scoreboard-only #bottomFooter { display: none !important; }
-    body.scoreboard-only #mainWorkspace { min-height: 100vh !important; padding: 0.55rem !important; }
+    body.scoreboard-only #mainWorkspace {
+      height: 100vh !important;
+      max-height: 100vh !important;
+      padding: 0.35rem 0.5rem !important;
+      gap: 0.4rem !important;
+      overflow: hidden !important;
+    }
     body.scoreboard-only #floatingFocusControls { display: flex !important; }
+
+    /* 전체화면 + 2경기 동시 보기일 때 강당 노트북 세로 높이 압축 */
+    body.scoreboard-only:not(.single-match-view) .match-section-box {
+      padding: 0.45rem 0.65rem !important;
+      border-radius: 0.85rem !important;
+      min-height: 0 !important;
+      flex: 1 1 0% !important;
+    }
+    body.scoreboard-only:not(.single-match-view) .match-header-bar {
+      padding: 0.3rem 0.75rem !important;
+      margin-bottom: 0.35rem !important;
+    }
+    body.scoreboard-only:not(.single-match-view) .match-team-title { font-size: 1.25rem !important; }
+    body.scoreboard-only:not(.single-match-view) .match-win-score { font-size: 1.75rem !important; }
+    body.scoreboard-only:not(.single-match-view) .match-win-box { padding: 0.15rem 0.85rem !important; }
+    body.scoreboard-only:not(.single-match-view) .boards-grid { gap: 0.45rem !important; min-height: 0 !important; }
+    body.scoreboard-only:not(.single-match-view) .board-card {
+      padding: 0.42rem 0.55rem !important;
+      gap: 0.28rem !important;
+      min-height: 0 !important;
+    }
+    body.scoreboard-only:not(.single-match-view) .board-top-bar { padding: 0.22rem 0.5rem !important; }
+    body.scoreboard-only:not(.single-match-view) .board-main-title { font-size: 0.98rem !important; }
+    body.scoreboard-only:not(.single-match-view) .board-score-panel { padding: 0.32rem 0.45rem !important; }
+    body.scoreboard-only:not(.single-match-view) .score-number { font-size: 1.85rem !important; margin: 0 !important; }
+    body.scoreboard-only:not(.single-match-view) .team-label { font-size: 0.82rem !important; }
+    body.scoreboard-only:not(.single-match-view) .live-log-row { padding: 0.16rem 0.45rem !important; font-size: 0.72rem !important; }
+    body.scoreboard-only:not(.single-match-view) .player-grid-wrap { padding-top: 0.25rem !important; gap: 0.3rem !important; }
+    body.scoreboard-only:not(.single-match-view) .player-col-stack { gap: 0.2rem !important; }
+    body.scoreboard-only:not(.single-match-view) .player-pill { padding: 0.16rem 0.4rem !important; font-size: 0.74rem !important; border-radius: 0.4rem !important; }
+    body.scoreboard-only:not(.single-match-view) .player-pts { font-size: 0.7rem !important; }
+
+    /* 일반 모드 폰트 크기 */
     .score-number { font-size: 2.2rem; line-height: 1.05; }
     @media (min-width: 1280px) { .score-number { font-size: 2.7rem; } }
     body.single-match-view .board-main-title { font-size: 1.45rem !important; }
@@ -62,7 +107,7 @@
           <div id="shoutoutBoardTag" class="inline-block px-3.5 py-1 rounded-full bg-white/10 text-amber-300 text-xs md:text-sm font-black tracking-widest uppercase">MATCH A · 다트 1번 보드</div>
           <div id="shoutoutEmoji" class="text-6xl md:text-8xl leading-none py-1">🎯</div>
           <div id="shoutoutMainTitle" class="font-score text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-white to-rose-300">BULLSEYE!</div>
-          <div id="shoutoutSubBadge" class="hidden inline-block px-4 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-sm md:text-lg font-black tracking-wide">BULL 3연속 명중! 150점!</div>
+          <div id="shoutoutSubBadge" class="hidden inline-block px-4 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-sm md:text-lg font-black tracking-wide">🎯 BULL 3연속 명중! 150점!</div>
           <div id="shoutoutPlayerText" class="text-2xl md:text-4xl font-black text-white pt-1">1반 김민준 선수!</div>
           <div class="text-xs text-slate-400 pt-2">화면을 터치하면 닫힙니다 (자동 닫힘)</div>
         </div>
@@ -71,13 +116,19 @@
   </div>
 
   <!-- 전체화면 전용 플로팅 바 -->
-  <div id="floatingFocusControls" class="hidden fixed top-3 right-3 z-50 items-center gap-1.5 bg-slate-900/90 border border-slate-700 p-1.5 rounded-xl shadow-2xl backdrop-blur-md opacity-60 hover:opacity-100 transition">
-    <button type="button" onclick="setViewMode('BOTH')" data-vmode="BOTH" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">2경기 전체</button>
-    <button type="button" onclick="setViewMode('ONLY_A')" data-vmode="ONLY_A" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">A만 크게</button>
-    <button type="button" onclick="setViewMode('ONLY_B')" data-vmode="ONLY_B" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">B만 크게</button>
-    <button type="button" onclick="setViewMode('FINAL')" data-vmode="FINAL" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">🏆 결승</button>
+  <div id="floatingFocusControls" class="hidden fixed bottom-2.5 right-2.5 z-50 items-center gap-1.5 bg-slate-900/95 border border-slate-700 p-1.5 rounded-xl shadow-2xl backdrop-blur-md opacity-75 hover:opacity-100 transition flex-wrap">
+    <button type="button" onclick="setViewMode('BOTH', true)" data-vmode="BOTH" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">2경기 전체</button>
+    <button type="button" onclick="setViewMode('ONLY_A', true)" data-vmode="ONLY_A" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">A만 크게</button>
+    <button type="button" onclick="setViewMode('ONLY_B', true)" data-vmode="ONLY_B" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">B만 크게</button>
+    <button type="button" onclick="toggleAutoCycleMode()" class="auto-cycle-btn px-2.5 py-1 rounded-lg text-xs font-black bg-slate-800 text-amber-300 border border-amber-500/40">🔄 A↔B 자동전환 OFF</button>
+    <button type="button" onclick="setViewMode('FINAL', true)" data-vmode="FINAL" class="vmode-btn px-2.5 py-1 rounded-lg text-xs font-black">🏆 결승</button>
+    <div class="flex items-center gap-0.5 bg-slate-950 border border-slate-700 rounded-lg px-1.5 py-0.5 text-[11px] font-bold text-slate-300" title="노트북 화면 배율 미세 조정">
+      <button type="button" onclick="adjustWorkspaceZoom(-0.05)" class="px-1.5 py-0.5 hover:text-amber-300 font-black">−</button>
+      <span id="floatingZoomLabel" class="font-score text-[10px] w-9 text-center">100%</span>
+      <button type="button" onclick="adjustWorkspaceZoom(0.05)" class="px-1.5 py-0.5 hover:text-amber-300 font-black">+</button>
+    </div>
     <button type="button" onclick="openBracketModal()" class="bg-purple-600 hover:bg-purple-500 text-white px-2.5 py-1 rounded-lg text-xs font-black">🗓️ 대진표</button>
-    <button type="button" onclick="exitScoreboardOnlyMode()" class="ml-1 bg-rose-600 hover:bg-rose-500 text-white px-2.5 py-1 rounded-lg text-xs font-black">✕ 종료</button>
+    <button type="button" onclick="exitScoreboardOnlyMode()" class="ml-0.5 bg-rose-600 hover:bg-rose-500 text-white px-2.5 py-1 rounded-lg text-xs font-black">✕ 종료</button>
   </div>
 
   <!-- 상단 컨트롤 헤더 -->
@@ -97,10 +148,19 @@
           <button type="button" id="soundToggleBtn" onclick="toggleSoundEffect()" class="px-2 py-0.5 text-[11px] font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 transition">🔊 효과음 ON</button>
         </div>
         <div class="flex items-center gap-1 mt-1 flex-wrap">
-          <button type="button" onclick="setViewMode('BOTH')" data-vmode="BOTH" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">📊 2경기 동시 (예선 3×2)</button>
-          <button type="button" onclick="setViewMode('ONLY_A')" data-vmode="ONLY_A" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">🔍 MATCH A만 크게</button>
-          <button type="button" onclick="setViewMode('ONLY_B')" data-vmode="ONLY_B" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">🔍 MATCH B만 크게</button>
-          <button type="button" onclick="setViewMode('FINAL')" data-vmode="FINAL" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">🏆 결승전 모드 (1경기)</button>
+          <button type="button" onclick="setViewMode('BOTH', true)" data-vmode="BOTH" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">📊 2경기 동시 (예선 3×2)</button>
+          <button type="button" onclick="setViewMode('ONLY_A', true)" data-vmode="ONLY_A" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">🔍 MATCH A만 크게</button>
+          <button type="button" onclick="setViewMode('ONLY_B', true)" data-vmode="ONLY_B" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">🔍 MATCH B만 크게</button>
+          <div class="inline-flex items-center rounded-md overflow-hidden border border-amber-500/40">
+            <button type="button" onclick="toggleAutoCycleMode()" class="auto-cycle-btn px-2.5 py-0.5 text-[11px] font-black bg-slate-800 text-amber-300 hover:bg-slate-700 transition">🔄 A↔B 자동전환 OFF</button>
+            <select id="autoCycleIntervalSelect" onchange="changeAutoCycleInterval(this.value)" title="자동 전환 시간 간격" class="bg-slate-950 text-amber-200 text-[11px] font-bold px-1.5 py-0.5 border-l border-amber-500/30 outline-none cursor-pointer">
+              <option value="5000">5초</option>
+              <option value="8000" selected>8초</option>
+              <option value="12000">12초</option>
+              <option value="15000">15초</option>
+            </select>
+          </div>
+          <button type="button" onclick="setViewMode('FINAL', true)" data-vmode="FINAL" class="vmode-btn px-2.5 py-0.5 rounded-md text-[11px] font-black transition">🏆 결승전 모드 (1경기)</button>
         </div>
       </div>
     </div>
@@ -118,50 +178,50 @@
 
   <!-- 메인 전광판 영역 -->
   <main id="mainWorkspace" class="flex-1 p-2.5 md:p-3.5 max-w-[1920px] w-full mx-auto flex flex-col gap-3.5 justify-center">
-    <section id="sectionMatchA" class="bg-gradient-to-b from-sky-950/35 to-slate-900/90 border-2 border-sky-500/45 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl flex-1">
-      <div class="flex flex-wrap items-center justify-between gap-2 bg-gradient-to-r from-sky-950/90 via-slate-950 to-indigo-950/90 border border-sky-500/45 rounded-xl px-4 py-2.5 mb-2.5 shadow-md">
+    <section id="sectionMatchA" class="match-section-box bg-gradient-to-b from-sky-950/35 to-slate-900/90 border-2 border-sky-500/45 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl flex-1">
+      <div class="match-header-bar flex flex-wrap items-center justify-between gap-2 bg-gradient-to-r from-sky-950/90 via-slate-950 to-indigo-950/90 border border-sky-500/45 rounded-xl px-4 py-2.5 mb-2.5 shadow-md">
         <div class="flex items-center gap-2.5">
           <span id="matchA_badgeLabel" class="px-3 py-1 rounded-lg bg-sky-500 text-slate-950 text-xs md:text-sm font-black tracking-wider shadow">MATCH A</span>
           <span class="text-xs md:text-sm text-sky-200 font-bold hidden sm:inline">다트 1 · 2 · 3번 보드</span>
         </div>
         <div class="flex items-center gap-3 md:gap-6">
-          <span id="matchA_homeName" class="text-xl md:text-3xl font-black text-sky-300 tracking-tight drop-shadow">1반</span>
-          <div class="flex items-center gap-3 bg-slate-950 px-5 py-1.5 rounded-2xl border-2 border-sky-400/65 shadow-inner">
-            <span id="matchA_homeWins" class="font-score text-3xl md:text-5xl font-black text-sky-300 leading-none">0</span>
+          <span id="matchA_homeName" class="match-team-title text-xl md:text-3xl font-black text-sky-300 tracking-tight drop-shadow">1반</span>
+          <div class="match-win-box flex items-center gap-3 bg-slate-950 px-5 py-1.5 rounded-2xl border-2 border-sky-400/65 shadow-inner">
+            <span id="matchA_homeWins" class="match-win-score font-score text-3xl md:text-5xl font-black text-sky-300 leading-none">0</span>
             <span class="text-slate-400 font-black text-2xl md:text-3xl leading-none">:</span>
-            <span id="matchA_awayWins" class="font-score text-3xl md:text-5xl font-black text-rose-400 leading-none">0</span>
+            <span id="matchA_awayWins" class="match-win-score font-score text-3xl md:text-5xl font-black text-rose-400 leading-none">0</span>
           </div>
-          <span id="matchA_awayName" class="text-xl md:text-3xl font-black text-rose-400 tracking-tight drop-shadow">2반</span>
+          <span id="matchA_awayName" class="match-team-title text-xl md:text-3xl font-black text-rose-400 tracking-tight drop-shadow">2반</span>
         </div>
         <div class="flex items-center gap-2">
           <div id="matchA_statusBadge" class="text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-sky-950/80 text-sky-200 border border-sky-500/30">진행 중</div>
           <button type="button" id="matchA_zoomBtn" onclick="toggleSingleMatch('ONLY_A')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-sky-600 text-slate-200 hover:text-white text-xs font-bold border border-slate-700 transition">⤢ 크게 보기</button>
         </div>
       </div>
-      <div id="matchA_boards" class="grid grid-cols-1 lg:grid-cols-3 gap-3 flex-1"></div>
+      <div id="matchA_boards" class="boards-grid grid grid-cols-1 lg:grid-cols-3 gap-3 flex-1"></div>
     </section>
 
-    <section id="sectionMatchB" class="bg-gradient-to-b from-amber-950/30 to-slate-900/90 border-2 border-amber-500/45 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl flex-1">
-      <div class="flex flex-wrap items-center justify-between gap-2 bg-gradient-to-r from-amber-950/90 via-slate-950 to-orange-950/90 border border-amber-500/45 rounded-xl px-4 py-2.5 mb-2.5 shadow-md">
+    <section id="sectionMatchB" class="match-section-box bg-gradient-to-b from-amber-950/30 to-slate-900/90 border-2 border-amber-500/45 rounded-2xl p-2.5 md:p-3.5 flex flex-col justify-between shadow-xl flex-1">
+      <div class="match-header-bar flex flex-wrap items-center justify-between gap-2 bg-gradient-to-r from-amber-950/90 via-slate-950 to-orange-950/90 border border-amber-500/45 rounded-xl px-4 py-2.5 mb-2.5 shadow-md">
         <div class="flex items-center gap-2.5">
           <span class="px-3 py-1 rounded-lg bg-amber-400 text-slate-950 text-xs md:text-sm font-black tracking-wider shadow">MATCH B</span>
           <span class="text-xs md:text-sm text-amber-200 font-bold hidden sm:inline">다트 4 · 5 · 6번 보드</span>
         </div>
         <div class="flex items-center gap-3 md:gap-6">
-          <span id="matchB_homeName" class="text-xl md:text-3xl font-black text-sky-300 tracking-tight drop-shadow">3반</span>
-          <div class="flex items-center gap-3 bg-slate-950 px-5 py-1.5 rounded-2xl border-2 border-amber-400/65 shadow-inner">
-            <span id="matchB_homeWins" class="font-score text-3xl md:text-5xl font-black text-sky-300 leading-none">0</span>
+          <span id="matchB_homeName" class="match-team-title text-xl md:text-3xl font-black text-sky-300 tracking-tight drop-shadow">3반</span>
+          <div class="match-win-box flex items-center gap-3 bg-slate-950 px-5 py-1.5 rounded-2xl border-2 border-amber-400/65 shadow-inner">
+            <span id="matchB_homeWins" class="match-win-score font-score text-3xl md:text-5xl font-black text-sky-300 leading-none">0</span>
             <span class="text-slate-400 font-black text-2xl md:text-3xl leading-none">:</span>
-            <span id="matchB_awayWins" class="font-score text-3xl md:text-5xl font-black text-rose-400 leading-none">0</span>
+            <span id="matchB_awayWins" class="match-win-score font-score text-3xl md:text-5xl font-black text-rose-400 leading-none">0</span>
           </div>
-          <span id="matchB_awayName" class="text-xl md:text-3xl font-black text-rose-400 tracking-tight drop-shadow">4반</span>
+          <span id="matchB_awayName" class="match-team-title text-xl md:text-3xl font-black text-rose-400 tracking-tight drop-shadow">4반</span>
         </div>
         <div class="flex items-center gap-2">
           <div id="matchB_statusBadge" class="text-xs md:text-sm font-bold px-3 py-1 rounded-lg bg-amber-950/80 text-amber-200 border border-amber-500/30">진행 중</div>
           <button type="button" id="matchB_zoomBtn" onclick="toggleSingleMatch('ONLY_B')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-amber-600 text-slate-200 hover:text-white text-xs font-bold border border-slate-700 transition">⤢ 크게 보기</button>
         </div>
       </div>
-      <div id="matchB_boards" class="grid grid-cols-1 lg:grid-cols-3 gap-3 flex-1"></div>
+      <div id="matchB_boards" class="boards-grid grid grid-cols-1 lg:grid-cols-3 gap-3 flex-1"></div>
     </section>
   </main>
 
@@ -178,7 +238,7 @@
     </div>
   </footer>
 
-  <!-- MODAL AUTH: 도우미 비밀번호 모달 (일반 인증 & 초기화 주의 재확인 공용) -->
+  <!-- MODAL AUTH: 도우미 비밀번호 모달 -->
   <div id="pinAuthModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[80] hidden items-center justify-center p-4">
     <div id="pinAuthCard" class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xs shadow-2xl overflow-hidden transition-colors">
       <div id="pinAuthHeader" class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
@@ -189,7 +249,6 @@
         <button type="button" onclick="closeModal('pinAuthModal')" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs font-bold">✕</button>
       </div>
       <div class="p-5 space-y-4">
-        <!-- 초기화 전용 빨간 주의 경고 배너 -->
         <div id="pinWarningBox" class="hidden bg-rose-950/85 border-2 border-rose-500/80 rounded-xl p-3 text-center space-y-1 shadow-lg">
           <div class="text-xs font-black text-rose-300 tracking-wide">⚠️ 주의! 실수 방지 재확인</div>
           <div id="pinWarningDetail" class="text-[11px] text-rose-100 leading-relaxed font-medium"></div>
@@ -220,22 +279,30 @@
     </div>
   </div>
 
-  <!-- MODAL -1: 토너먼트 대진표 모달 -->
-  <div id="bracketModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden items-center justify-center p-2 md:p-4">
-    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-6xl h-[92vh] shadow-2xl overflow-hidden flex flex-col">
+  <!-- MODAL -1: 토너먼트 대진표 모달 (전체 화면 가로폭 확장 & 배율 조절 지원) -->
+  <div id="bracketModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden items-center justify-center p-1 md:p-2">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-[98vw] max-w-[1900px] h-[95vh] shadow-2xl overflow-hidden flex flex-col">
       <div class="px-4 py-2.5 bg-slate-950 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
         <div class="flex items-center gap-2">
           <span class="text-lg">🗓️</span>
           <h2 class="text-sm md:text-base font-black text-white">LUNCH LEAGUE 501 · 공식 토너먼트 대진표</h2>
         </div>
-        <div class="flex items-center gap-1.5">
+        <div class="flex items-center gap-1.5 flex-wrap">
+          <div class="flex items-center gap-1 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs font-bold text-slate-300">
+            <span class="text-[11px] text-slate-400 mr-1">한눈에 보기 배율:</span>
+            <button type="button" onclick="setBracketZoom(1.0)" class="bzoom-btn px-2 py-0.5 rounded bg-purple-600 text-white font-black text-[11px]" data-bzoom="1">100%</button>
+            <button type="button" onclick="setBracketZoom(0.85)" class="bzoom-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[11px]" data-bzoom="0.85">85%</button>
+            <button type="button" onclick="setBracketZoom(0.72)" class="bzoom-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[11px]" data-bzoom="0.72">72%</button>
+          </div>
           <button type="button" onclick="reloadBracketFrame()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold">🔄 새로고침</button>
           <a href="https://today119.github.io/baseball-record/dart1.html" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold">↗ 새 탭에서 열기</a>
           <button type="button" onclick="closeModal('bracketModal')" class="w-8 h-8 rounded-lg bg-rose-600/80 hover:bg-rose-500 text-white flex items-center justify-center font-black ml-1">✕</button>
         </div>
       </div>
-      <div class="flex-1 bg-slate-950 relative w-full h-full">
-        <iframe id="bracketIframe" src="" title="대진표" class="w-full h-full border-0 bg-white" loading="lazy"></iframe>
+      <div class="flex-1 bg-white relative w-full h-full overflow-auto">
+        <div id="bracketZoomWrapper" class="w-full h-full origin-top-left transition-transform">
+          <iframe id="bracketIframe" src="" title="대진표" class="w-full h-full border-0 bg-white" loading="lazy"></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -349,7 +416,10 @@
         </div>
         <!-- 전광판 스페셜 이펙트 & 팡파레 송출 -->
         <div class="bg-gradient-to-r from-rose-950/50 via-amber-950/40 to-rose-950/50 p-3 rounded-xl border border-amber-500/40 space-y-2">
-          <div class="text-xs font-black text-amber-300">🎉 전광판 스페셜 이펙트 & 팡파레 송출</div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black text-amber-300">🎉 전광판 스페셜 이펙트 & 팡파레 송출</span>
+            <span class="text-[11px] text-amber-200/80">※ 송출 시 전광판이 이 경기로 자동 전환됩니다</span>
+          </div>
           <div class="grid grid-cols-3 gap-2">
             <button type="button" onclick="triggerSpecialShoutout('BULL')" class="py-2 px-2 rounded-xl bg-gradient-to-b from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-black text-xs md:text-sm shadow-lg active:scale-95 flex flex-col items-center justify-center gap-0.5"><span class="text-base">🎯</span><span>BULL 명중!</span></button>
             <button type="button" onclick="triggerSpecialShoutout('TRIPLE20')" class="py-2 px-2 rounded-xl bg-gradient-to-b from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-black text-xs md:text-sm shadow-lg active:scale-95 flex flex-col items-center justify-center gap-0.5"><span class="text-base">🔥</span><span>TRIPLE 20!</span></button>
@@ -704,6 +774,82 @@
     let isHelperAuthenticated = sessionStorage.getItem(HELPER_SESSION_KEY) === 'true';
     let currentPinBuffer = '', pendingAuthCallback = null, lastHandledShoutoutId = null, shoutoutAutoCloseTimer = null;
 
+    // A <-> B 자동 순환 중계 상태
+    let isAutoCycling = false;
+    let autoCycleTimer = null;
+    let autoCycleMs = 8000;
+    let workspaceZoomLevel = 1.0;
+
+    function updateAutoCycleButtonsUI() {
+      document.querySelectorAll('.auto-cycle-btn').forEach(btn => {
+        if (isAutoCycling) {
+          btn.className = 'auto-cycle-btn px-2.5 py-0.5 md:py-1 rounded-lg text-[11px] md:text-xs font-black bg-amber-500 text-slate-950 shadow animate-pulse transition';
+          btn.textContent = `🔄 자동전환 ON (${autoCycleMs / 1000}초)`;
+        } else {
+          btn.className = 'auto-cycle-btn px-2.5 py-0.5 md:py-1 rounded-lg text-[11px] md:text-xs font-black bg-slate-800 text-amber-300 hover:bg-slate-700 border border-amber-500/40 transition';
+          btn.textContent = '🔄 A↔B 자동전환 OFF';
+        }
+      });
+    }
+
+    function stopAutoCycleInternal() {
+      isAutoCycling = false;
+      if (autoCycleTimer) { clearInterval(autoCycleTimer); autoCycleTimer = null; }
+      updateAutoCycleButtonsUI();
+    }
+
+    function startAutoCycleTimer() {
+      if (autoCycleTimer) clearInterval(autoCycleTimer);
+      autoCycleTimer = setInterval(() => {
+        if (!isAutoCycling) return;
+        const nextMode = state.viewMode === 'ONLY_A' ? 'ONLY_B' : 'ONLY_A';
+        setViewMode(nextMode, false);
+      }, autoCycleMs);
+    }
+
+    window.toggleAutoCycleMode = function() {
+      if (isAutoCycling) {
+        stopAutoCycleInternal();
+      } else {
+        isAutoCycling = true;
+        updateAutoCycleButtonsUI();
+        if (state.viewMode !== 'ONLY_A' && state.viewMode !== 'ONLY_B') {
+          setViewMode('ONLY_A', false);
+        }
+        startAutoCycleTimer();
+      }
+    };
+
+    window.changeAutoCycleInterval = function(val) {
+      autoCycleMs = parseInt(val, 10) || 8000;
+      updateAutoCycleButtonsUI();
+      if (isAutoCycling) startAutoCycleTimer();
+    };
+
+    // 강당 노트북 전체화면 배율 미세 조정 & 토너먼트 대진표 배율 조정
+    window.adjustWorkspaceZoom = function(delta) {
+      workspaceZoomLevel = Math.max(0.7, Math.min(1.15, Math.round((workspaceZoomLevel + delta) * 100) / 100));
+      const ws = document.getElementById('mainWorkspace');
+      ws.style.zoom = workspaceZoomLevel;
+      const lbl = document.getElementById('floatingZoomLabel');
+      if (lbl) lbl.textContent = `${Math.round(workspaceZoomLevel * 100)}%`;
+    };
+
+    window.setBracketZoom = function(scale) {
+      const wrapper = document.getElementById('bracketZoomWrapper');
+      if (wrapper) {
+        wrapper.style.transform = `scale(${scale})`;
+        wrapper.style.width = `${100 / scale}%`;
+        wrapper.style.height = `${100 / scale}%`;
+      }
+      document.querySelectorAll('.bzoom-btn').forEach(btn => {
+        const z = parseFloat(btn.getAttribute('data-bzoom'));
+        btn.className = Math.abs(z - scale) < 0.01
+          ? 'bzoom-btn px-2 py-0.5 rounded bg-purple-600 text-white font-black text-[11px]'
+          : 'bzoom-btn px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[11px]';
+      });
+    };
+
     function updateAuthBadgeUI() {
       const badge = document.getElementById('authLockBadge');
       if (!badge) return;
@@ -742,7 +888,6 @@
       document.getElementById('pinErrorMsg').textContent = ''; renderPinDots(); openModal('pinAuthModal');
     };
 
-    // 초기화 전용: 이미 로그인되어 있어도 무조건 비밀번호 재입력 + 주의 문구 표시
     window.confirmResetWithPin = function(actionTitle, warningMessage, callback) {
       document.getElementById('pinAuthCard').className = 'bg-slate-900 border-2 border-rose-500/80 rounded-2xl w-full max-w-xs shadow-2xl overflow-hidden transition-colors';
       document.getElementById('pinAuthHeader').className = 'px-5 py-3.5 bg-rose-950/90 border-b border-rose-800 flex items-center justify-between';
@@ -862,24 +1007,59 @@
       if (url) { const link = document.createElement('a'); link.download = `LUNCH_LEAGUE_501_QR_${label}.png`; link.href = url; link.click(); }
     };
 
-    window.triggerSpecialShoutout = async function(type) {
+    // 스페셜 이펙트 송출 (targetMatchId 포함 -> 전광판 해당 경기 자동 포커스 전환)
+    window.triggerSpecialShoutout = async function(rawType) {
       if (activeBoardIndex === null) return;
+      const type = String(rawType || '').trim().toUpperCase();
       const board = state.boards[activeBoardIndex], matchCfg = state.matches[board.matchId];
       const homeCls = state.classes[matchCfg.homeClassId], awayCls = state.classes[matchCfg.awayClassId];
       const playerLabel = selectedPlayerInfo ? `${selectedPlayerInfo.teamName} ${selectedPlayerInfo.playerName} 선수!` : `${homeCls.name} vs ${awayCls.name}`;
       const boardTag = state.viewMode === 'FINAL' ? `🏆 FINAL 결승전 · 다트 ${activeBoardIndex + 1}번 보드` : `MATCH ${board.matchId} · 다트 ${activeBoardIndex + 1}번 보드`;
-      const payload = { id: `${Date.now()}_${Math.random().toString(36).slice(2, 7)}`, type, boardTag, playerLabel, createdAt: Date.now() };
+
+      const payload = {
+        id: `${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+        type,
+        targetMatchId: board.matchId, // 'A' 또는 'B'
+        boardIndex: activeBoardIndex,
+        boardTag,
+        playerLabel,
+        createdAt: Date.now()
+      };
+
       showShoutoutOverlay(payload);
       if (isCloudConnected && db) {
         try { await setDoc(doc(db, 'dart_leagues', ROOM_ID, 'state_docs', 'shoutout_event'), payload); } catch (e) {}
       }
     };
 
+    function focusMatchOnShoutout(targetMatchId) {
+      if (!targetMatchId || state.viewMode === 'FINAL') return;
+      const targetMode = targetMatchId === 'A' ? 'ONLY_A' : (targetMatchId === 'B' ? 'ONLY_B' : null);
+      if (!targetMode) return;
+
+      // 자동 순환 중이었다면 타이머를 리셋하여 해당 경기를 충분히 보여줌
+      if (isAutoCycling) {
+        startAutoCycleTimer();
+      }
+      if (state.viewMode !== targetMode) {
+        state.viewMode = targetMode;
+        applyViewModeUI();
+        renderAll();
+      }
+    }
+
     function showShoutoutOverlay(payload) {
       if (!payload || !payload.id || lastHandledShoutoutId === payload.id) return;
       lastHandledShoutoutId = payload.id;
       if (payload.createdAt && (Date.now() - payload.createdAt > 8000)) return;
-      playShoutoutSound(payload.type);
+
+      // 대상 선수가 있는 경기(MATCH A 또는 MATCH B)로 전광판 자동 전환
+      if (payload.targetMatchId) {
+        focusMatchOnShoutout(payload.targetMatchId);
+      }
+
+      const eventType = String(payload.type || '').trim().toUpperCase();
+      playShoutoutSound(eventType);
 
       const overlay = document.getElementById('shoutoutOverlay'), card = document.getElementById('shoutoutCard');
       const waveRing = document.getElementById('shoutoutWaveRing'), boardTagEl = document.getElementById('shoutoutBoardTag');
@@ -890,32 +1070,37 @@
       playerEl.textContent = payload.playerLabel || '';
       subBadgeEl.classList.add('hidden');
 
-      if (payload.type === 'BULL') {
-        card.className = 'animate-shout-box relative bg-gradient-to-br from-rose-600 via-amber-500 to-rose-600 p-1.5 rounded-3xl shadow-2xl max-w-2xl w-full';
-        waveRing.className = 'absolute w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-rose-400/80 animate-ring-wave';
-        emojiEl.textContent = '🎯';
-        titleEl.className = 'font-score text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-white to-rose-300';
-        titleEl.textContent = 'BULLSEYE!';
-      } else if (payload.type === 'TRIPLE20') {
-        card.className = 'animate-shout-box relative bg-gradient-to-br from-amber-400 via-orange-500 to-red-600 p-1.5 rounded-3xl shadow-2xl max-w-2xl w-full';
-        waveRing.className = 'absolute w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-amber-400/80 animate-ring-wave';
-        emojiEl.textContent = '🔥';
-        titleEl.className = 'font-score text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-orange-300';
-        titleEl.textContent = 'TRIPLE 20!';
-      } else if (payload.type === 'HATTRICK') {
-        card.className = 'animate-shout-box relative bg-gradient-to-br from-emerald-400 via-teal-400 to-amber-400 p-2 rounded-3xl shadow-2xl max-w-2xl w-full';
-        waveRing.className = 'absolute w-80 h-80 md:w-[440px] md:h-[440px] rounded-full border-8 border-emerald-400/80 animate-ring-wave';
-        emojiEl.textContent = '🎩';
-        titleEl.className = 'font-score text-5xl md:text-8xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-white to-amber-300';
-        titleEl.textContent = 'HAT TRICK!';
-        subBadgeEl.textContent = '🎯 BULL 3연속 명중! 150점!';
-        subBadgeEl.classList.remove('hidden');
-      } else {
-        card.className = 'animate-shout-box relative bg-gradient-to-br from-purple-500 via-pink-500 to-amber-400 p-1.5 rounded-3xl shadow-2xl max-w-2xl w-full';
-        waveRing.className = 'absolute w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-purple-400/80 animate-ring-wave';
-        emojiEl.textContent = '👑';
-        titleEl.className = 'font-score text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-white to-amber-300';
-        titleEl.textContent = '180! MAXIMUM!';
+      switch (eventType) {
+        case 'BULL':
+          card.className = 'animate-shout-box relative bg-gradient-to-br from-rose-600 via-amber-500 to-rose-600 p-1.5 rounded-3xl shadow-2xl max-w-2xl w-full';
+          waveRing.className = 'absolute w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-rose-400/80 animate-ring-wave';
+          emojiEl.textContent = '🎯';
+          titleEl.className = 'font-score text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-white to-rose-300';
+          titleEl.textContent = 'BULLSEYE!';
+          break;
+        case 'TRIPLE20':
+          card.className = 'animate-shout-box relative bg-gradient-to-br from-amber-400 via-orange-500 to-red-600 p-1.5 rounded-3xl shadow-2xl max-w-2xl w-full';
+          waveRing.className = 'absolute w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-amber-400/80 animate-ring-wave';
+          emojiEl.textContent = '🔥';
+          titleEl.className = 'font-score text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-orange-300';
+          titleEl.textContent = 'TRIPLE 20!';
+          break;
+        case 'HATTRICK':
+          card.className = 'animate-shout-box relative bg-gradient-to-br from-emerald-400 via-teal-400 to-amber-400 p-2 rounded-3xl shadow-2xl max-w-2xl w-full';
+          waveRing.className = 'absolute w-80 h-80 md:w-[440px] md:h-[440px] rounded-full border-8 border-emerald-400/80 animate-ring-wave';
+          emojiEl.textContent = '🎩';
+          titleEl.className = 'font-score text-5xl md:text-8xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-white to-amber-300';
+          titleEl.textContent = 'HAT TRICK!';
+          subBadgeEl.textContent = '🎯 BULL 3연속 명중! 150점!';
+          subBadgeEl.classList.remove('hidden');
+          break;
+        default:
+          card.className = 'animate-shout-box relative bg-gradient-to-br from-purple-500 via-pink-500 to-amber-400 p-1.5 rounded-3xl shadow-2xl max-w-2xl w-full';
+          waveRing.className = 'absolute w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-purple-400/80 animate-ring-wave';
+          emojiEl.textContent = '👑';
+          titleEl.className = 'font-score text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-white to-amber-300';
+          titleEl.textContent = '180! MAXIMUM!';
+          break;
       }
 
       card.style.animation = 'none'; void card.offsetWidth; card.style.animation = '';
@@ -941,7 +1126,7 @@
               const data = snap.data();
               if (data.classes) state.classes = normalizeClassesData(data.classes);
               if (data.matches) state.matches = data.matches;
-              if (data.viewMode) state.viewMode = data.viewMode;
+              if (data.viewMode && !isAutoCycling) state.viewMode = data.viewMode;
               if (typeof data.customRosterMode === 'boolean') state.customRosterMode = data.customRosterMode;
               saveLocalState(); applyViewModeUI(); renderAll();
               if (!document.getElementById('rosterManagerModal').classList.contains('hidden')) {
@@ -996,8 +1181,15 @@
       openModal('bracketModal');
     };
     window.reloadBracketFrame = function() { document.getElementById('bracketIframe').src = BRACKET_SITE_URL + '?t=' + Date.now(); };
-    window.setViewMode = async function(mode) { state.viewMode = mode; applyViewModeUI(); renderAll(); await syncMetaToCloud(); };
-    window.toggleSingleMatch = function(targetMode) { setViewMode(state.viewMode === targetMode ? 'BOTH' : targetMode); };
+
+    window.setViewMode = async function(mode, isManual = true) {
+      if (isManual && isAutoCycling) stopAutoCycleInternal();
+      state.viewMode = mode;
+      applyViewModeUI();
+      renderAll();
+      if (isManual) await syncMetaToCloud();
+    };
+    window.toggleSingleMatch = function(targetMode) { setViewMode(state.viewMode === targetMode ? 'BOTH' : targetMode, true); };
 
     function applyViewModeUI() {
       const mode = state.viewMode || 'BOTH';
@@ -1042,12 +1234,14 @@
     window.enterScoreboardOnlyMode = function() {
       document.body.classList.add('scoreboard-only');
       if (!document.fullscreenElement && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {});
+      renderAll();
     };
     window.exitScoreboardOnlyMode = function() {
       document.body.classList.remove('scoreboard-only');
       if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {});
+      renderAll();
     };
-    document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement) document.body.classList.remove('scoreboard-only'); });
+    document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement) { document.body.classList.remove('scoreboard-only'); renderAll(); } });
 
     function renderAll() { renderMatchSection('A', [0, 1, 2], 'matchA_boards'); renderMatchSection('B', [3, 4, 5], 'matchB_boards'); }
 
@@ -1088,7 +1282,10 @@
       const cardBorder = isHomeWin ? 'border-sky-400/80 win-glow bg-gradient-to-b from-sky-950/40 to-slate-950' : isAwayWin ? 'border-rose-400/80 win-glow bg-gradient-to-b from-rose-950/40 to-slate-950' : 'border-slate-800 hover:border-indigo-500/60 bg-slate-950/90';
       const homePct = Math.max(0, Math.min(100, (board.homeScore / 501) * 100)), awayPct = Math.max(0, Math.min(100, (board.awayScore / 501) * 100));
       const historyArr = board.history || [], lastTurn = historyArr.length > 0 ? historyArr[historyArr.length - 1] : null;
-      const maxLogLines = state.viewMode === 'BOTH' ? 2 : 3;
+
+      // 전체화면 + 2경기 동시 보기일 때는 최근 로그 1줄만 압축 표기하여 노트북 한 화면에 딱 맞춤
+      const isCompactFullscreen = document.body.classList.contains('scoreboard-only') && state.viewMode === 'BOTH';
+      const maxLogLines = isCompactFullscreen ? 1 : (state.viewMode === 'BOTH' ? 2 : 3);
       const recentLogs = historyArr.slice(-maxLogLines).reverse();
 
       let liveThrowBanner = recentLogs.length > 0
@@ -1098,7 +1295,7 @@
             const scoreBadge = turn.isBust ? `<span class="text-rose-400 font-black text-xs">BUST (0)</span>` : `<span class="font-score text-amber-300 font-black ${isLatest ? 'text-sm md:text-base' : 'text-xs'}">-${turn.appliedPoints}</span>`;
             return `<div class="live-log-row px-2.5 py-1 rounded-lg border ${sideColor} flex items-center justify-between gap-2"><div class="flex items-center gap-1.5 truncate text-xs"><span>${isLatest ? '🎯' : '•'}</span><span class="${isLatest ? 'font-black' : 'font-semibold'} truncate">${turn.teamName} ${turn.playerName}</span></div>${scoreBadge}</div>`;
           }).join('')}</div>`
-        : `<div class="live-log-row px-3 py-1.5 rounded-xl border border-slate-800/80 bg-slate-900/50 flex items-center justify-center text-xs text-slate-500 font-medium">${isHelperAuthenticated ? '투구 대기 중 · 터치하여 입력' : 'LIVE 실시간 관전 중'}</div>`;
+        : `<div class="live-log-row px-3 py-1 rounded-xl border border-slate-800/80 bg-slate-900/50 flex items-center justify-center text-xs text-slate-500 font-medium">${isHelperAuthenticated ? '투구 대기 중 · 터치하여 입력' : 'LIVE 실시간 관전 중'}</div>`;
 
       const renderPlayerMiniList = (players) => players.map((p, idx) => {
         const stat = getPlayerStat(p.id), dispName = getDisplayPlayerName(p, idx), isBlank = !p.name || !p.name.trim();
@@ -1107,22 +1304,22 @@
         return `<div class="player-pill flex items-center justify-between ${highlightCls} px-2.5 py-1.5 rounded-lg border text-xs md:text-sm transition"><div class="flex items-center gap-1.5 truncate">${genderDot}<span class="${isBlank ? 'text-slate-500 italic' : 'text-slate-100'} font-bold truncate">${dispName}</span></div><span class="player-pts font-score text-xs font-bold text-amber-400 ml-1">+${stat.points}</span></div>`;
       }).join('');
 
-      const actionTagHTML = isHomeWin ? `<span class="text-xs md:text-sm font-black text-sky-300 bg-sky-500/25 border border-sky-400/50 px-2.5 py-1 rounded-lg">🏆 ${homeCls.name} 승</span>`
-        : isAwayWin ? `<span class="text-xs md:text-sm font-black text-rose-300 bg-rose-500/25 border border-rose-400/50 px-2.5 py-1 rounded-lg">🏆 ${awayCls.name} 승</span>`
+      const actionTagHTML = isHomeWin ? `<span class="text-xs md:text-sm font-black text-sky-300 bg-sky-500/25 border border-sky-400/50 px-2.5 py-0.5 rounded-lg">🏆 ${homeCls.name} 승</span>`
+        : isAwayWin ? `<span class="text-xs md:text-sm font-black text-rose-300 bg-rose-500/25 border border-rose-400/50 px-2.5 py-0.5 rounded-lg">🏆 ${awayCls.name} 승</span>`
         : isHelperAuthenticated ? `<span class="text-xs font-extrabold text-indigo-300 bg-indigo-500/15 border border-indigo-500/30 px-2 py-0.5 rounded-md">입력 ▸</span>`
         : `<span class="text-xs font-bold text-slate-400 bg-slate-800/80 border border-slate-700 px-2 py-0.5 rounded-md">🔒 도우미</span>`;
 
       return `
         <div onclick="requireHelperAuth(() => openScoreModal(${boardIdx}))" class="board-card cursor-pointer rounded-xl border ${cardBorder} p-3 flex flex-col justify-between gap-2">
-          <div class="flex items-center justify-between gap-2 bg-slate-900/95 border border-slate-700/80 rounded-xl px-2.5 py-2 shadow-sm">
+          <div class="board-top-bar flex items-center justify-between gap-2 bg-slate-900/95 border border-slate-700/80 rounded-xl px-2.5 py-2 shadow-sm">
             <div class="flex items-center gap-2 flex-wrap">
-              ${getUnifiedDartIconHTML(state.viewMode === 'BOTH' ? 'w-7 h-7' : 'w-8 h-8')}
+              ${getUnifiedDartIconHTML(isCompactFullscreen ? 'w-5 h-5' : (state.viewMode === 'BOTH' ? 'w-7 h-7' : 'w-8 h-8'))}
               <span class="board-main-title text-lg md:text-xl font-black tracking-tight text-white">다트 ${boardIdx + 1}번</span>
               <span class="board-round-pill text-xs md:text-sm font-black px-2 py-0.5 rounded-lg border ${rMeta.badgeStyle}">${rMeta.badge}</span>
             </div>
             ${actionTagHTML}
           </div>
-          <div class="bg-slate-900/95 border border-slate-800/90 rounded-xl p-2.5">
+          <div class="board-score-panel bg-slate-900/95 border border-slate-800/90 rounded-xl p-2.5">
             <div class="grid grid-cols-11 items-center text-center">
               <div class="col-span-5">
                 <div class="team-label text-sm md:text-base font-black text-sky-400 truncate">${homeCls.name}</div>
@@ -1138,9 +1335,9 @@
             </div>
           </div>
           ${liveThrowBanner}
-          <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-800/80">
-            <div class="space-y-1.5">${renderPlayerMiniList(homeLineup)}</div>
-            <div class="space-y-1.5">${renderPlayerMiniList(awayLineup)}</div>
+          <div class="player-grid-wrap grid grid-cols-2 gap-2 pt-1 border-t border-slate-800/80">
+            <div class="player-col-stack space-y-1.5">${renderPlayerMiniList(homeLineup)}</div>
+            <div class="player-col-stack space-y-1.5">${renderPlayerMiniList(awayLineup)}</div>
           </div>
         </div>
       `;
